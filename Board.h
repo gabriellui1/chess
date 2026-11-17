@@ -6,6 +6,9 @@
 #include <vector>
 
 class Board {
+private:
+public:
+    Board();
 };
 
 #endif
