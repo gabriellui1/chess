@@ -8,6 +8,7 @@
 class Board {
 private:
 public:
+    Board();
 };
 
 #endif
