@@ -2,11 +2,13 @@
 #define COMMAND_PARSER_H
 
 #include <string>;
+#include "Types.h";
 
-class COMMAND_PARSER {
+
+class CommandParser {
 private:
 public:
-    void parse();
+    Command parse(const std::string &command) const;
 };
 
 #endif
