@@ -14,6 +14,6 @@ void GameController::run() {
         string input;
         cout << "enter command" << endl;
         cin >> input;
-        Command command = parser.parse(input);
+        Command command = parsers.parse(input);
     }
 }
