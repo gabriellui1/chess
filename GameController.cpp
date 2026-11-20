@@ -4,16 +4,34 @@
 
 using namespace std;
 
-GameController::GameController() {
+GameController::GameController(TextView& view_) : view(view_) {
+    board.attach(&view);
 }
 
 void GameController::run() {
-    cout << "hello world" << endl;
+    std::cout << "hello world\n";
 
-    while (1) {
-        string input;
-        cout << "enter command" << endl;
-        cin >> input;
+    std::string input;
+    while (std::getline(std::cin, input)) {
+        if (input.empty()) continue;
+
         Command command = parsers.parse(input);
+
+        if (command.type == CommandType::Game) {
+            std::cout << "new game\n";
+            board.loadStandardPosition();
+        } else if (command.type == CommandType::Move) {
+            std::cout << "move\n";
+        } else if (command.type == CommandType::Resign) {
+            std::cout << "resign\n";
+        } else if (command.type == CommandType::Setup) {
+            std::cout << "setup\n";
+        } else if (command.type == CommandType::Done) {
+            std::cout << "done\n";
+        } else {
+            std::cout << "invalid command\n";
+        }
     }
+
+    std::cout << "end";
 }
