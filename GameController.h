@@ -1,6 +1,7 @@
 #ifndef GAME_CONTROLLER_H
 #define GAME_CONTROLLER_H
 
+#include <memory>
 #include "Board.h"
 #include "Rules.h"
 #include "CommandParser.h"
@@ -25,11 +26,10 @@ private:
     void runStartMenu();
     void startGame(std::string whiteSpec, std::string blackSpec);
     void playMove(const Command&);
-    void resign(); 
+    void resign();
     void setupCommand(const Command&);
     void finishSetup();
     void printFinalScore();
-
 
 public:
     GameController(TextView& view);

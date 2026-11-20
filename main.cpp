@@ -1,7 +1,9 @@
 #include "GameController.h"
+#include "TextView.h"
 
 int main() {
-    GameController game;
+    TextView view;
+    GameController game(view);
     game.run();
     return 0;
 }

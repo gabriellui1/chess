@@ -9,8 +9,7 @@ enum class MoveKind {Normal, DoublePawnStep, Castle, EnPassant, Promotion};
 enum class PieceType {King, Queen, Rook, Bishop, Knight, Pawn};
 enum class GameState {Menu, Idle, Setup, Playing};
 enum class GameStatus {Ongoing, Check, Checkmate, Stalemate};
-enum class CommandType { Move, Resign, Setup, Done, Invalid };
-
+enum class CommandType { Game, Resign, Move, Setup, Place, Remove, SetTurn, Done, Invalid };
 
 struct Position {
     int row;
