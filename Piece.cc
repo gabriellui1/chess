@@ -33,3 +33,37 @@ std::vector<Position> Piece::jump(const Board& board, Position from, const std::
     }
     return squares;
 }
+
+
+std::vector<Move> Piece::toMoves(const Board& board, Position from, const std::vector<Position>& squares) const {
+    std::vector<Move> moves;
+    for (Position cur_pos : squares) {
+        const Piece* p = board.at(cur_pos); //has to use const because .at() return a const ptr.
+        
+        if (p == nullptr || p->getColour() != getColour()) { //only allow move that squares is empty or does not hit the same colour.
+            moves.push_back(Move{from, cur_pos, MoveKind::Normal, {}});
+        }
+    }
+    return moves;
+}
+
+
+Color Piece::getColour() const{
+    return colour_;
+}
+bool Piece::hasMoved() const{
+    return moved_;
+}
+void Piece::setMoved(bool moved){
+    moved_ = moved;
+}
+
+
+std::vector<Position> Piece::attackSquare(const Board& board, Position from) const{
+    std::vector<Move> moves = pseudoMoves(board, from);
+    std::vector<Position> pos_vec;
+    for(Move& move : moves){
+        pos_vec.push_back(move.to);
+    }
+    return pos_vec;
+}
