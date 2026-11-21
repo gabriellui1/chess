@@ -18,6 +18,7 @@ public:
     Board();
     ~Board();
 
+    bool isOnBoard(Position pos) const; // function checking whether a piece is on board given its position
     const Piece* at(Position pos) const;
     void place(Position pos , std::unique_ptr<Piece> piece);
     void remove(Position pos);
