@@ -2,3 +2,5 @@
 *.d
 
 chess
+# Ignores 'logs' directories anywhere in the repository
+.vscode/
