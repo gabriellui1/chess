@@ -1,0 +1,1 @@
+reminder: change getColour to getColor method tonight 11:59PM when no one is working on the code
