@@ -15,13 +15,16 @@ private:
     std::vector<UndoRecord> history_;
     std::vector<BoardObserver *> observers_; // non-owning
     void notifyObservers();
+    void applyMove(const Move &move);
+    void undoMove();
+    void emptySquares();
 
 public:
     Board();
     ~Board();
 
     bool isOnBoard(Position pos) const; // funcction chekcing whether a square is on board given its position
-    const Piece *at(Position pos) const;
+    const std::unique_ptr<Piece> &at(Position pos) const;
     void place(Position pos, std::unique_ptr<Piece> piece);
     void remove(Position pos);
     void clear();
