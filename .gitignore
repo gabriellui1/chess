@@ -3,4 +3,4 @@
 
 chess
 # Ignores 'logs' directories anywhere in the repository
-logs/
+.vscode/
