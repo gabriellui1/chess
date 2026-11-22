@@ -22,8 +22,8 @@ std::vector<Position> Piece::slide(const Board &board, const std::vector<Offset>
                 break; // there is a piece so break
             }
         }
-        return squares;
     }
+    return squares;
 }
 
 std::vector<Position> Piece::jump(const Board &board, Position from, const std::vector<Offset> &offsets) const

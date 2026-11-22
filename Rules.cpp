@@ -1,5 +1,6 @@
 #include "Rules.h"
 #include "Board.h"
+#include "DataManipHelper.h"
 
 std::vector<Move> Rules::legalMoves(Board &board, Color side) const
 {
@@ -56,7 +57,7 @@ bool Rules::isAttacked(const Board &board, Position square, Color byColor) const
             if (piece != Board::outOfBoundsPtr_ && piece->getColor() == byColor)
             {
                 std::vector<Position> pos_attack = piece->attackSquare(board, Position{i, j});
-                if (std::find(pos_attack.begin(), pos_attack.end(), square) != pos_attack.end())
+                if (findIndex(pos_attack, square) != -1)
                 {
                     return true;
                 }
@@ -116,7 +117,7 @@ std::vector<std::string> Rules::validateSetup(const Board &board) const
         Position first_row{0, column};
         Position last_row{7, column};
         if (board.at(first_row) != Board::outOfBoundsPtr_ && board.at(last_row) != Board::outOfBoundsPtr_
-            && board.at(first_row)->getType() == PieceType::Pawn || board.at(last_row)->getType() == PieceType::Pawn)
+            && (board.at(first_row)->getType() == PieceType::Pawn || board.at(last_row)->getType() == PieceType::Pawn))
         {
             message.push_back("Pawns can't be on the first or last row.");
             break;

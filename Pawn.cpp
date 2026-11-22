@@ -86,19 +86,23 @@ std::vector<Position> Pawn::attackSquare(const Board &board, Position from) cons
 {
     // Captures
     int direction = getColor() == Color::White ? 1 : -1;
-    std::vector<Move> moves;
+    std::vector<Position> pos;
 
     Position capture_right{from.row + direction, from.col + 1}; // test right capture
-    if (board.isOnBoard(capture_right))
+    if (board.isOnBoard(capture_right) && board.at(capture_right) != Board::outOfBoundsPtr_
+        && board.at(capture_right)->getColor() != getColor())
     {
-        moves.push_back(Move{from, capture_right, MoveKind::Normal, {}});
+        pos.push_back(capture_right);
     }
 
     Position capture_left{from.row + direction, from.col - 1}; // test left capture
-    if (board.isOnBoard(capture_left))
+    if (board.isOnBoard(capture_left) && board.at(capture_left) != Board::outOfBoundsPtr_
+        && board.at(capture_left)->getColor() != getColor())
     {
-        moves.push_back(Move{from, capture_left, MoveKind::Normal, {}});
+        pos.push_back(capture_left);
     }
+
+    return pos;
 }
 
 char Pawn::getChar() const
