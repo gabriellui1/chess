@@ -62,11 +62,6 @@ void Board::clear()
     notifyObservers();
 }
 
-void Board::attach(std::unique_ptr<BoardObserver> observer)
-{
-    observers_.push_back(observer);
-}
-
 void Board::loadStandardPosition()
 {
     emptySquares();
@@ -134,9 +129,27 @@ std::vector<Position> Board::kingSquares(Color color) const
 
 void Board::notifyObservers()
 {
-    for (std::unique_ptr<BoardObserver> observer : observers_)
+    for (const std::unique_ptr<BoardObserver> &ob : observers_)
     {
-        observer->onBoardChanged(*this);
+        ob->onBoardChanged(*this);
+    }
+}
+
+void Board::attach(std::unique_ptr<BoardObserver> observer)
+{
+    observers_.push_back(std::move(observer));
+}
+
+void Board::detach(std::unique_ptr<BoardObserver> observer)
+{
+    for (const std::unique_ptr<BoardObserver> &ob : observers_)
+    {
+        if (ob == observer)
+        {
+            observer.reset();
+            observers_.pop_back();
+            break;
+        }
     }
 }
 
