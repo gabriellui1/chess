@@ -11,6 +11,7 @@
 class Board
 {
 private:
+    static const std::unique_ptr<Piece> outOfBoundsPtr_;
     struct UndoRecord;
     std::vector<std::vector<std::unique_ptr<Piece>>> squares_;
     std::vector<UndoRecord> history_;
@@ -39,5 +40,7 @@ public:
     void attach(BoardObserver *ob);
     void detach(BoardObserver *ob);
 };
+
+const std::unique_ptr<Piece> Board::outOfBoundsPtr_{};
 
 #endif
