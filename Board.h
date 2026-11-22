@@ -6,6 +6,7 @@
 #include <vector>
 #include <memory>
 #include "Piece.h"
+#include "PieceFactory.h"
 
 class Board
 {

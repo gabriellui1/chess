@@ -1,5 +1,6 @@
+// Status: Finished?? but not tested
+
 #include "Board.h"
-#include "PieceFactory.h"
 
 struct Board::UndoRecord
 {
@@ -68,7 +69,27 @@ void Board::attach(BoardObserver *observer)
 
 void Board::loadStandardPosition()
 {
-    // TODO: actually load the position
+    emptySquares();
+
+    for (int col = 0; col < 8; col++)
+    {
+        squares_[1][col] = PieceFactory::create(PieceType::Pawn, Color::White);
+    }
+
+    for (int col = 0; col < 8; col++)
+    {
+        squares_[6][col] = PieceFactory::create(PieceType::Pawn, Color::Black);
+    }
+
+    std::vector<PieceType> pieceTypes = {PieceType::Rook, PieceType::Knight, PieceType::Bishop, PieceType::Queen, PieceType::King, PieceType::Bishop, PieceType::Knight, PieceType::Rook};
+    for (int row : {0, 7})
+    {
+        for (int col = 0; col < 8; col++)
+        {
+            squares_[row][col] = PieceFactory::create(pieceTypes[col], row == 0 ? Color::White : Color::Black);
+        }
+    }
+
     notifyObservers();
 }
 
@@ -202,6 +223,7 @@ void Board::emptySquares()
         {
             Position pos{row, col};
             remove(pos);
+            squares_[row][col] = nullptr;
         }
     }
     history_.clear();
