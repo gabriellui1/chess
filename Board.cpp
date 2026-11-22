@@ -62,7 +62,7 @@ void Board::clear()
     notifyObservers();
 }
 
-void Board::attach(BoardObserver *observer)
+void Board::attach(std::unique_ptr<BoardObserver> observer)
 {
     observers_.push_back(observer);
 }
@@ -134,7 +134,7 @@ std::vector<Position> Board::kingSquares(Color color) const
 
 void Board::notifyObservers()
 {
-    for (BoardObserver *observer : observers_)
+    for (std::unique_ptr<BoardObserver> observer : observers_)
     {
         observer->onBoardChanged(*this);
     }

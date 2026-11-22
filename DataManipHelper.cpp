@@ -1,6 +1,4 @@
 #include <sstream>
-#include <algorithm>
-#include <cctype>
 #include <limits>
 #include "DataManipHelper.h"
 
@@ -29,20 +27,6 @@ int findCharIndex(const std::string &str, char c)
     }
 
     return static_cast<int>(pos);
-}
-
-// finds index of element in vector, -1 if not found
-template <typename T>
-int findIndex(const std::vector<T> &vec, const T &word)
-{
-    auto it = std::find(vec.begin(), vec.end(), word);
-
-    if (it != vec.end())
-    {
-        return std::distance(vec.begin(), it);
-    }
-
-    return -1;
 }
 
 // assumes you have already validated

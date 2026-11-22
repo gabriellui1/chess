@@ -11,11 +11,11 @@
 class Board
 {
 private:
-    static const std::unique_ptr<Piece> outOfBoundsPtr_;
+    static inline const std::unique_ptr<Piece> outOfBoundsPtr_{};
     struct UndoRecord;
     std::vector<std::vector<std::unique_ptr<Piece>>> squares_;
     std::vector<UndoRecord> history_;
-    std::vector<BoardObserver *> observers_; // non-owning
+    std::vector<std::unique_ptr<BoardObserver>> observers_; // non-owning
     void notifyObservers();
     void applyMove(const Move &move);
     void undoMove();
@@ -40,7 +40,5 @@ public:
     void attach(BoardObserver *ob);
     void detach(BoardObserver *ob);
 };
-
-const std::unique_ptr<Piece> Board::outOfBoundsPtr_{};
 
 #endif
