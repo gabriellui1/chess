@@ -11,13 +11,13 @@ std::vector<Position> Piece::slide(const Board &board, const std::vector<Offset>
         for (int i = 0; i < maxSteps; ++i)
         {
             cur = Position{cur.row + dir.drow, cur.col + dir.dcol};
-            if (!isOnBoard(cur))
+            if (!board.isOnBoard(cur))
             {
                 break; // can't step in that direction anymore
             }
 
             squares.push_back(cur); // include the square that possibly can have a piece there.
-            if (board.at(cur) != nullptr)
+            if (board.at(cur) != Board::outOfBoundsPtr_)
             {
                 break; // there is a piece so break
             }
@@ -32,7 +32,7 @@ std::vector<Position> Piece::jump(const Board &board, Position from, const std::
     for (const Offset &offset : offsets)
     { // read only
         Position cur = Position{from.row + offset.drow, from.col + offset.dcol};
-        if (isOnBoard(cur))
+        if (board.isOnBoard(cur))
         {
             squares.push_back(cur);
         }
@@ -45,11 +45,11 @@ std::vector<Move> Piece::toMoves(const Board &board, Position from, const std::v
     std::vector<Move> moves;
     for (Position cur_pos : squares)
     {
-        const Piece *p = board.at(cur_pos); // has to use const because .at() return a const ptr.
-
-        if (p == nullptr || p->getColor() != getColor())
-        { // only allow move that squares is empty or does not hit the same color.
-            moves.push_back(Move{from, cur_pos, MoveKind::Normal, {}});
+        if(board.at(cur_pos) != Board::outOfBoundsPtr_){
+            if (board.at(cur_pos)->getColor() != getColor())
+            { // only allow move that squares is empty or does not hit the same color.
+                moves.push_back(Move{from, cur_pos, MoveKind::Normal, {}});
+            }
         }
     }
     return moves;
