@@ -55,6 +55,15 @@ enum class CommandType
     Invalid
 };
 
+enum class PlayerType
+{
+    Human,
+    Computer1,
+    Computer2,
+    Computer3,
+    Computer4
+};
+
 struct Position
 {
     int row;
@@ -80,9 +89,9 @@ struct Command
     CommandType type;
     Position from;
     Position to;
-    PieceType piece;       // empty unless move promotes
-    std::string whiteSpec; // player name
-    std::string blackSpec;
+    PieceType piece;      // empty unless move promotes
+    PlayerType whiteSpec; // player type, uses player type enum class
+    PlayerType blackSpec;
     Position square; // setup mode
     Color color;     // setup mode
 };

@@ -3,9 +3,10 @@
 #include "Types.h"
 #include "Piece.h"
 #include <memory>
-class PieceFactory{
+class PieceFactory
+{
 public:
-    static std::unique_ptr<Piece> create(PieceType piecetype, Color colour);
+    static std::unique_ptr<Piece> create(PieceType piecetype, Color color);
     static std::unique_ptr<Piece> fromSymbol(char c);
 };
 
