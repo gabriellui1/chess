@@ -11,7 +11,6 @@
 class Board
 {
 private:
-    static inline const std::unique_ptr<Piece> outOfBoundsPtr_{};
     struct UndoRecord;
     std::vector<std::vector<std::unique_ptr<Piece>>> squares_;
     std::vector<UndoRecord> history_;
@@ -25,6 +24,7 @@ public:
     Board();
     ~Board();
 
+    static inline const std::unique_ptr<Piece> outOfBoundsPtr_{};
     bool isOnBoard(Position pos) const; // funcction chekcing whether a square is on board given its position
     const std::unique_ptr<Piece> &at(Position pos) const;
     void place(Position pos, std::unique_ptr<Piece> piece);
