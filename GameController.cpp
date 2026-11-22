@@ -1,6 +1,7 @@
 #include "GameController.h"
 #include <iostream>
 #include <string>
+#include <typeinfo>
 
 using namespace std;
 
@@ -11,15 +12,12 @@ GameController::GameController(TextView &view_) : view(view_)
 
 void GameController::run()
 {
-    std::cout << "hello world\n";
+    std::cout << "not world\n";
 
     std::string input;
     while (std::getline(std::cin, input))
     {
-        if (input.empty())
-            continue;
-
-        Command command = parsers.parse(input);
+        Command command = parsers.parse(input, std::cout);
 
         if (command.type == CommandType::Game)
         {

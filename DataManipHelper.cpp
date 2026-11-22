@@ -1,6 +1,7 @@
 #include <sstream>
 #include <limits>
 #include "DataManipHelper.h"
+#include "Piece.h"
 
 // turns every char in string to lowercase
 std::string toLower(std::string str)
@@ -27,6 +28,35 @@ int findCharIndex(const std::string &str, char c)
     }
 
     return static_cast<int>(pos);
+}
+
+char symbolFor(const Piece &piece)
+{
+    char c = '?';
+    switch (piece.getType())
+    {
+    case PieceType::King:
+        c = 'K';
+        break;
+    case PieceType::Queen:
+        c = 'Q';
+        break;
+    case PieceType::Bishop:
+        c = 'B';
+        break;
+    case PieceType::Pawn:
+        c = 'P';
+        break;
+    case PieceType::Knight:
+        c = 'N';
+        break;
+    case PieceType::Rook:
+        c = 'R';
+        break;
+    default:
+        c = '?';
+    }
+    return piece.getColor() == Color::White ? c : toLower(c);
 }
 
 // assumes you have already validated

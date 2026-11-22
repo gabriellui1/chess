@@ -24,7 +24,6 @@ public:
     virtual PieceType getType() const = 0;
     virtual std::vector<Move> pseudoMoves(const Board &board, Position from) const = 0;
     virtual std::vector<Position> attackSquare(const Board &board, Position from) const;
-    virtual char getChar() const = 0;
 };
 
 #endif

@@ -70,28 +70,3 @@ std::vector<Move> Knight::pseudoMoves(const Board &board, Position from) const
     static const std::vector<Offset> direction = {{1, 2}, {2, 1}, {-1, 2}, {-2, 1}, {1, -2}, {2, -1}, {-1, -2}, {-2, -1}};
     return toMoves(board, from, jump(board, from, direction));
 }
-
-char King::getChar() const
-{
-    return getColor() == Color::White ? 'K' : 'k';
-}
-
-char Queen::getChar() const
-{
-    return getColor() == Color::White ? 'Q' : 'q';
-}
-
-char Bishop::getChar() const
-{
-    return getColor() == Color::White ? 'B' : 'b';
-}
-
-char Knight::getChar() const
-{
-    return getColor() == Color::White ? 'N' : 'n';
-}
-
-char Rook::getChar() const
-{
-    return getColor() == Color::White ? 'R' : 'r';
-}

@@ -1,22 +1,24 @@
 #include "TextView.h"
 #include "Board.h"
+#include "DataManipHelper.h"
 
 TextView::TextView(std::ostream &out) : out_(out) {}
 
 void TextView::drawBoard(const Board &board)
 {
+    out_ << std::endl;
     for (int row = 7; row >= 0; row--)
     {
         out_ << row + 1 << " ";
         for (int col = 0; col <= 7; col++)
         {
             Position pos{row, col};
-            out_ << (board.at(pos) == nullptr) ? ((row + col) % 2 == 0 ? '_' : ' ') : board.at(pos)->getChar();
+            out_ << ((board.at(pos) == nullptr) ? ((row + col) % 2 == 0 ? '_' : ' ') : symbolFor(*board.at(pos)));
         }
         out_ << std::endl;
     }
     out_ << std::endl
-         << "  abcdefgh";
+         << "  abcdefgh" << std::endl;
 }
 
 void TextView::onBoardChanged(const Board &board)

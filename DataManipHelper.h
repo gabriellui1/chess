@@ -7,6 +7,7 @@
 #include <cctype>
 #include <string>
 
+class Piece;
 
 // turns every char in string to lowercase
 std::string toLower(const std::string str);
@@ -16,6 +17,9 @@ char toLower(const char c);
 
 // finds first index of char in string, -1 if not found
 int findCharIndex(const std::string &str, char target);
+
+//
+char symbolFor(const Piece &piece);
 
 // finds index of element in vector, -1 if not found
 template <typename T>

@@ -68,12 +68,7 @@ std::vector<Move> Pawn::pseudoMoves(const Board &board, Position from) const
     if (!last.empty())
     {
         const Move &lastmove = last.back();
-        if (lastmove.kind == MoveKind::DoublePawnStep 
-            && board.at(lastmove.to) != Board::outOfBoundsPtr_ 
-            && board.at(lastmove.to)->getType() == PieceType::Pawn 
-            && board.at(lastmove.to)->getColor() != getColor() 
-            && lastmove.to.row == from.row 
-            && (lastmove.to.col - from.col == 1 || lastmove.to.col - from.col == -1))
+        if (lastmove.kind == MoveKind::DoublePawnStep && board.at(lastmove.to) != Board::outOfBoundsPtr_ && board.at(lastmove.to)->getType() == PieceType::Pawn && board.at(lastmove.to)->getColor() != getColor() && lastmove.to.row == from.row && (lastmove.to.col - from.col == 1 || lastmove.to.col - from.col == -1))
         {
             moves.push_back(Move{from, Position{from.row + direction, lastmove.to.col}, MoveKind::EnPassant, {}});
         }
@@ -89,23 +84,16 @@ std::vector<Position> Pawn::attackSquare(const Board &board, Position from) cons
     std::vector<Position> pos;
 
     Position capture_right{from.row + direction, from.col + 1}; // test right capture
-    if (board.isOnBoard(capture_right) && board.at(capture_right) != Board::outOfBoundsPtr_
-        && board.at(capture_right)->getColor() != getColor())
+    if (board.isOnBoard(capture_right) && board.at(capture_right) != Board::outOfBoundsPtr_ && board.at(capture_right)->getColor() != getColor())
     {
         pos.push_back(capture_right);
     }
 
     Position capture_left{from.row + direction, from.col - 1}; // test left capture
-    if (board.isOnBoard(capture_left) && board.at(capture_left) != Board::outOfBoundsPtr_
-        && board.at(capture_left)->getColor() != getColor())
+    if (board.isOnBoard(capture_left) && board.at(capture_left) != Board::outOfBoundsPtr_ && board.at(capture_left)->getColor() != getColor())
     {
         pos.push_back(capture_left);
     }
 
     return pos;
-}
-
-char Pawn::getChar() const
-{
-    return getColor() == Color::White ? 'P' : 'p';
 }
