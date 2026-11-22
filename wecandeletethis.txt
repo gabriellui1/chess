@@ -1,0 +1,17 @@
+Welcome to the chess menu!
+Choose one of the commands:
+
+game <white-player> <black-player>
+    starts a new game with <white-player> and <black-player>
+    <white-player>: human | computer1 | computer2 | computer3 | computer4
+        choose the type of player playing with the white pieces
+    <black-player>: human | computer1 | computer2 | computer3 | computer4
+        choose the type of player playing with the black pieces
+
+setup
+    enters setup mode to set up your own initial board configurations
+
+CTRL+D
+    exits chess
+
+
