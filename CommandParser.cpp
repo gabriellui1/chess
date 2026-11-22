@@ -21,9 +21,8 @@ bool isWordValid(std::istringstream &iss, std::string &word, Command &cmd, const
 // modifies square, does not take cmd
 bool parseSquare(const std::string word, Position &square)
 {
-    std::string files = "abcdefgh";
-    int index = files.find(toLower(word[0]));
-    if (index == std::string::npos || word[1] - '1' < 0 || word[1] - '1' > 7)
+    int index = findCharIndex("abcdefgh", toLower(word[0]));
+    if (index == -1 || word[1] - '1' < 0 || word[1] - '1' > 7)
         return false;
     square.col = index;
     square.row = word[1] - '1';

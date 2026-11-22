@@ -1,7 +1,7 @@
 // Status: Finished?? but not tested
 
 #include "Board.h"
-
+#include "Types.h"
 struct Board::UndoRecord
 {
     Move move;
@@ -32,7 +32,7 @@ bool Board::isOnBoard(Position pos) const
 const std::unique_ptr<Piece> &Board::at(Position pos) const
 {
     if (!isOnBoard(pos))
-        return nullptr;
+        return Board::outOfBoundsPtr_;
 
     return squares_[pos.row][pos.col];
 }
@@ -123,7 +123,7 @@ std::vector<Position> Board::kingSquares(Color color) const
         for (int col = 0; col < 8; col++)
         {
             Position pos{row, col};
-            if (at(pos)->getType() == PieceType::King && at(pos)->getColour() == color)
+            if (at(pos)->getType() == PieceType::King && at(pos)->getColor() == color)
             {
                 kingPos.push_back(pos);
             }
@@ -173,13 +173,13 @@ void Board::applyMove(const Move &move)
     if (move.kind == MoveKind::Promotion)
     {
         undo.replacedPawn = std::move(squares_[move.from.row][move.from.col]);
-        squares_[move.to.row][move.to.col] = PieceFactory::create(move.promoteTo[0], undo.replacedPawn->getColour());
+        squares_[move.to.row][move.to.col] = PieceFactory::create(move.promoteTo[0], undo.replacedPawn->getColor());
     }
     else
         squares_[move.to.row][move.to.col] = std::move(squares_[move.from.row][move.from.col]);
 
     squares_[move.to.row][move.to.col]->setMoved(true);
-    history_.push_back(undo);
+    history_.push_back(std::move(undo));
 }
 
 void Board::undoMove()
@@ -187,32 +187,33 @@ void Board::undoMove()
     if (history_.size() == 0)
         return;
 
-    Undo undo = history_.pop_back();
+    UndoRecord undo = std::move(history_.back());
+    history_.pop_back();
 
     if (undo.move.kind == MoveKind::Promotion)
     {
         squares_[undo.move.to.row][undo.move.to.col].reset();
-        squares_[undo.move.from.row][undo.move.from.col] = std::move(undo.move.replacePawn);
+        squares_[undo.move.from.row][undo.move.from.col] = std::move(undo.replacedPawn);
     }
     else
         squares_[undo.move.from.row][undo.move.from.col] = std::move(squares_[undo.move.to.row][undo.move.to.col]);
 
-    if (move.kind == MoveKind::Castle)
+    if (undo.move.kind == MoveKind::Castle)
     {
-        if (move.to.col > move.from.col)
+        if (undo.move.to.col > undo.move.from.col)
         {
-            squares_[move.to.row][7] = std::move(squares_[move.to.row][5]);
-            squares_[move.to.row][7]->setMoved(false);
+            squares_[undo.move.to.row][7] = std::move(squares_[undo.move.to.row][5]);
+            squares_[undo.move.to.row][7]->setMoved(false);
         }
         else
         {
-            squares_[move.to.row][0] = std::move(squares_[move.to.row][3]);
-            squares_[move.to.row][0]->setMoved(false);
+            squares_[undo.move.to.row][0] = std::move(squares_[undo.move.to.row][3]);
+            squares_[undo.move.to.row][0]->setMoved(false);
         }
     }
 
     squares_[undo.capturedAt.row][undo.capturedAt.col] = std::move(undo.captured);
-    squares_[move.from.row][move.from.col]->setMoved(undo.previouslyMoved);
+    squares_[undo.move.from.row][undo.move.from.col]->setMoved(undo.previouslyMoved);
 }
 
 void Board::emptySquares()
