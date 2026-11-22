@@ -5,7 +5,22 @@
 #include <algorithm>
 #include <cctype>
 
-PieceType charToPiece(char c)
+// finds index of element in vector, -1 if not found
+template <typename T>
+int findIndex(const std::vector<T> &vec, const T &target)
+{
+    auto it = std::find(vec.begin(), vec.end(), target);
+
+    if (it != vec.end())
+    {
+        return std::distance(vec.begin(), it);
+    }
+
+    return -1;
+}
+
+// assumes you have already validated
+PieceType charToPiece(const char c)
 {
     std::string files = "qrbnpk";
     std::vector<PieceType> pieces({PieceType::Queen, PieceType::Rook, PieceType::Bishop, PieceType::Knight, PieceType::Pawn, PieceType::King});
@@ -13,14 +28,25 @@ PieceType charToPiece(char c)
     return pieces[index];
 }
 
-std::string toLower(std::string str)
+// assumes you have already validated
+PlayerType stringToPlayer(const std::string str)
+{
+    std::vector<PlayerType> players({PlayerType::Human, PlayerType::Computer1, PlayerType::Computer2, PlayerType::Computer3, PlayerType::Computer4});
+    std::vector<std::string> playerStrings({"human", "computer1", "computer2", "computer3", "computer4"});
+    int index = findIndex(playerStrings, toLower(str));
+    return players[index];
+}
+
+// turns every char in string to lowercase
+std::string toLower(const std::string str)
 {
     std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c)
                    { return std::tolower(c); });
     return str;
 }
 
-char toLower(char c)
+// turns every char in string to lowercase
+char toLower(const char c)
 {
     return static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
 }
@@ -31,7 +57,7 @@ bool isWordValid(std::istringstream &iss, std::string &word, Command &cmd, const
     if (readWord)
         iss >> word;
 
-    if (iss.eof() || iss.fail() || (validWords.size() != 0 && std::find(validWords.begin(), validWords.end(), toLower(word)) == validWords.end()))
+    if (iss.eof() || iss.fail() || (validWords.size() != 0 && findIndex(validWords, toLower(word)) == -1))
     {
         cmd.type = CommandType::Invalid;
         return false;
@@ -75,11 +101,11 @@ Command CommandParser::parse(const std::string &command) const
 
         if (!isWordValid(iss, word, cmd, validWords))
             return cmd;
-        cmd.whiteSpec = word;
+        cmd.whiteSpec = stringToPlayer(word);
 
         if (!isWordValid(iss, word, cmd, validWords))
             return cmd;
-        cmd.blackSpec = word;
+        cmd.blackSpec = stringToPlayer(word);
 
         cmd.type = CommandType::Game;
         return cmd;
@@ -165,14 +191,17 @@ Command CommandParser::parse(const std::string &command) const
     if (word == "resign")
     {
         cmd.type = CommandType::Resign;
+        return cmd;
     }
     else if (word == "setup")
     {
         cmd.type = CommandType::Setup;
+        return cmd;
     }
     else if (word == "done")
     {
         cmd.type = CommandType::Done;
+        return cmd;
     }
 
     cmd.type = CommandType::Invalid;
