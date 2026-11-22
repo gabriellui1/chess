@@ -1,4 +1,6 @@
 #include "Types.h"
+#include <algorithm>
+#include <cctype>
 #include <string>
 
 #ifndef DATA_MANIP_HELPER_H
@@ -15,8 +17,17 @@ int findCharIndex(const std::string &str, char target);
 
 // finds index of element in vector, -1 if not found
 template <typename T>
-int findIndex(const std::vector<T> &vec, const T &target);
+int findIndex(const std::vector<T> &vec, const T &word)
+{
+    auto it = std::find(vec.begin(), vec.end(), word);
 
+    if (it != vec.end())
+    {
+        return std::distance(vec.begin(), it);
+    }
+
+    return -1;
+}
 // assumes you have already validated
 PieceType charToPiece(const char c);
 
