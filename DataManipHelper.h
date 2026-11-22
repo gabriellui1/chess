@@ -1,10 +1,12 @@
+
+#ifndef DATA_MANIP_HELPER_H
+#define DATA_MANIP_HELPER_H
+
 #include "Types.h"
 #include <algorithm>
 #include <cctype>
 #include <string>
 
-#ifndef DATA_MANIP_HELPER_H
-#define DATA_MANIP_HELPER_H
 
 // turns every char in string to lowercase
 std::string toLower(const std::string str);

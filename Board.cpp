@@ -242,3 +242,6 @@ void Board::emptySquares()
     }
     history_.clear();
 }
+
+void Board::applyTrial(const Move &move){} // without notifying observer
+void Board::undoTrial(){}

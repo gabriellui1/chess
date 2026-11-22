@@ -2,7 +2,7 @@
 
 #include "CommandParser.h"
 #include <sstream>
-#include "DataManipHelper.cpp"
+#include "DataManipHelper.h"
 
 // does not modify command except for type
 bool isWordValid(std::istringstream &iss, std::string &word, Command &cmd, const std::vector<std::string> validWords = {}, bool readWord = true)
