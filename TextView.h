@@ -1,3 +1,4 @@
+//
 #ifndef TEXTVIEW_H
 #define TEXTVIEW_H
 
@@ -18,7 +19,7 @@ public:
     void showMessage(const std::string &message);
     void showError(const std::string &error);
     void showStartMenu();
-    void showLevelPrompt(Color side);
+    // void showLevelPrompt(Color side); this functionality is already implemented in commandParser.cpp
 };
 
 #endif

@@ -1,18 +1,61 @@
-// Status: TBD
+// TODO: need to split helper methods into different files and include these files or make them static
 
 #include "CommandParser.h"
 #include <sstream>
 #include <algorithm>
+#include <cctype>
 
-bool isWordValid(std::istringstream &iss, std::string &word, Command &cmd, std::vector<std::string> validWords = {})
+PieceType charToPiece(char c)
 {
-    iss >> word;
-    if (iss.eof() || iss.fail() || (validWords.size() != 0 && std::find(validWords.begin(), validWords.end(), word) == validWords.end()))
+    std::string files = "qrbnpk";
+    std::vector<PieceType> pieces({PieceType::Queen, PieceType::Rook, PieceType::Bishop, PieceType::Knight, PieceType::Pawn, PieceType::King});
+    int index = files.find(toLower(c));
+    return pieces[index];
+}
+
+std::string toLower(std::string str)
+{
+    std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c)
+                   { return std::tolower(c); });
+    return str;
+}
+
+char toLower(char c)
+{
+    return static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+}
+
+// does not modify command except for type
+bool isWordValid(std::istringstream &iss, std::string &word, Command &cmd, const std::vector<std::string> validWords = {}, bool readWord = true)
+{
+    if (readWord)
+        iss >> word;
+
+    if (iss.eof() || iss.fail() || (validWords.size() != 0 && std::find(validWords.begin(), validWords.end(), toLower(word)) == validWords.end()))
     {
         cmd.type = CommandType::Invalid;
         return false;
     }
     return true;
+}
+
+// modifies square, does not take cmd
+bool parseSquare(const std::string word, Position &square)
+{
+    std::string files = "abcdefgh";
+    int index = files.find(toLower(word[0]));
+    if (index == std::string::npos || word[1] - '1' < 0 || word[1] - '1' > 7)
+        return false;
+    square.col = index;
+    square.row = word[1] - '1';
+    return true;
+}
+
+bool isSquareValid(std::istringstream &iss, std::string &word, Position &square)
+{
+    iss >> word;
+    parseSquare(word, square);
+    return iss.eof() || square.row == -1 || square.col == -1;
 }
 
 Command CommandParser::parse(const std::string &command) const
@@ -44,32 +87,82 @@ Command CommandParser::parse(const std::string &command) const
 
     if (word == "move")
     {
+        if (!isSquareValid(iss, word, cmd.from))
+            return cmd;
+
+        if (!isSquareValid(iss, word, cmd.to))
+        {
+            cmd.type = CommandType::Invalid;
+            return cmd;
+        }
+
+        std::vector<std::string> validWords({"q",
+                                             "r",
+                                             "b",
+                                             "n"});
 
         iss >> word;
-        if (iss.eof())
+        if (iss.eof() || iss.fail())
             return cmd;
 
-        Position pos;
-        std::string files = "abcdefgh";
-        int index = files.find(word[0]);
-        if (index == std::string::npos)
-        {
-            cmd.type = CommandType::Invalid;
+        // do not merge these if statements!
+        if (!isWordValid(iss, word, cmd, validWords, false))
             return cmd;
-        }
-        pos.col = index;
-        if (word[1] - '1' < 0 || word[1] - '1' > 7)
-        {
-            cmd.type = CommandType::Invalid;
-            return cmd;
-        }
-
-        pos.row = word[1] - '1';
-        // not done
+        cmd.piece = charToPiece(word[0]);
         cmd.type = CommandType::Move;
         return cmd;
     }
-    else if (word == "resign")
+
+    if (word == "+")
+    {
+        std::vector<std::string> validWords({"q",
+                                             "r",
+                                             "b",
+                                             "n",
+                                             "k",
+                                             "p"});
+
+        iss >> word;
+        if (!isWordValid(iss, word, cmd, validWords))
+            return cmd;
+        cmd.piece = charToPiece(word[0]);
+        cmd.color = toLower(word[0]) == word[0] ? Color::Black : Color::White;
+
+        if (!isSquareValid(iss, word, cmd.square))
+        {
+            cmd.type = CommandType::Invalid;
+            return cmd;
+        }
+
+        cmd.type = CommandType::Place;
+        return cmd;
+    }
+
+    if (word == "-")
+    {
+        if (!isSquareValid(iss, word, cmd.square))
+        {
+            cmd.type = CommandType::Invalid;
+            return cmd;
+        }
+
+        cmd.type = CommandType::Remove;
+        return cmd;
+    }
+
+    if (word == "=")
+    {
+        std::vector<std::string> validWords({"white", "black"});
+
+        if (!isWordValid(iss, word, cmd, validWords))
+            return cmd;
+        cmd.color = word == "white" ? Color::White : Color::Black;
+
+        cmd.type = CommandType::SetTurn;
+        return cmd;
+    }
+
+    if (word == "resign")
     {
         cmd.type = CommandType::Resign;
     }
