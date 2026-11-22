@@ -34,11 +34,11 @@ std::vector<Move> Pawn::pseudoMoves(const Board &board, Position from) const
 
     // one and two step forward
     Position cur = Position{from.row + direction, from.col};
-    if (isOnBoard(cur) && board.at(cur) == nullptr)
+    if (board.isOnBoard(cur) && board.at(cur) == Board::outOfBoundsPtr_)
     {
         moves = add(from, cur, moves, lastRow);
         Position cur_two = Position{from.row + 2 * direction, from.col};
-        if (from.row == homeRow && isOnBoard(cur_two) && board.at(cur_two) == nullptr)
+        if (from.row == homeRow && board.isOnBoard(cur_two) && board.at(cur_two) == Board::outOfBoundsPtr_)
         {
             moves.push_back(Move{from, cur_two, MoveKind::DoublePawnStep, {}});
         }
@@ -47,19 +47,17 @@ std::vector<Move> Pawn::pseudoMoves(const Board &board, Position from) const
     // Captures
 
     Position capture_right{from.row + direction, from.col + 1}; // test right capture
-    if (isOnBoard(capture_right))
+    if (board.isOnBoard(capture_right))
     {
-        const Piece *target = board.at(capture_right);
-        if (target != nullptr && target->getColor() != getColor())
+        if (board.at(capture_right) != Board::outOfBoundsPtr_ && board.at(capture_right)->getColor() != getColor())
         {
             moves = add(from, capture_right, moves, lastRow);
         }
     }
     Position capture_left{from.row + direction, from.col - 1}; // test left capture
-    if (isOnBoard(capture_left))
+    if (board.isOnBoard(capture_left))
     {
-        const Piece *target = board.at(capture_left);
-        if (target != nullptr && target->getColor() != getColor())
+        if (board.at(capture_left) != Board::outOfBoundsPtr_ && board.at(capture_left)->getColor() != getColor())
         {
             moves = add(from, capture_left, moves, lastRow);
         }
@@ -70,8 +68,12 @@ std::vector<Move> Pawn::pseudoMoves(const Board &board, Position from) const
     if (!last.empty())
     {
         const Move &lastmove = last.back();
-        const Piece *other = board.at(lastmove.to);
-        if (lastmove.kind == MoveKind::DoublePawnStep && other != nullptr && other->getType() == PieceType::Pawn && other->getColor() != getColor() && lastmove.to.row == from.row && (lastmove.to.col - from.col == 1 || lastmove.to.col - from.col == -1))
+        if (lastmove.kind == MoveKind::DoublePawnStep 
+            && board.at(lastmove.to) != Board::outOfBoundsPtr_ 
+            && board.at(lastmove.to)->getType() == PieceType::Pawn 
+            && board.at(lastmove.to)->getColor() != getColor() 
+            && lastmove.to.row == from.row 
+            && (lastmove.to.col - from.col == 1 || lastmove.to.col - from.col == -1))
         {
             moves.push_back(Move{from, Position{from.row + direction, lastmove.to.col}, MoveKind::EnPassant, {}});
         }
@@ -87,13 +89,13 @@ std::vector<Position> Pawn::attackSquare(const Board &board, Position from) cons
     std::vector<Move> moves;
 
     Position capture_right{from.row + direction, from.col + 1}; // test right capture
-    if (isOnBoard(capture_right))
+    if (board.isOnBoard(capture_right))
     {
         moves.push_back(Move{from, capture_right, MoveKind::Normal, {}});
     }
 
     Position capture_left{from.row + direction, from.col - 1}; // test left capture
-    if (isOnBoard(capture_left))
+    if (board.isOnBoard(capture_left))
     {
         moves.push_back(Move{from, capture_left, MoveKind::Normal, {}});
     }
