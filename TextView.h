@@ -14,7 +14,7 @@ private:
     void drawBoard(const Board &board);
 
 public:
-    explicit TextView(std::ostream &out);
+    explicit TextView(std::ostream &out = std::cout);
     void onBoardChanged(const Board &board);
     void showMessage(const std::string &message);
     void showError(const std::string &error);

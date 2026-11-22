@@ -1,0 +1,26 @@
+#include "Types.h"
+#include <string>
+
+#ifndef DATA_MANIP_HELPER_H
+#define DATA_MANIP_HELPER_H
+
+// turns every char in string to lowercase
+std::string toLower(const std::string str);
+
+// turns every char in string to lowercase
+char toLower(const char c);
+
+// finds first index of char in string, -1 if not found
+int findCharIndex(const std::string &str, char target);
+
+// finds index of element in vector, -1 if not found
+template <typename T>
+int findIndex(const std::vector<T> &vec, const T &target);
+
+// assumes you have already validated
+PieceType charToPiece(const char c);
+
+// assumes you have already validated
+PlayerType stringToPlayer(const std::string str);
+
+#endif
