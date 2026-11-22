@@ -37,8 +37,8 @@ public:
     void undo();                       // notify observer
     void applyTrial(const Move &move); // without notifying observer
     void undoTrial();
-    void attach(BoardObserver *ob);
-    void detach(BoardObserver *ob);
+    void attach(std::unique_ptr<BoardObserver> ob);
+    void detach(std::unique_ptr<BoardObserver> ob);
 };
 
 #endif
