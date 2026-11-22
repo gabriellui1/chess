@@ -110,6 +110,15 @@ void Board::undo()
     notifyObservers();
 }
 
+void Board::applyTrial(const Move &move)
+{
+    applyMove(move);
+} // without notifying observer
+void Board::undoTrial()
+{
+    undoMove();
+}
+
 std::vector<Position> Board::kingSquares(Color color) const
 {
     std::vector<Position> kingPos = std::vector<Position>();
@@ -242,6 +251,3 @@ void Board::emptySquares()
     }
     history_.clear();
 }
-
-void Board::applyTrial(const Move &move){} // without notifying observer
-void Board::undoTrial(){}
