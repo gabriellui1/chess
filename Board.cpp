@@ -35,7 +35,7 @@ const std::unique_ptr<Piece> &Board::at(Position pos) const
     return squares_[pos.row][pos.col];
 }
 
-void Board::place(Position pos, std::unique_ptr<Piece> piece)
+void Board::place(Position pos, std::unique_ptr<Piece> &piece)
 {
     remove(pos);
     squares_[pos.row][pos.col] = std::move(piece);
@@ -125,7 +125,7 @@ std::vector<Position> Board::kingSquares(Color color) const
         for (int col = 0; col < 8; col++)
         {
             Position pos{row, col};
-            if (at(pos)->getType() == PieceType::King && at(pos)->getColor() == color)
+            if (at(pos) != nullptr && at(pos) != Board::outOfBoundsPtr_ && at(pos)->getType() == PieceType::King && at(pos)->getColor() == color)
             {
                 kingPos.push_back(pos);
             }
@@ -134,35 +134,40 @@ std::vector<Position> Board::kingSquares(Color color) const
     return kingPos;
 }
 
+// Fix and understand this code notifyObservers, attach, detach
 void Board::notifyObservers()
 {
-    for (const std::unique_ptr<BoardObserver> &ob : observers_)
-    {
-        ob->onBoardChanged(*this);
-    }
-}
-
-void Board::attach(std::unique_ptr<BoardObserver> observer)
-{
-    observers_.push_back(std::move(observer));
-}
-
-void Board::detach(std::unique_ptr<BoardObserver> observer)
-{
-    for (const std::unique_ptr<BoardObserver> &ob : observers_)
-    {
-        if (ob == observer)
+    std::vector<std::shared_ptr<BoardObserver>> liveObservers;
+    std::erase_if(observers_, [&liveObservers](const auto &observer)
+                  {
+        if (auto live = observer.lock())
         {
-            observer.reset();
-            observers_.pop_back();
-            break;
+            liveObservers.push_back(std::move(live));
+            return false;
         }
-    }
+        return true; });
+
+    for (const auto &observer : liveObservers)
+        observer->onBoardChanged(*this);
+}
+
+void Board::attach(const std::shared_ptr<BoardObserver> &observer)
+{
+    observers_.push_back(observer);
+}
+
+void Board::detach(const std::shared_ptr<BoardObserver> &observer)
+{
+    std::erase_if(observers_, [&observer](const auto &current)
+                  {
+        auto live = current.lock();
+        return !live || live == observer; });
 }
 
 void Board::applyMove(const Move &move)
 {
     UndoRecord undo;
+    undo.move = move;
     undo.previouslyMoved = at(move.from)->hasMoved();
 
     if (move.kind == MoveKind::EnPassant)

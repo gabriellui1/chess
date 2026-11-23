@@ -1,9 +1,10 @@
 # chess
 remember to run git pull
+also run ```make``` to compile
 
 TODO:
-CommandParser.cc
-  need to split helper methods into different files and include these files or make them static
-  
+rename gamecontroller to controller
+change unique ptr constructors to make_unique
+use namespace classes instead of including (forward reference)
+Fix and udnerstand notifyObservers, attach, detach
 
-also run ```make``` to compile
