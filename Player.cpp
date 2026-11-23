@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "DataManipHelper.h"
 bool Human::isHuman() const
 {
     return true;
@@ -6,5 +7,10 @@ bool Human::isHuman() const
 
 std::vector<Move> Human::choose(const Command &cmd, const Board &board, const std::vector<Move> &legal)
 {
-    return legal;
+    for (Move move : legal)
+    {
+        if (move.from == cmd.from && move.to == cmd.to && (move.promoteTo.empty() || move.promoteTo[0] == cmd.piece))
+            return std::vector<Move>({move});
+    }
+    return std::vector<Move>();
 }

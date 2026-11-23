@@ -42,7 +42,7 @@ bool isSquareValid(std::istringstream &iss, std::string &word, Position &square)
 
 Command CommandParser::parseMenu(const std::string &command, std::ostream &out) const
 {
-    Command cmd{};
+    Command cmd;
     std::istringstream iss(command);
     std::string word;
 
@@ -73,7 +73,6 @@ Command CommandParser::parseMenu(const std::string &command, std::ostream &out) 
         return cmd;
     }
 
-    cmd.type = CommandType::Invalid;
     return cmd;
 }
 
@@ -111,6 +110,7 @@ Command CommandParser::parseGame(const std::string &command, std::ostream &out) 
         // do not merge these if statements!
         if (!isWordValid(iss, word, cmd, validWords, false))
             return cmd;
+
         cmd.piece = charToPiece(word[0]);
         cmd.type = CommandType::Move;
         return cmd;
@@ -122,7 +122,6 @@ Command CommandParser::parseGame(const std::string &command, std::ostream &out) 
         return cmd;
     }
 
-    cmd.type = CommandType::Invalid;
     return cmd;
 }
 
@@ -189,6 +188,5 @@ Command CommandParser::parseSetup(const std::string &command, std::ostream &out)
         return cmd;
     }
 
-    cmd.type = CommandType::Invalid;
     return cmd;
 }
