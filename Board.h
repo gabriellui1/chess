@@ -14,7 +14,7 @@ private:
     struct UndoRecord;
     std::vector<std::vector<std::unique_ptr<Piece>>> squares_;
     std::vector<UndoRecord> history_;
-    std::vector<std::unique_ptr<BoardObserver>> observers_; // non-owning
+    std::vector<std::weak_ptr<BoardObserver>> observers_; // it should be non-owning, maybe using weak ptr?
     void notifyObservers();
     void applyMove(const Move &move);
     void undoMove();
@@ -27,7 +27,7 @@ public:
     static inline const std::unique_ptr<Piece> outOfBoundsPtr_{};
     bool isOnBoard(Position pos) const; // funcction chekcing whether a square is on board given its position
     const std::unique_ptr<Piece> &at(Position pos) const;
-    void place(Position pos, std::unique_ptr<Piece> piece);
+    void place(Position pos, std::unique_ptr<Piece> &piece);
     void remove(Position pos);
     void clear();
     void loadStandardPosition();
@@ -37,8 +37,8 @@ public:
     void undo();                       // notify observer
     void applyTrial(const Move &move); // without notifying observer
     void undoTrial();
-    void attach(std::unique_ptr<BoardObserver> ob);
-    void detach(std::unique_ptr<BoardObserver> ob);
+    void attach(const std::shared_ptr<BoardObserver> &observer);
+    void detach(const std::shared_ptr<BoardObserver> &observer);
 };
 
 #endif

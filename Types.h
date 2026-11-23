@@ -31,9 +31,8 @@ enum class PieceType
 enum class GameState
 {
     Menu,
-    Idle,
     Setup,
-    Playing
+    Game
 };
 enum class GameStatus
 {
@@ -68,7 +67,7 @@ struct Position
 {
     int row;
     int col;
-    bool operator==(const Position& other) const = default;
+    bool operator==(const Position &other) const = default;
 };
 
 struct Offset

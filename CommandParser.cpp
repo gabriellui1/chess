@@ -40,18 +40,14 @@ bool isSquareValid(std::istringstream &iss, std::string &word, Position &square)
     return parseSquare(word, square);
 }
 
-Command CommandParser::parse(const std::string &command, std::ostream &out) const
+Command CommandParser::parseMenu(const std::string &command, std::ostream &out) const
 {
     Command cmd{};
-
     std::istringstream iss(command);
     std::string word;
 
-    iss >> word;
-    out << word << std::endl;
-
-    // if (!isWordValid(iss, word, cmd))
-    //     return cmd;
+    if (!isWordValid(iss, word, cmd))
+        return cmd;
 
     if (word == "game")
     {
@@ -70,6 +66,25 @@ Command CommandParser::parse(const std::string &command, std::ostream &out) cons
         cmd.type = CommandType::Game;
         return cmd;
     }
+
+    else if (word == "setup")
+    {
+        cmd.type = CommandType::Setup;
+        return cmd;
+    }
+
+    cmd.type = CommandType::Invalid;
+    return cmd;
+}
+
+Command CommandParser::parseGame(const std::string &command, std::ostream &out) const
+{
+    Command cmd{};
+    std::istringstream iss(command);
+    std::string word;
+
+    if (!isWordValid(iss, word, cmd))
+        return cmd;
 
     if (word == "move")
     {
@@ -98,6 +113,25 @@ Command CommandParser::parse(const std::string &command, std::ostream &out) cons
         cmd.type = CommandType::Move;
         return cmd;
     }
+
+    if (word == "resign")
+    {
+        cmd.type = CommandType::Resign;
+        return cmd;
+    }
+
+    cmd.type = CommandType::Invalid;
+    return cmd;
+}
+
+Command CommandParser::parseSetup(const std::string &command, std::ostream &out) const
+{
+    Command cmd{};
+    std::istringstream iss(command);
+    std::string word;
+
+    if (!isWordValid(iss, word, cmd))
+        return cmd;
 
     if (word == "+")
     {
@@ -148,17 +182,7 @@ Command CommandParser::parse(const std::string &command, std::ostream &out) cons
         return cmd;
     }
 
-    if (word == "resign")
-    {
-        cmd.type = CommandType::Resign;
-        return cmd;
-    }
-    else if (word == "setup")
-    {
-        cmd.type = CommandType::Setup;
-        return cmd;
-    }
-    else if (word == "done")
+    if (word == "done")
     {
         cmd.type = CommandType::Done;
         return cmd;

@@ -5,18 +5,19 @@
 #include <vector>
 class Board;
 
-class Player {
+class Player
+{
 protected:
-
 public:
     virtual ~Player() = default;
-    virtual std::vector<Move> choose(const Command&, const Board&, const std::vector<Move>& legal) = 0;
+    virtual bool isHuman() const = 0;
+    virtual std::vector<Move> choose(const Command &, const Board &, const std::vector<Move> &legal) = 0;
 };
 
-class Human: public Player{
+class Human : public Player
+{
 
 public:
-    virtual std::vector<Move> choose(const Command&, const Board&, const std::vector<Move>& legal) override;
-
+    virtual std::vector<Move> choose(const Command &, const Board &, const std::vector<Move> &legal) override;
 };
 #endif
