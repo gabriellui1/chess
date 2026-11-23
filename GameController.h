@@ -17,7 +17,7 @@ class GameController
 {
 private:
     Board board_;
-    Rules rule_;
+    Rules rules_;
     ScoreBoard scores_;
     std::shared_ptr<TextView> view_;
     CommandParser parser_;

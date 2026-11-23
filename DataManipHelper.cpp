@@ -63,7 +63,7 @@ char symbolFor(const Piece &piece)
 PieceType charToPiece(const char c)
 {
     std::vector<PieceType> pieces({PieceType::Queen, PieceType::Rook, PieceType::Bishop, PieceType::Knight, PieceType::Pawn, PieceType::King});
-    int index = findCharIndex("qrbnpk", c);
+    int index = findCharIndex("qrbnpk", toLower(c));
     return pieces[index];
 }
 

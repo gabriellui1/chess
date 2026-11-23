@@ -8,11 +8,11 @@
 // does not modify command except for type
 bool isWordValid(std::istringstream &iss, std::string &word, Command &cmd, const std::vector<std::string> validWords = {}, bool readWord = true)
 {
+    bool wordExists = true;
     if (readWord)
-        iss >> word;
+        wordExists = static_cast<bool>(iss >> word);
 
-    if (iss.fail() || (!validWords.empty() &&
-                       findIndex(validWords, toLower(word)) == -1))
+    if (!wordExists || iss.fail() || (!validWords.empty() && findIndex(validWords, toLower(word)) == -1))
     {
         cmd.type = CommandType::Invalid;
         return false;
@@ -24,7 +24,7 @@ bool isWordValid(std::istringstream &iss, std::string &word, Command &cmd, const
 // modifies square, does not take cmd
 bool parseSquare(const std::string word, Position &square)
 {
-    if (word.size() == 2)
+    if (word.size() != 2)
         return false;
     int index = findCharIndex("abcdefgh", toLower(word[0]));
     if (index == -1 || word[1] - '1' < 0 || word[1] - '1' > 7)
@@ -102,10 +102,12 @@ Command CommandParser::parseGame(const std::string &command, std::ostream &out) 
                                              "b",
                                              "n"});
 
-        iss >> word;
-        if (iss.eof() || iss.fail())
+        bool wordExists = static_cast<bool>(iss >> word);
+        if (!wordExists || iss.fail())
+        {
+            cmd.type = CommandType::Move;
             return cmd;
-
+        }
         // do not merge these if statements!
         if (!isWordValid(iss, word, cmd, validWords, false))
             return cmd;
@@ -142,7 +144,6 @@ Command CommandParser::parseSetup(const std::string &command, std::ostream &out)
                                              "k",
                                              "p"});
 
-        iss >> word;
         if (!isWordValid(iss, word, cmd, validWords))
             return cmd;
         cmd.piece = charToPiece(word[0]);

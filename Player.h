@@ -18,6 +18,7 @@ class Human : public Player
 {
 
 public:
-    virtual std::vector<Move> choose(const Command &, const Board &, const std::vector<Move> &legal) override;
+    std::vector<Move> choose(const Command &, const Board &, const std::vector<Move> &legal) override;
+    bool isHuman() const override;
 };
 #endif
