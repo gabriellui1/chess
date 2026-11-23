@@ -87,6 +87,7 @@ struct Move
 struct Command
 {
     CommandType type = CommandType::Invalid;
+    std::vector<std::string> messages = {};
     Position from = Position{-1, -1};
     Position to = Position{-1, -1};
     PieceType piece = PieceType::Pawn;        // empty unless move promotes

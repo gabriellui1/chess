@@ -37,24 +37,12 @@ std::unique_ptr<Player> makePlayer(const PlayerType &spec, const Rules &rules)
 
 void GameController::run()
 {
-    std::cout << "hi" << std::endl;
-
+    view_->showStartMenu();
     std::string input;
     Command command;
     while (std::getline(std::cin, input))
     {
-        switch (state_)
-        {
-        case GameState::Menu:
-            command = parser_.parseMenu(input, std::cout);
-            break;
-        case GameState::Setup:
-            command = parser_.parseSetup(input, std::cout);
-            break;
-        case GameState::Game:
-            command = parser_.parseGame(input, std::cout);
-            break;
-        }
+        parser_.parse(input, state_);
         execute(command);
     }
 
@@ -76,16 +64,14 @@ void GameController::execute(const Command &cmd)
         break;
     case CommandType::Setup:
         view_->showMessage("Setup\n");
-        board_.loadStandardPosition();
+        board_.clear();
+        turn_ = Color::White;
+        customStart_ = false;
         state_ = GameState::Setup;
-
         break;
     case CommandType::Place:
         view_->showMessage("place\n");
-        {
-            std::unique_ptr<Piece> piece = PieceFactory::create(cmd.piece, cmd.color);
-            board_.place(cmd.square, piece);
-        }
+        setupCommand(cmd);
         break;
     case CommandType::Remove:
         view_->showMessage("remove\n");
@@ -97,12 +83,12 @@ void GameController::execute(const Command &cmd)
         break;
     case CommandType::Done:
         view_->showMessage("done\n");
-        state_ = GameState::Menu;
+        finishSetup();
         break;
     default:
-        view_->showMessage("invalid command\n");
         break;
     }
+    view_->showMessages(cmd.messages);
     view_->onBoardChanged(board_);
 }
 
@@ -135,4 +121,35 @@ void GameController::startGame(PlayerType whiteSpec, PlayerType blackSpec)
     turn_ = Color::White;
     legal_ = rules_.legalMoves(board_, turn_);
     state_ = GameState::Game;
+}
+
+void GameController::setupCommand(const Command &cmd)
+{
+    std::unique_ptr<Piece> piece = PieceFactory::create(cmd.piece, cmd.color);
+    board_.place(cmd.square, piece);
+}
+
+void GameController::finishSetup()
+{
+    std::vector<std::string> messages = rules_.validateSetup(board_);
+    for (std::string message : messages)
+    {
+        view_->showError(message);
+    }
+    if (messages.empty())
+    {
+        state_ = GameState::Menu;
+        customStart_ = true;
+    }
+}
+
+void GameController::resign()
+{
+    Color winner = (turn_ == Color::White) ? Color::Black : Color::White;
+    scores_.addWin(winner);
+    state_ = GameState::Menu;
+}
+
+void printFinalScore()
+{
 }

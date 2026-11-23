@@ -31,6 +31,12 @@ void TextView::showMessage(const std::string &message)
     out_ << message << std::endl;
 }
 
+void TextView::showMessages(const std::vector<std::string> &messages)
+{
+    for (std::string message : messages)
+        showMessage(message);
+}
+
 void TextView::showError(const std::string &error)
 {
     out_ << error << std::endl;

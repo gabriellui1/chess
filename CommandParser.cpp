@@ -56,11 +56,17 @@ Command CommandParser::parseMenu(const std::string &command, std::ostream &out) 
         std::vector<std::string> validWords({"human", "computer1", "computer2", "computer3", "computer4"});
 
         if (!isWordValid(iss, word, cmd, validWords))
+        {
+            cmd.messages.push_back("Not a valid player type for white.");
             return cmd;
+        }
         cmd.whiteSpec = stringToPlayer(word);
 
         if (!isWordValid(iss, word, cmd, validWords))
+        {
+            cmd.messages.push_back("Not a valid player type for black.");
             return cmd;
+        }
         cmd.blackSpec = stringToPlayer(word);
 
         cmd.type = CommandType::Game;
@@ -88,11 +94,14 @@ Command CommandParser::parseGame(const std::string &command, std::ostream &out) 
     if (word == "move")
     {
         if (!isSquareValid(iss, word, cmd.from))
+        {
+            cmd.type = CommandType::Move;
             return cmd;
+        }
 
         if (!isSquareValid(iss, word, cmd.to))
         {
-            cmd.type = CommandType::Invalid;
+            cmd.messages.push_back("Missing destination square");
             return cmd;
         }
 
@@ -107,9 +116,12 @@ Command CommandParser::parseGame(const std::string &command, std::ostream &out) 
             cmd.type = CommandType::Move;
             return cmd;
         }
-        // do not merge these if statements!
+
         if (!isWordValid(iss, word, cmd, validWords, false))
+        {
+            cmd.messages.push_back("Not a valid promotion piece.");
             return cmd;
+        }
 
         cmd.piece = charToPiece(word[0]);
         cmd.type = CommandType::Move;
@@ -144,13 +156,16 @@ Command CommandParser::parseSetup(const std::string &command, std::ostream &out)
                                              "p"});
 
         if (!isWordValid(iss, word, cmd, validWords))
+        {
+            cmd.messages.push_back("Not a valid piece type.");
             return cmd;
+        }
         cmd.piece = charToPiece(word[0]);
         cmd.color = toLower(word[0]) == word[0] ? Color::Black : Color::White;
 
         if (!isSquareValid(iss, word, cmd.square))
         {
-            cmd.type = CommandType::Invalid;
+            cmd.messages.push_back("Not a valid piece square.");
             return cmd;
         }
 
@@ -162,7 +177,7 @@ Command CommandParser::parseSetup(const std::string &command, std::ostream &out)
     {
         if (!isSquareValid(iss, word, cmd.square))
         {
-            cmd.type = CommandType::Invalid;
+            cmd.messages.push_back("Not a valid square.");
             return cmd;
         }
 
@@ -175,7 +190,10 @@ Command CommandParser::parseSetup(const std::string &command, std::ostream &out)
         std::vector<std::string> validWords({"white", "black"});
 
         if (!isWordValid(iss, word, cmd, validWords))
+        {
+            cmd.messages.push_back("Change turn to a valid color.");
             return cmd;
+        }
         cmd.color = word == "white" ? Color::White : Color::Black;
 
         cmd.type = CommandType::SetTurn;
@@ -189,4 +207,8 @@ Command CommandParser::parseSetup(const std::string &command, std::ostream &out)
     }
 
     return cmd;
+}
+
+Command CommandParser::parse(const std::string &line, GameState state) const
+{
 }
