@@ -1,6 +1,10 @@
 // rename this file to controller.cpp
 #include "GameController.h"
 #include "Computer.h"
+#include "Level1.h"
+#include "Level2.h"
+#include "Level3.h"
+#include "Level4.h"
 #include "TextView.h"
 #include "DataManipHelper.h"
 #include <iostream>
@@ -9,30 +13,32 @@
 
 using namespace std;
 
-// std::unique_ptr<Player> makePlayer(const PlayerType &spec /*, const Rules &rules*/)
-// {
-//     switch (spec)
-//     {
-//     case PlayerType::Human:
-//         return std::make_unique<Human>();
-//     case PlayerType::Computer1:
-//         return std::make_unique<Computer>(); // change these values to real computer levels later
-//     case PlayerType::Computer2:
-//         return std::make_unique<Computer>();
-//     case PlayerType::Computer3:
-//         return std::make_unique<Computer>();
-//     case PlayerType::Computer4:
-//         return std::make_unique<Computer>();
-//     }
-// }
-
-GameController::GameController(std::shared_ptr<TextView> view) : view_(std::move(view)), state_(GameState::Menu)
+GameController::GameController(std::shared_ptr<TextView> view) : view_(std::move(view)), state_(GameState::Menu), rules_(Rules{})
 {
     board_.attach(view);
 }
 
+std::unique_ptr<Player> makePlayer(const PlayerType &spec, const Rules &rules)
+{
+    switch (spec)
+    {
+    case PlayerType::Human:
+        return std::make_unique<Human>();
+    case PlayerType::Computer1:
+        return std::make_unique<Level1>(rules);
+    case PlayerType::Computer2:
+        return std::make_unique<Level2>(rules);
+    case PlayerType::Computer3:
+        return std::make_unique<Level3>(rules);
+    case PlayerType::Computer4:
+        return std::make_unique<Level4>(rules);
+    }
+}
+
 void GameController::run()
 {
+    std::cout << "hi" << std::endl;
+
     std::string input;
     Command command;
     while (std::getline(std::cin, input))
@@ -62,13 +68,11 @@ void GameController::execute(const Command &cmd)
     {
     case CommandType::Game:
         std::cout << "new game\n";
-        board_.loadStandardPosition();
-        // makePlayer(cmd.whiteSpec);
-        // makePlayer(cmd.blackSpec);
+        startGame(cmd.whiteSpec, cmd.blackSpec);
         break;
     case CommandType::Move:
         std::cout << "move\n";
-        // playMove(cmd);
+        playMove(cmd);
         break;
     case CommandType::Setup:
         std::cout << "Setup\n";
@@ -99,27 +103,31 @@ void GameController::execute(const Command &cmd)
         std::cout << "invalid command\n";
         break;
     }
-    // temp code
-    ostream &out_ = std::cout;
-    out_ << std::endl;
-    for (int row = 7; row >= 0; row--)
+    view_->onBoardChanged(board_);
+}
+
+void GameController::playMove(const Command &cmd)
+{
+
+    std::unique_ptr<Player> &currentPlayer = (turn_ == Color::White) ? whitePlayer_ : blackPlayer_;
+    if (currentPlayer->isHuman())
     {
-        out_ << row + 1 << " ";
-        for (int col = 0; col <= 7; col++)
-        {
-            Position pos{row, col};
-            out_ << ((board_.at(pos) == nullptr) ? ((row + col) % 2 == 0 ? '_' : ' ') : symbolFor(*board_.at(pos)));
-        }
-        out_ << std::endl;
     }
-    out_ << std::endl
-         << "  abcdefgh" << std::endl;
+    std::vector<Move> chosen = currentPlayer->choose(cmd, board_, legal_);
+    board_.apply(chosen[0]);
+    turn_ = (turn_ == Color::White) ? Color::Black : Color::White;
+    legal_ = rules_.legalMoves(board_, turn_); // i dont know what these do
+    rules_.status(board_, turn_, legal_);
 }
 
-void playMove(const Command &cmd)
+void GameController::startGame(PlayerType whiteSpec, PlayerType blackSpec)
 {
-}
+    if (!customStart_)
+        board_.loadStandardPosition();
 
-void startGame(PlayerType whiteSpec, PlayerType blackSpec)
-{
+    whitePlayer_ = makePlayer(whiteSpec, rules_);
+    blackPlayer_ = makePlayer(blackSpec, rules_);
+    turn_ = Color::White;
+    legal_ = rules_.legalMoves(board_, turn_);
+    state_ = GameState::Game;
 }

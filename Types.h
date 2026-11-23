@@ -43,6 +43,7 @@ enum class GameStatus
 };
 enum class CommandType
 {
+    Invalid,
     Game,
     Resign,
     Move,
@@ -50,8 +51,7 @@ enum class CommandType
     Place,
     Remove,
     SetTurn,
-    Done,
-    Invalid
+    Done
 };
 
 enum class PlayerType
