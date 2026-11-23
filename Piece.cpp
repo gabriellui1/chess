@@ -51,6 +51,9 @@ std::vector<Move> Piece::toMoves(const Board &board, Position from, const std::v
                 moves.push_back(Move{from, cur_pos, MoveKind::Normal, {}});
             }
         }
+        else{
+            moves.push_back(Move{from, cur_pos, MoveKind::Normal, {}});
+        }
     }
     return moves;
 }
