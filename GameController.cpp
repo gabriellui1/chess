@@ -58,7 +58,7 @@ void GameController::run()
         execute(command);
     }
 
-    std::cout << "end";
+    view_->showMessage("end");
 }
 
 void GameController::execute(const Command &cmd)
@@ -67,40 +67,40 @@ void GameController::execute(const Command &cmd)
     switch (cmd.type)
     {
     case CommandType::Game:
-        std::cout << "new game\n";
+        view_->showMessage("new game\n");
         startGame(cmd.whiteSpec, cmd.blackSpec);
         break;
     case CommandType::Move:
-        std::cout << "move\n";
+        view_->showMessage("move\n");
         playMove(cmd);
         break;
     case CommandType::Setup:
-        std::cout << "Setup\n";
+        view_->showMessage("Setup\n");
         board_.loadStandardPosition();
         state_ = GameState::Setup;
 
         break;
     case CommandType::Place:
-        std::cout << "place\n";
+        view_->showMessage("place\n");
         {
             std::unique_ptr<Piece> piece = PieceFactory::create(cmd.piece, cmd.color);
             board_.place(cmd.square, piece);
         }
         break;
     case CommandType::Remove:
-        std::cout << "remove\n";
+        view_->showMessage("remove\n");
         board_.remove(cmd.square);
         break;
     case CommandType::SetTurn:
-        std::cout << "set turn\n";
+        view_->showMessage("set turn\n");
         turn_ = cmd.color;
         break;
     case CommandType::Done:
-        std::cout << "done\n";
+        view_->showMessage("done\n");
         state_ = GameState::Menu;
         break;
     default:
-        std::cout << "invalid command\n";
+        view_->showMessage("invalid command\n");
         break;
     }
     view_->onBoardChanged(board_);
@@ -114,6 +114,11 @@ void GameController::playMove(const Command &cmd)
     {
     }
     std::vector<Move> chosen = currentPlayer->choose(cmd, board_, legal_);
+    if (chosen.empty())
+    {
+        view_->showError("Illegal Move");
+        return;
+    }
     board_.apply(chosen[0]);
     turn_ = (turn_ == Color::White) ? Color::Black : Color::White;
     legal_ = rules_.legalMoves(board_, turn_); // i dont know what these do
