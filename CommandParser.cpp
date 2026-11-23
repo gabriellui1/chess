@@ -2,6 +2,7 @@
 
 #include "CommandParser.h"
 #include <sstream>
+#include <iostream>
 #include "DataManipHelper.h"
 
 // does not modify command except for type
@@ -10,17 +11,21 @@ bool isWordValid(std::istringstream &iss, std::string &word, Command &cmd, const
     if (readWord)
         iss >> word;
 
-    if (iss.eof() || iss.fail() || (validWords.size() != 0 && findIndex(validWords, toLower(word)) == -1))
+    if (iss.fail() || (!validWords.empty() &&
+                       findIndex(validWords, toLower(word)) == -1))
     {
         cmd.type = CommandType::Invalid;
         return false;
     }
+
     return true;
 }
 
 // modifies square, does not take cmd
 bool parseSquare(const std::string word, Position &square)
 {
+    if (word.size() == 2)
+        return false;
     int index = findCharIndex("abcdefgh", toLower(word[0]));
     if (index == -1 || word[1] - '1' < 0 || word[1] - '1' > 7)
         return false;
@@ -32,22 +37,25 @@ bool parseSquare(const std::string word, Position &square)
 bool isSquareValid(std::istringstream &iss, std::string &word, Position &square)
 {
     iss >> word;
-    parseSquare(word, square);
-    return iss.eof() || square.row == -1 || square.col == -1;
+    return parseSquare(word, square);
 }
 
-Command CommandParser::parse(const std::string &command) const
+Command CommandParser::parse(const std::string &command, std::ostream &out) const
 {
     Command cmd{};
 
     std::istringstream iss(command);
     std::string word;
 
-    if (!isWordValid(iss, word, cmd))
-        return cmd;
+    iss >> word;
+    out << word << std::endl;
+
+    // if (!isWordValid(iss, word, cmd))
+    //     return cmd;
 
     if (word == "game")
     {
+        out << "hi" << std::endl;
 
         std::vector<std::string> validWords({"human", "computer1", "computer2", "computer3", "computer4"});
 

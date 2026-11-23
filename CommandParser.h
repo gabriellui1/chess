@@ -4,10 +4,11 @@
 #include <string>
 #include "Types.h"
 
-class CommandParser {
+class CommandParser
+{
 private:
 public:
-    Command parse(const std::string& line) const;
+    Command parse(const std::string &line, std::ostream &out) const; // added extra argument for debugging pls remove later.
 };
 
 #endif

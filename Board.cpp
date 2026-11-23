@@ -12,15 +12,13 @@ struct Board::UndoRecord
 };
 
 Board::Board()
+    : squares_(8)
 {
-    for (int row = 0; row < 8; row++)
+    for (auto &row : squares_)
     {
-        for (int col = 0; col < 8; col++)
-        {
-            squares_[row][col] = nullptr;
-        }
+        row.resize(8);
     }
-};
+}
 
 Board::~Board() = default;
 
@@ -90,7 +88,7 @@ void Board::loadStandardPosition()
 
 std::vector<Move> Board::lastMove() const
 {
-    if (history_.size() == 0)
+    if (history_.empty())
         return std::vector<Move>();
     std::vector<Move> v{history_.back().move};
     return v;
@@ -104,7 +102,7 @@ void Board::apply(const Move &move)
 
 void Board::undo()
 {
-    if (history_.size() == 0)
+    if (history_.empty())
         return;
     undoMove();
     notifyObservers();
@@ -206,7 +204,7 @@ void Board::applyMove(const Move &move)
 
 void Board::undoMove()
 {
-    if (history_.size() == 0)
+    if (history_.empty())
         return;
 
     UndoRecord undo = std::move(history_.back());
