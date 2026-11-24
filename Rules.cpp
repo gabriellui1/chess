@@ -45,7 +45,7 @@ bool Rules::isInCheck(const Board &board, Color side) const
     std::vector<Position> king_pos = board.kingSquares(side);
     if (king_pos.empty())
         return false;
-    return isAttacked(board, king_pos.back(), side == Color::White ? Color::White : Color::Black);
+    return isAttacked(board, king_pos.back(), side == Color::White ? Color::Black : Color::White);
 }
 
 bool Rules::isAttacked(const Board &board, Position square, Color byColor) const

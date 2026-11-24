@@ -119,11 +119,11 @@ void GameController::playMove(const Command &cmd)
     switch (rules_.status(board_, turn_, legal_))
     {
     case GameStatus::Check:
-        view_->pushMessages((turn_ == Color::Black) ? "White is in check." : "Black is in check.");
+        view_->pushMessages((turn_ == Color::White) ? "White is in check." : "Black is in check.");
         break;
     case GameStatus::Checkmate:
-        view_->pushMessages((turn_ == Color::Black) ? "Checkmate! White wins!" : "Checkmate! Black wins!");
-        scores_.addWin((turn_ == Color::White) ? Color::Black : Color::White);
+        view_->pushMessages((turn_ == Color::White) ? "Checkmate! White wins!" : "Checkmate! Black wins!");
+        scores_.addWin((turn_ == Color::Black) ? Color::Black : Color::White);
         state_ = GameState::Menu;
         break;
     case GameStatus::Stalemate:
