@@ -3,20 +3,39 @@
 #include "Piece.h"
 #include "Rules.h"
 #include <algorithm>
+#include <vector>
 
 int Level4::evaluateBoard(const Board& board) const {
     int eval = 0;
     for (int i = 0; i < 8; ++i) {
         for (int j = 0; j < 8; ++j) {
-            const std::unique_ptr<Piece> &piece = board.at(Position{i, j});
-            if (piece != Board::outOfBoundsPtr_)
-            {
-                Color color = piece->getColor();
-                if (color == Color::White) {
-                    eval += PIECE_VALUES.at(piece->getType());
-                } else {
-                    eval -= PIECE_VALUES.at(piece->getType());
+            Position pos = Position{i, j};
+            const std::unique_ptr<Piece>& piece = board.at(pos);
+
+            if (piece != nullptr && piece != Board::outOfBoundsPtr_) {
+                int c = 1;
+                if (piece->getColor() == Color::Black) {
+                    c = -1;
                 }
+
+                if ((i == 3 || i == 4) && (j == 3 || j == 4)) {
+                    eval += 3 * c;
+                }
+
+                std::vector<Position> attackSquares = piece->attackSquare(board, pos);
+                for (const Position& p : attackSquares) {
+                    if ((p.row == 3 || p.row == 4) && (p.col == 3 || p.col == 4)) {
+                        eval += 2 * c;
+                    }
+                    const std::unique_ptr<Piece>& attackPiece = board.at(p);
+                    if (attackPiece != nullptr && attackPiece != Board::outOfBoundsPtr_) {
+                        if (attackPiece->getColor() != piece->getColor()) {
+                            eval += 5 * c;
+                        }
+                    }
+                    eval += 1 * c;
+                }
+                eval += PIECE_VALUES.at(piece->getType()) * 20 * c;
             }
         }
     }
@@ -31,11 +50,7 @@ int Level4::alphaBeta(Board& board, int depth, int alpha, int beta, Color curren
     std::vector<Move> legals = rules_.legalMoves(board, currentColor);
     if (legals.empty()) {
         if (rules_.isInCheck(board, currentColor)) {
-            if (currentColor == Color::White) {
-                return -9999;
-            } else {
-                return 9999;
-            }
+            return (currentColor == Color::White) ? (-90000 - depth) : (90000 + depth);
         }
         return 0;
     }
