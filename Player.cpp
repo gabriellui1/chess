@@ -14,3 +14,8 @@ std::vector<Move> Human::choose(const Command &cmd, const Board &board, const st
     }
     return std::vector<Move>();
 }
+
+Color Player::getColor() const
+{
+    return color;
+}
