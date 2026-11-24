@@ -1,5 +1,6 @@
 #include "GameController.h"
 #include "TextView.h"
+#include <iostream>
 
 int main()
 {
