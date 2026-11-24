@@ -43,6 +43,7 @@ int findIndex(const std::vector<T> &vec, const T &word)
 PieceType charToPiece(const char c);
 
 std::string pieceToString(const PieceType piece);
+std::string colorToString(const Color color);
 
 // assumes you have already validated
 PlayerType stringToPlayer(const std::string str);

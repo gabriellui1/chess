@@ -1,6 +1,6 @@
 #include <sstream>
 #include <limits>
-#include "DataManipHelper.h"
+#include "Helper.h"
 #include "Piece.h"
 
 // turns every char in string to lowercase
@@ -78,6 +78,11 @@ std::string pieceToString(const PieceType piece)
     if (index == -1)
         return "";
     return pieceNames[index];
+}
+
+std::string colorToString(const Color color)
+{
+    return color == Color::White ? "White" : "Black";
 }
 
 // assumes you have already validated
