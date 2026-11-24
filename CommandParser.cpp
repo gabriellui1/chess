@@ -49,11 +49,19 @@ Command CommandParser::parseMenu(const std::string &command) const
     if (!isWordValid(iss, word, cmd))
         return cmd;
 
-    if (word == "game")
+    if (word == "game" || word == "g")
     {
+        bool wordExists = static_cast<bool>(iss >> word);
+        if (!wordExists || iss.fail())
+        {
+            cmd.type = CommandType::Game;
+            cmd.whiteSpec = PlayerType::Human;
+            cmd.blackSpec = PlayerType::Human;
+            return cmd;
+        }
         std::vector<std::string> validWords({"human", "computer1", "computer2", "computer3", "computer4"});
 
-        if (!isWordValid(iss, word, cmd, validWords))
+        if (!isWordValid(iss, word, cmd, validWords, false))
         {
             cmd.errMessages.push_back("Not a valid player type for white.");
             return cmd;
@@ -88,7 +96,7 @@ Command CommandParser::parseGame(const std::string &command) const
     if (!isWordValid(iss, word, cmd))
         return cmd;
 
-    if (word == "move")
+    if (word == "move" || word == "m")
     {
         if (!isSquareValid(iss, word, cmd.from))
         {
@@ -244,9 +252,9 @@ Command CommandParser::parse(const std::string &line, GameState state) const
             cmd = setupCommand;
         break;
     }
-    if (cmd.errMessages.empty())
+    if (cmd.errMessages.empty() && cmd.type == CommandType::Invalid)
     {
-        cmd.errMessages.push_back(cmd.type == CommandType::Invalid ? "Invalid command." : "Command successful!");
+        cmd.errMessages.push_back("Invalid command.");
     }
     return cmd;
 }
