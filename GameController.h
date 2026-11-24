@@ -34,7 +34,9 @@ private:
     void startGame(PlayerType whiteSpec, PlayerType blackSpec); // change from string to playerType
     void playMove(const Command &cmd);
     void resign();
-    void setupCommand(const Command &cmd);
+    void setupPlace(const Command &cmd);
+    void setupRemove(const Command &cmd);
+    void enterSetup();
     void finishSetup();
     void printFinalScore();
 

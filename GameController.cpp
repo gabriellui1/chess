@@ -10,6 +10,7 @@
 #include <iostream>
 #include <string>
 #include <typeinfo>
+#include <format>
 
 using namespace std;
 
@@ -56,34 +57,28 @@ void GameController::execute(const Command &cmd)
     switch (cmd.type)
     {
     case CommandType::Game:
-        view_->showMessage("New game");
         startGame(cmd.whiteSpec, cmd.blackSpec);
         break;
     case CommandType::Move:
-        view_->showMessage("Move");
         playMove(cmd);
         break;
     case CommandType::Setup:
-        view_->showMessage("Setup");
-        board_.clear();
-        turn_ = Color::White;
-        customStart_ = false;
-        state_ = GameState::Setup;
+        enterSetup();
         break;
     case CommandType::Place:
-        view_->showMessage("Place");
-        setupCommand(cmd);
+        setupPlace(cmd);
         break;
     case CommandType::Remove:
-        view_->showMessage("Remove");
-        board_.remove(cmd.square);
+        setupRemove(cmd);
         break;
     case CommandType::SetTurn:
         view_->showMessage("Set turn");
         turn_ = cmd.color;
         break;
+    case CommandType::Resign:
+        resign();
+        break;
     case CommandType::Done:
-        view_->showMessage("Done");
         finishSetup();
         break;
     default:
@@ -96,14 +91,23 @@ void GameController::playMove(const Command &cmd)
 {
 
     std::unique_ptr<Player> &currentPlayer = (turn_ == Color::White) ? whitePlayer_ : blackPlayer_;
+    if (currentPlayer->isHuman() && (!isSquareValid(cmd.from) || !isSquareValid(cmd.to)))
+    {
+        messages_.clear();
+        messages_.push_back("Please enter valid squares for your move.");
+        return;
+    }
     std::vector<Move> chosen = currentPlayer->choose(cmd, board_, legal_);
-    if (chosen.empty())
+
+    if (chosen.empty() || !isSquareValid(chosen[0].from) || !isSquareValid(chosen[0].to))
     {
         messages_.clear();
         messages_.push_back("Illegal Move!");
         return;
     }
     board_.apply(chosen[0]);
+    // the code pieceToString(board_.at(chosen[0].to)->getType()) is scuffed, pls fix
+    messages_.push_back(std::format("Moved {} from {} to {}", pieceToString(board_.at(chosen[0].to)->getType()), squareToString(chosen[0].from), squareToString(chosen[0].to)));
     turn_ = (turn_ == Color::White) ? Color::Black : Color::White;
     legal_ = rules_.legalMoves(board_, turn_); // i dont know what these do
     switch (rules_.status(board_, turn_, legal_))
@@ -127,6 +131,7 @@ void GameController::playMove(const Command &cmd)
 
 void GameController::startGame(PlayerType whiteSpec, PlayerType blackSpec)
 {
+    messages_.push_back("New game");
     if (!customStart_)
     {
         board_.loadStandardPosition();
@@ -150,14 +155,34 @@ void GameController::startGame(PlayerType whiteSpec, PlayerType blackSpec)
     view_->onBoardChanged(board_);
 }
 
-void GameController::setupCommand(const Command &cmd)
+void GameController::setupPlace(const Command &cmd)
 {
+    messages_.push_back(std::format("Place {} at {}", pieceToString(cmd.piece), squareToString(cmd.square)));
     std::unique_ptr<Piece> piece = PieceFactory::create(cmd.piece, cmd.color);
     board_.place(cmd.square, piece);
+    view_->onBoardChanged(board_);
+}
+
+void GameController::setupRemove(const Command &cmd)
+{
+    messages_.push_back(std::format("Remove piece at square {}", squareToString(cmd.square)));
+    board_.remove(cmd.square);
+    view_->onBoardChanged(board_);
+}
+
+void GameController::enterSetup()
+{
+    messages_.push_back("Setup");
+    board_.clear();
+    turn_ = Color::White;
+    customStart_ = false;
+    state_ = GameState::Setup;
+    view_->onBoardChanged(board_);
 }
 
 void GameController::finishSetup()
 {
+    messages_.push_back("Done");
     std::vector<std::string> messages = rules_.validateSetup(board_);
     for (std::string message : messages)
     {
@@ -173,6 +198,7 @@ void GameController::finishSetup()
 void GameController::resign()
 {
     Color winner = (turn_ == Color::White) ? Color::Black : Color::White;
+    messages_.push_back((winner == Color::White) ? "Black resigns. White wins!" : "White resigns. Black wins!");
     scores_.addWin(winner);
     state_ = GameState::Menu;
 }

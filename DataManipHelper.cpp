@@ -17,6 +17,17 @@ char toLower(const char c)
     return static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
 }
 
+bool isSquareValid(const Position square)
+{
+    return square.col != -1 && square.row != -1;
+}
+// convert square to string
+std::string squareToString(const Position square)
+{
+    std::string files = "abcdefgh";
+    return {files[square.col], ('1' + square.row)};
+}
+
 // finds first index of char in string, -1 if not found
 int findCharIndex(const std::string &str, char c)
 {
@@ -57,6 +68,16 @@ char symbolFor(const Piece &piece)
         c = '?';
     }
     return piece.getColor() == Color::White ? c : toLower(c);
+}
+
+std::string pieceToString(const PieceType piece)
+{
+    std::vector<std::string> pieceNames = {"Queen", "Rook", "Bishop", "Knight", "Pawn", "King"};
+    std::vector<PieceType> pieces({PieceType::Queen, PieceType::Rook, PieceType::Bishop, PieceType::Knight, PieceType::Pawn, PieceType::King});
+    int index = findIndex(pieces, piece);
+    if (index == -1)
+        return "";
+    return pieceNames[index];
 }
 
 // assumes you have already validated
