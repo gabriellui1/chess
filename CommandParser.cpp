@@ -40,7 +40,7 @@ bool isSquareValid(std::istringstream &iss, std::string &word, Position &square)
     return parseSquare(word, square);
 }
 
-Command CommandParser::parseMenu(const std::string &command, std::ostream &out) const
+Command CommandParser::parseMenu(const std::string &command) const
 {
     Command cmd;
     std::istringstream iss(command);
@@ -51,24 +51,21 @@ Command CommandParser::parseMenu(const std::string &command, std::ostream &out) 
 
     if (word == "game")
     {
-        out << "hi" << std::endl;
-
         std::vector<std::string> validWords({"human", "computer1", "computer2", "computer3", "computer4"});
 
         if (!isWordValid(iss, word, cmd, validWords))
         {
-            cmd.messages.push_back("Not a valid player type for white.");
+            cmd.errMessages.push_back("Not a valid player type for white.");
             return cmd;
         }
         cmd.whiteSpec = stringToPlayer(word);
 
         if (!isWordValid(iss, word, cmd, validWords))
         {
-            cmd.messages.push_back("Not a valid player type for black.");
+            cmd.errMessages.push_back("Not a valid player type for black.");
             return cmd;
         }
         cmd.blackSpec = stringToPlayer(word);
-
         cmd.type = CommandType::Game;
         return cmd;
     }
@@ -82,7 +79,7 @@ Command CommandParser::parseMenu(const std::string &command, std::ostream &out) 
     return cmd;
 }
 
-Command CommandParser::parseGame(const std::string &command, std::ostream &out) const
+Command CommandParser::parseGame(const std::string &command) const
 {
     Command cmd{};
     std::istringstream iss(command);
@@ -101,7 +98,7 @@ Command CommandParser::parseGame(const std::string &command, std::ostream &out) 
 
         if (!isSquareValid(iss, word, cmd.to))
         {
-            cmd.messages.push_back("Missing destination square");
+            cmd.errMessages.push_back("Missing destination square");
             return cmd;
         }
 
@@ -119,7 +116,7 @@ Command CommandParser::parseGame(const std::string &command, std::ostream &out) 
 
         if (!isWordValid(iss, word, cmd, validWords, false))
         {
-            cmd.messages.push_back("Not a valid promotion piece.");
+            cmd.errMessages.push_back("Not a valid promotion piece.");
             return cmd;
         }
 
@@ -137,7 +134,7 @@ Command CommandParser::parseGame(const std::string &command, std::ostream &out) 
     return cmd;
 }
 
-Command CommandParser::parseSetup(const std::string &command, std::ostream &out) const
+Command CommandParser::parseSetup(const std::string &command) const
 {
     Command cmd{};
     std::istringstream iss(command);
@@ -157,7 +154,7 @@ Command CommandParser::parseSetup(const std::string &command, std::ostream &out)
 
         if (!isWordValid(iss, word, cmd, validWords))
         {
-            cmd.messages.push_back("Not a valid piece type.");
+            cmd.errMessages.push_back("Not a valid piece type.");
             return cmd;
         }
         cmd.piece = charToPiece(word[0]);
@@ -165,7 +162,7 @@ Command CommandParser::parseSetup(const std::string &command, std::ostream &out)
 
         if (!isSquareValid(iss, word, cmd.square))
         {
-            cmd.messages.push_back("Not a valid piece square.");
+            cmd.errMessages.push_back("Not a valid piece square.");
             return cmd;
         }
 
@@ -177,7 +174,7 @@ Command CommandParser::parseSetup(const std::string &command, std::ostream &out)
     {
         if (!isSquareValid(iss, word, cmd.square))
         {
-            cmd.messages.push_back("Not a valid square.");
+            cmd.errMessages.push_back("Not a valid square.");
             return cmd;
         }
 
@@ -191,7 +188,7 @@ Command CommandParser::parseSetup(const std::string &command, std::ostream &out)
 
         if (!isWordValid(iss, word, cmd, validWords))
         {
-            cmd.messages.push_back("Change turn to a valid color.");
+            cmd.errMessages.push_back("Change turn to a valid color.");
             return cmd;
         }
         cmd.color = word == "white" ? Color::White : Color::Black;
@@ -211,4 +208,45 @@ Command CommandParser::parseSetup(const std::string &command, std::ostream &out)
 
 Command CommandParser::parse(const std::string &line, GameState state) const
 {
+
+    Command cmd;
+    Command menuCommand = parseMenu(line);
+    Command gameCommand = parseGame(line);
+    Command setupCommand = parseSetup(line);
+
+    switch (state)
+    {
+    case GameState::Menu:
+        if (menuCommand.type == CommandType::Invalid && (gameCommand.type != CommandType::Invalid || setupCommand.type != CommandType::Invalid))
+        {
+            cmd.type = CommandType::Invalid;
+            cmd.errMessages.push_back("Need to be in Menu state.");
+        }
+        else
+            cmd = menuCommand;
+        break;
+    case GameState::Game:
+        if (gameCommand.type == CommandType::Invalid && (menuCommand.type != CommandType::Invalid || setupCommand.type != CommandType::Invalid))
+        {
+            cmd.type = CommandType::Invalid;
+            cmd.errMessages.push_back("Need to be in Game state.");
+        }
+        else
+            cmd = gameCommand;
+        break;
+    case GameState::Setup:
+        if (setupCommand.type == CommandType::Invalid && (menuCommand.type != CommandType::Invalid || gameCommand.type != CommandType::Invalid))
+        {
+            cmd.type = CommandType::Invalid;
+            cmd.errMessages.push_back("Need to be in Setup state.");
+        }
+        else
+            cmd = setupCommand;
+        break;
+    }
+    if (cmd.errMessages.empty())
+    {
+        cmd.errMessages.push_back(cmd.type == CommandType::Invalid ? "Invalid command." : "Command successful!");
+    }
+    return cmd;
 }

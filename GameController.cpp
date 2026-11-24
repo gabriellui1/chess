@@ -42,11 +42,12 @@ void GameController::run()
     Command command;
     while (std::getline(std::cin, input))
     {
-        parser_.parse(input, state_);
+        command = parser_.parse(input, state_);
+        view_->showErrorMessages(command.errMessages);
         execute(command);
     }
 
-    view_->showMessage("end");
+    view_->showMessage("End program");
 }
 
 void GameController::execute(const Command &cmd)
@@ -55,40 +56,41 @@ void GameController::execute(const Command &cmd)
     switch (cmd.type)
     {
     case CommandType::Game:
-        view_->showMessage("new game\n");
+        view_->showMessage("New game");
         startGame(cmd.whiteSpec, cmd.blackSpec);
         break;
     case CommandType::Move:
-        view_->showMessage("move\n");
+        view_->showMessage("Move");
         playMove(cmd);
         break;
     case CommandType::Setup:
-        view_->showMessage("Setup\n");
+        view_->showMessage("Setup");
         board_.clear();
         turn_ = Color::White;
         customStart_ = false;
         state_ = GameState::Setup;
         break;
     case CommandType::Place:
-        view_->showMessage("place\n");
+        view_->showMessage("Place");
         setupCommand(cmd);
         break;
     case CommandType::Remove:
-        view_->showMessage("remove\n");
+        view_->showMessage("Remove");
         board_.remove(cmd.square);
         break;
     case CommandType::SetTurn:
-        view_->showMessage("set turn\n");
+        view_->showMessage("Set turn");
         turn_ = cmd.color;
         break;
     case CommandType::Done:
-        view_->showMessage("done\n");
+        view_->showMessage("Done");
         finishSetup();
         break;
     default:
         break;
     }
-    view_->showMessages(cmd.messages);
+
+    // placeholder to always see board
     view_->onBoardChanged(board_);
 }
 
@@ -150,6 +152,9 @@ void GameController::resign()
     state_ = GameState::Menu;
 }
 
-void printFinalScore()
+void GameController::printFinalScore()
 {
+    view_->showMessage("Final Score:");
+    view_->showMessage("White: " + std::to_string(scores_.whiteScore()));
+    view_->showMessage("Black: " + std::to_string(scores_.blackScore()));
 }
