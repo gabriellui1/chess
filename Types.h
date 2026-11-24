@@ -11,6 +11,16 @@ enum class Color
     White,
     Black
 };
+
+constexpr Color operator!(Color c)
+{
+    if (c == Color::White)
+    {
+        return Color::Black;
+    }
+    return Color::White;
+}
+
 enum class MoveKind
 {
     Normal,
