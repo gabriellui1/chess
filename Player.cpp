@@ -17,5 +17,5 @@ std::vector<Move> Human::choose(const Command &cmd, const Board &board, const st
 
 Color Player::getColor() const
 {
-    return color;
+    return color_;
 }
