@@ -2,7 +2,7 @@
 #include "Board.h"
 #include "Helper.h"
 
-TextView::TextView(std::ostream &out) : out_(out) {}
+TextView::TextView(std::ostream &out) : out_(out), messages_({}) {}
 
 void TextView::drawBoard(const Board &board)
 {
@@ -26,29 +26,34 @@ void TextView::onBoardChanged(const Board &board)
     drawBoard(board);
 }
 
-void TextView::showMessage(const std::string &message)
+void TextView::show(const std::string &message)
 {
     out_ << message << std::endl;
 }
 
-void TextView::showMessages(const std::vector<std::string> &messages)
+void TextView::show(const std::vector<std::string> &messages)
 {
     for (std::string message : messages)
-        showMessage(message);
+        show(message);
 }
 
-void TextView::showErrorMessages(const std::vector<std::string> &messages)
+void TextView::showMessages()
 {
-    for (std::string message : messages)
-        showMessage(message);
+    for (std::string message : messages_)
+        show(message);
 }
 
-void TextView::showError(const std::string &error)
+void TextView::clearMessages()
 {
-    out_ << error << std::endl;
+    messages_.clear();
+}
+
+void TextView::pushMessages(const std::string message)
+{
+    messages_.push_back(message);
 }
 
 void TextView::showStartMenu()
 {
-    showMessage("Welcome to the chess menu!\nChoose one of the commands:\n\ngame <white-player> <black-player>\n\tstarts a new game with <white-player> and <black-player>\n\t<white-player>: human | computer1 | computer2 | computer3 | computer4\n\t\tchoose the type of player playing with the white pieces\n\t<black-player>: human | computer1 | computer2 | computer3 | computer4\n\t\tchoose the type of player playing with the black pieces\n\nsetup\n\tenters setup mode to set up your own initial board configurations\n\nCTRL+D\n\texits chess");
+    show("Welcome to the chess menu!\nChoose one of the commands:\n\ngame <white-player> <black-player>\n\tstarts a new game with <white-player> and <black-player>\n\t<white-player>: human | computer1 | computer2 | computer3 | computer4\n\t\tchoose the type of player playing with the white pieces\n\t<black-player>: human | computer1 | computer2 | computer3 | computer4\n\t\tchoose the type of player playing with the black pieces\n\nsetup\n\tenters setup mode to set up your own initial board configurations\n\nCTRL+D\n\texits chess");
 }

@@ -14,7 +14,7 @@
 
 using namespace std;
 
-GameController::GameController(std::shared_ptr<TextView> view) : view_(std::move(view)), state_(GameState::Menu), rules_({}), messages_({})
+GameController::GameController(std::shared_ptr<TextView> view) : view_(std::move(view)), state_(GameState::Menu), rules_({})
 {
     board_.attach(view);
 }
@@ -47,13 +47,13 @@ void GameController::run()
         execute(cmd);
     }
 
-    view_->showMessage("End program");
+    view_->show("End program");
 }
 
 void GameController::execute(const Command &cmd)
 {
-    view_->showErrorMessages(cmd.errMessages);
-    messages_.clear();
+    view_->show(cmd.errMessages);
+    view_->clearMessages();
     switch (cmd.type)
     {
     case CommandType::Game:
@@ -72,7 +72,7 @@ void GameController::execute(const Command &cmd)
         setupRemove(cmd);
         break;
     case CommandType::SetTurn:
-        view_->showMessage("Set turn");
+        view_->show("Set turn");
         turn_ = cmd.color;
         break;
     case CommandType::Resign:
@@ -84,7 +84,7 @@ void GameController::execute(const Command &cmd)
     default:
         break;
     }
-    view_->showMessages(messages_);
+    view_->showMessages();
 }
 
 void GameController::playMove(const Command &cmd)
@@ -93,41 +93,41 @@ void GameController::playMove(const Command &cmd)
     std::unique_ptr<Player> &currentPlayer = (turn_ == Color::White) ? whitePlayer_ : blackPlayer_;
     if (currentPlayer->isHuman() && (!isSquareValid(cmd.from) || !isSquareValid(cmd.to)))
     {
-        messages_.clear();
-        messages_.push_back("Please enter valid squares for your move.");
+        view_->clearMessages();
+        view_->pushMessages("Please enter valid squares for your move.");
         return;
     }
     if (!currentPlayer->isHuman() && (isSquareValid(cmd.from) || isSquareValid(cmd.to)))
     {
-        messages_.clear();
-        messages_.push_back("Computer cannot accept move input.");
+        view_->clearMessages();
+        view_->pushMessages("Computer cannot accept move input.");
         return;
     }
     std::vector<Move> chosen = currentPlayer->choose(cmd, board_, legal_);
 
     if (chosen.empty() || !isSquareValid(chosen[0].from) || !isSquareValid(chosen[0].to))
     {
-        messages_.clear();
-        messages_.push_back("Illegal Move!");
+        view_->clearMessages();
+        view_->pushMessages("Illegal Move!");
         return;
     }
     board_.apply(chosen[0]);
     // the code pieceToString(board_.at(chosen[0].to)->getType()) is scuffed, pls fix
-    messages_.push_back(std::format("Moved {} {} from {} to {}", colorToString(turn_), pieceToString(board_.at(chosen[0].to)->getType()), squareToString(chosen[0].from), squareToString(chosen[0].to)));
+    view_->pushMessages(std::format("Moved {} {} from {} to {}", colorToString(turn_), pieceToString(board_.at(chosen[0].to)->getType()), squareToString(chosen[0].from), squareToString(chosen[0].to)));
     turn_ = (turn_ == Color::White) ? Color::Black : Color::White;
     legal_ = rules_.legalMoves(board_, turn_); // i dont know what these do
     switch (rules_.status(board_, turn_, legal_))
     {
     case GameStatus::Check:
-        messages_.push_back((turn_ == Color::Black) ? "White is in check." : "Black is in check.");
+        view_->pushMessages((turn_ == Color::Black) ? "White is in check." : "Black is in check.");
         break;
     case GameStatus::Checkmate:
-        messages_.push_back((turn_ == Color::Black) ? "Checkmate! White wins!" : "Checkmate! Black wins!");
+        view_->pushMessages((turn_ == Color::Black) ? "Checkmate! White wins!" : "Checkmate! Black wins!");
         scores_.addWin((turn_ == Color::White) ? Color::Black : Color::White);
         state_ = GameState::Menu;
         break;
     case GameStatus::Stalemate:
-        messages_.push_back("Stalemate!");
+        view_->pushMessages("Stalemate!");
         scores_.addDraw();
         state_ = GameState::Menu;
         break;
@@ -137,7 +137,7 @@ void GameController::playMove(const Command &cmd)
 
 void GameController::startGame(PlayerType whiteSpec, PlayerType blackSpec)
 {
-    messages_.push_back("New game");
+    view_->pushMessages("New game");
     if (!customStart_)
     {
         board_.loadStandardPosition();
@@ -150,8 +150,8 @@ void GameController::startGame(PlayerType whiteSpec, PlayerType blackSpec)
 
     if (rules_.status(board_, turn_, legal_) == GameStatus::Stalemate)
     {
-        messages_.clear();
-        messages_.push_back("Stalemate!");
+        view_->clearMessages();
+        view_->pushMessages("Stalemate!");
         state_ = GameState::Menu;
         return;
     }
@@ -163,7 +163,7 @@ void GameController::startGame(PlayerType whiteSpec, PlayerType blackSpec)
 
 void GameController::setupPlace(const Command &cmd)
 {
-    messages_.push_back(std::format("Place {} {} at {}", colorToString(cmd.color), pieceToString(cmd.piece), squareToString(cmd.square)));
+    view_->pushMessages(std::format("Place {} {} at {}", colorToString(cmd.color), pieceToString(cmd.piece), squareToString(cmd.square)));
     std::unique_ptr<Piece> piece = PieceFactory::create(cmd.piece, cmd.color);
     board_.place(cmd.square, piece);
     view_->onBoardChanged(board_);
@@ -172,14 +172,14 @@ void GameController::setupPlace(const Command &cmd)
 void GameController::setupRemove(const Command &cmd)
 {
     // the code pieceToString(board_.at(chosen[0].to)->getType()) is scuffed, pls fix
-    messages_.push_back(std::format("Remove {} {} at square {}", colorToString(cmd.color), pieceToString(board_.at(cmd.square)->getType()), squareToString(cmd.square)));
+    view_->pushMessages(std::format("Remove {} {} at square {}", colorToString(cmd.color), pieceToString(board_.at(cmd.square)->getType()), squareToString(cmd.square)));
     board_.remove(cmd.square);
     view_->onBoardChanged(board_);
 }
 
 void GameController::enterSetup()
 {
-    messages_.push_back("Entered setup mode.");
+    view_->pushMessages("Entered setup mode.");
     board_.clear();
     turn_ = Color::White;
     customStart_ = false;
@@ -189,9 +189,9 @@ void GameController::enterSetup()
 
 void GameController::finishSetup()
 {
-    messages_.push_back("Exited setup mode and saved board!");
+    view_->pushMessages("Exited setup mode and saved board!");
     std::vector<std::string> messages = rules_.validateSetup(board_);
-    view_->showErrorMessages(messages);
+    view_->show(messages);
     if (messages.empty())
     {
         state_ = GameState::Menu;
@@ -202,14 +202,14 @@ void GameController::finishSetup()
 void GameController::resign()
 {
     Color winner = (turn_ == Color::White) ? Color::Black : Color::White;
-    messages_.push_back((winner == Color::White) ? "Black resigns. White wins!" : "White resigns. Black wins!");
+    view_->pushMessages((winner == Color::White) ? "Black resigns. White wins!" : "White resigns. Black wins!");
     scores_.addWin(winner);
     state_ = GameState::Menu;
 }
 
 void GameController::printFinalScore()
 {
-    view_->showMessage("Final Score:");
-    view_->showMessage("White: " + std::to_string(scores_.whiteScore()));
-    view_->showMessage("Black: " + std::to_string(scores_.blackScore()));
+    view_->show("Final Score:");
+    view_->show("White: " + std::to_string(scores_.whiteScore()));
+    view_->show("Black: " + std::to_string(scores_.blackScore()));
 }
