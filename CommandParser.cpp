@@ -222,34 +222,36 @@ Command CommandParser::parse(const std::string &line, GameState state) const
     Command gameCommand = parseGame(line);
     Command setupCommand = parseSetup(line);
 
+    // when you in wrong state
+    if (state != GameState::Menu && menuCommand.type != CommandType::Invalid && gameCommand.type == CommandType::Invalid && setupCommand.type == CommandType::Invalid)
+    {
+        cmd.type = CommandType::Invalid;
+        cmd.errMessages.push_back("Game/setup mode is currently running. Please end it first.");
+        return cmd;
+    }
+    if (state != GameState::Game && gameCommand.type != CommandType::Invalid && menuCommand.type == CommandType::Invalid && setupCommand.type == CommandType::Invalid)
+    {
+        cmd.type = CommandType::Invalid;
+        cmd.errMessages.push_back("No game is running.");
+        return cmd;
+    }
+    if (state != GameState::Setup && setupCommand.type != CommandType::Invalid && menuCommand.type == CommandType::Invalid && gameCommand.type == CommandType::Invalid)
+    {
+        cmd.type = CommandType::Invalid;
+        cmd.errMessages.push_back("Setup mode has not been started.");
+        return cmd;
+    }
+
     switch (state)
     {
     case GameState::Menu:
-        if (menuCommand.type == CommandType::Invalid && (gameCommand.type != CommandType::Invalid || setupCommand.type != CommandType::Invalid))
-        {
-            cmd.type = CommandType::Invalid;
-            cmd.errMessages.push_back("Need to be in Menu state.");
-        }
-        else
-            cmd = menuCommand;
+        cmd = menuCommand;
         break;
     case GameState::Game:
-        if (gameCommand.type == CommandType::Invalid && (menuCommand.type != CommandType::Invalid || setupCommand.type != CommandType::Invalid))
-        {
-            cmd.type = CommandType::Invalid;
-            cmd.errMessages.push_back("Need to be in Game state.");
-        }
-        else
-            cmd = gameCommand;
+        cmd = gameCommand;
         break;
     case GameState::Setup:
-        if (setupCommand.type == CommandType::Invalid && (menuCommand.type != CommandType::Invalid || gameCommand.type != CommandType::Invalid))
-        {
-            cmd.type = CommandType::Invalid;
-            cmd.errMessages.push_back("Need to be in Setup state.");
-        }
-        else
-            cmd = setupCommand;
+        cmd = setupCommand;
         break;
     }
     if (cmd.errMessages.empty() && cmd.type == CommandType::Invalid)
