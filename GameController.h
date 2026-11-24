@@ -23,7 +23,6 @@ private:
     CommandParser parser_;
     std::unique_ptr<Player> whitePlayer_;
     std::unique_ptr<Player> blackPlayer_;
-    std::vector<std::string> messages_;
     std::vector<Move> legal_;
     Color turn_;
     GameState state_;

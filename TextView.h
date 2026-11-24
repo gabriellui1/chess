@@ -11,15 +11,17 @@ class TextView : public BoardObserver
 {
 private:
     std::ostream &out_;
+    std::vector<std::string> messages_;
     void drawBoard(const Board &board);
 
 public:
     explicit TextView(std::ostream &out = std::cout);
     void onBoardChanged(const Board &board);
-    void showMessage(const std::string &message);
-    void showError(const std::string &error);
-    void showMessages(const std::vector<std::string> &messages);
-    void showErrorMessages(const std::vector<std::string> &messages);
+    void show(const std::string &message);
+    void show(const std::vector<std::string> &messages);
+    void clearMessages();
+    void showMessages();
+    void pushMessages(const std::string message);
     void showStartMenu();
     // void showLevelPrompt(Color side); this functionality is already implemented in commandParser.cpp
 };
