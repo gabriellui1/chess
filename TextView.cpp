@@ -1,6 +1,6 @@
 #include "TextView.h"
 #include "Board.h"
-#include "DataManipHelper.h"
+#include "Helper.h"
 
 TextView::TextView(std::ostream &out) : out_(out) {}
 

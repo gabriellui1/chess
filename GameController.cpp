@@ -6,7 +6,7 @@
 #include "Level3.h"
 #include "Level4.h"
 #include "TextView.h"
-#include "DataManipHelper.h"
+#include "Helper.h"
 #include <iostream>
 #include <string>
 #include <typeinfo>
@@ -97,6 +97,12 @@ void GameController::playMove(const Command &cmd)
         messages_.push_back("Please enter valid squares for your move.");
         return;
     }
+    if (!currentPlayer->isHuman() && (isSquareValid(cmd.from) || isSquareValid(cmd.to)))
+    {
+        messages_.clear();
+        messages_.push_back("Computer cannot accept move input.");
+        return;
+    }
     std::vector<Move> chosen = currentPlayer->choose(cmd, board_, legal_);
 
     if (chosen.empty() || !isSquareValid(chosen[0].from) || !isSquareValid(chosen[0].to))
@@ -107,7 +113,7 @@ void GameController::playMove(const Command &cmd)
     }
     board_.apply(chosen[0]);
     // the code pieceToString(board_.at(chosen[0].to)->getType()) is scuffed, pls fix
-    messages_.push_back(std::format("Moved {} from {} to {}", pieceToString(board_.at(chosen[0].to)->getType()), squareToString(chosen[0].from), squareToString(chosen[0].to)));
+    messages_.push_back(std::format("Moved {} {} from {} to {}", colorToString(turn_), pieceToString(board_.at(chosen[0].to)->getType()), squareToString(chosen[0].from), squareToString(chosen[0].to)));
     turn_ = (turn_ == Color::White) ? Color::Black : Color::White;
     legal_ = rules_.legalMoves(board_, turn_); // i dont know what these do
     switch (rules_.status(board_, turn_, legal_))
@@ -157,7 +163,7 @@ void GameController::startGame(PlayerType whiteSpec, PlayerType blackSpec)
 
 void GameController::setupPlace(const Command &cmd)
 {
-    messages_.push_back(std::format("Place {} at {}", pieceToString(cmd.piece), squareToString(cmd.square)));
+    messages_.push_back(std::format("Place {} {} at {}", colorToString(cmd.color), pieceToString(cmd.piece), squareToString(cmd.square)));
     std::unique_ptr<Piece> piece = PieceFactory::create(cmd.piece, cmd.color);
     board_.place(cmd.square, piece);
     view_->onBoardChanged(board_);
@@ -165,14 +171,15 @@ void GameController::setupPlace(const Command &cmd)
 
 void GameController::setupRemove(const Command &cmd)
 {
-    messages_.push_back(std::format("Remove piece at square {}", squareToString(cmd.square)));
+    // the code pieceToString(board_.at(chosen[0].to)->getType()) is scuffed, pls fix
+    messages_.push_back(std::format("Remove {} {} at square {}", colorToString(cmd.color), pieceToString(board_.at(cmd.square)->getType()), squareToString(cmd.square)));
     board_.remove(cmd.square);
     view_->onBoardChanged(board_);
 }
 
 void GameController::enterSetup()
 {
-    messages_.push_back("Setup");
+    messages_.push_back("Entered setup mode.");
     board_.clear();
     turn_ = Color::White;
     customStart_ = false;
@@ -182,12 +189,9 @@ void GameController::enterSetup()
 
 void GameController::finishSetup()
 {
-    messages_.push_back("Done");
+    messages_.push_back("Exited setup mode and saved board!");
     std::vector<std::string> messages = rules_.validateSetup(board_);
-    for (std::string message : messages)
-    {
-        view_->showError(message);
-    }
+    view_->showErrorMessages(messages);
     if (messages.empty())
     {
         state_ = GameState::Menu;

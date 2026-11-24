@@ -1,5 +1,5 @@
 #include "Player.h"
-#include "DataManipHelper.h"
+#include "Helper.h"
 bool Human::isHuman() const
 {
     return true;
