@@ -17,6 +17,7 @@ char toLower(const char c);
 
 // convert square to string
 std::string squareToString(const Position square);
+std::string stateToString(const GameState state_);
 
 bool isSquareValid(const Position square);
 

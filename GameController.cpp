@@ -83,6 +83,7 @@ void GameController::execute(const Command &cmd)
     default:
         break;
     }
+    view_->pushMessages(std::format("You are currently in {} state: ", stateToString(state_)));
     view_->showMessages();
 }
 
@@ -188,11 +189,11 @@ void GameController::enterSetup()
 
 void GameController::finishSetup()
 {
-    view_->pushMessages("Exited setup mode and saved board!");
     std::vector<std::string> messages = rules_.validateSetup(board_);
     view_->show(messages);
     if (messages.empty())
     {
+        view_->pushMessages("Exited setup mode and saved board!");
         state_ = GameState::Menu;
         customStart_ = true;
     }

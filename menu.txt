@@ -11,7 +11,10 @@ game <white-player> <black-player>
 setup
     enters setup mode to set up your own initial board configurations
 
-CTRL+D
+help
+    list of commands in your current state
+
+quit
     exits chess
 
 
