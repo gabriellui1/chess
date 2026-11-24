@@ -13,7 +13,7 @@
 
 using namespace std;
 
-GameController::GameController(std::shared_ptr<TextView> view) : view_(std::move(view)), state_(GameState::Menu), rules_(Rules{})
+GameController::GameController(std::shared_ptr<TextView> view) : view_(std::move(view)), state_(GameState::Menu), rules_({}), messages_({})
 {
     board_.attach(view);
 }
@@ -39,12 +39,11 @@ void GameController::run()
 {
     view_->showStartMenu();
     std::string input;
-    Command command;
+    Command cmd;
     while (std::getline(std::cin, input))
     {
-        command = parser_.parse(input, state_);
-        view_->showErrorMessages(command.errMessages);
-        execute(command);
+        cmd = parser_.parse(input, state_);
+        execute(cmd);
     }
 
     view_->showMessage("End program");
@@ -52,7 +51,8 @@ void GameController::run()
 
 void GameController::execute(const Command &cmd)
 {
-
+    view_->showErrorMessages(cmd.errMessages);
+    messages_.clear();
     switch (cmd.type)
     {
     case CommandType::Game:
@@ -89,40 +89,65 @@ void GameController::execute(const Command &cmd)
     default:
         break;
     }
-
-    // placeholder to always see board
-    view_->onBoardChanged(board_);
+    view_->showMessages(messages_);
 }
 
 void GameController::playMove(const Command &cmd)
 {
 
     std::unique_ptr<Player> &currentPlayer = (turn_ == Color::White) ? whitePlayer_ : blackPlayer_;
-    if (currentPlayer->isHuman())
-    {
-    }
     std::vector<Move> chosen = currentPlayer->choose(cmd, board_, legal_);
     if (chosen.empty())
     {
-        view_->showError("Illegal Move");
+        messages_.clear();
+        messages_.push_back("Illegal Move!");
         return;
     }
     board_.apply(chosen[0]);
     turn_ = (turn_ == Color::White) ? Color::Black : Color::White;
     legal_ = rules_.legalMoves(board_, turn_); // i dont know what these do
-    rules_.status(board_, turn_, legal_);
+    switch (rules_.status(board_, turn_, legal_))
+    {
+    case GameStatus::Check:
+        messages_.push_back((turn_ == Color::Black) ? "White is in check." : "Black is in check.");
+        break;
+    case GameStatus::Checkmate:
+        messages_.push_back((turn_ == Color::Black) ? "Checkmate! White wins!" : "Checkmate! Black wins!");
+        scores_.addWin((turn_ == Color::White) ? Color::Black : Color::White);
+        state_ = GameState::Menu;
+        break;
+    case GameStatus::Stalemate:
+        messages_.push_back("Stalemate!");
+        scores_.addDraw();
+        state_ = GameState::Menu;
+        break;
+    }
+    view_->onBoardChanged(board_);
 }
 
 void GameController::startGame(PlayerType whiteSpec, PlayerType blackSpec)
 {
     if (!customStart_)
+    {
         board_.loadStandardPosition();
+        turn_ = Color::White;
+    }
+    else
+        customStart_ = false;
 
+    legal_ = rules_.legalMoves(board_, turn_);
+
+    if (rules_.status(board_, turn_, legal_) == GameStatus::Stalemate)
+    {
+        messages_.clear();
+        messages_.push_back("Stalemate!");
+        state_ = GameState::Menu;
+        return;
+    }
+    state_ = GameState::Game;
     whitePlayer_ = makePlayer(whiteSpec, rules_);
     blackPlayer_ = makePlayer(blackSpec, rules_);
-    turn_ = Color::White;
-    legal_ = rules_.legalMoves(board_, turn_);
-    state_ = GameState::Game;
+    view_->onBoardChanged(board_);
 }
 
 void GameController::setupCommand(const Command &cmd)
