@@ -17,7 +17,9 @@ public:
     explicit TextView(std::ostream &out = std::cout);
     void onBoardChanged(const Board &board);
     void showMessage(const std::string &message);
+    void TextView::showMessages(const std::vector<std::string> &messages);
     void showError(const std::string &error);
+    void TextView::showErrorMessages(const std::vector<std::string> &messages);
     void showStartMenu();
     // void showLevelPrompt(Color side); this functionality is already implemented in commandParser.cpp
 };

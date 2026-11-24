@@ -37,28 +37,17 @@ std::unique_ptr<Player> makePlayer(const PlayerType &spec, const Rules &rules)
 
 void GameController::run()
 {
-    std::cout << "hi" << std::endl;
-
+    view_->showStartMenu();
     std::string input;
     Command command;
     while (std::getline(std::cin, input))
     {
-        switch (state_)
-        {
-        case GameState::Menu:
-            command = parser_.parseMenu(input, std::cout);
-            break;
-        case GameState::Setup:
-            command = parser_.parseSetup(input, std::cout);
-            break;
-        case GameState::Game:
-            command = parser_.parseGame(input, std::cout);
-            break;
-        }
+        command = parser_.parse(input, state_);
+        view_->showErrorMessages(command.errMessages);
         execute(command);
     }
 
-    view_->showMessage("end");
+    view_->showMessage("End program");
 }
 
 void GameController::execute(const Command &cmd)
@@ -67,42 +56,41 @@ void GameController::execute(const Command &cmd)
     switch (cmd.type)
     {
     case CommandType::Game:
-        view_->showMessage("new game\n");
+        view_->showMessage("New game");
         startGame(cmd.whiteSpec, cmd.blackSpec);
         break;
     case CommandType::Move:
-        view_->showMessage("move\n");
+        view_->showMessage("Move");
         playMove(cmd);
         break;
     case CommandType::Setup:
-        view_->showMessage("Setup\n");
-        board_.loadStandardPosition();
+        view_->showMessage("Setup");
+        board_.clear();
+        turn_ = Color::White;
+        customStart_ = false;
         state_ = GameState::Setup;
-
         break;
     case CommandType::Place:
-        view_->showMessage("place\n");
-        {
-            std::unique_ptr<Piece> piece = PieceFactory::create(cmd.piece, cmd.color);
-            board_.place(cmd.square, piece);
-        }
+        view_->showMessage("Place");
+        setupCommand(cmd);
         break;
     case CommandType::Remove:
-        view_->showMessage("remove\n");
+        view_->showMessage("Remove");
         board_.remove(cmd.square);
         break;
     case CommandType::SetTurn:
-        view_->showMessage("set turn\n");
+        view_->showMessage("Set turn");
         turn_ = cmd.color;
         break;
     case CommandType::Done:
-        view_->showMessage("done\n");
-        state_ = GameState::Menu;
+        view_->showMessage("Done");
+        finishSetup();
         break;
     default:
-        view_->showMessage("invalid command\n");
         break;
     }
+
+    // placeholder to always see board
     view_->onBoardChanged(board_);
 }
 
@@ -135,4 +123,38 @@ void GameController::startGame(PlayerType whiteSpec, PlayerType blackSpec)
     turn_ = Color::White;
     legal_ = rules_.legalMoves(board_, turn_);
     state_ = GameState::Game;
+}
+
+void GameController::setupCommand(const Command &cmd)
+{
+    std::unique_ptr<Piece> piece = PieceFactory::create(cmd.piece, cmd.color);
+    board_.place(cmd.square, piece);
+}
+
+void GameController::finishSetup()
+{
+    std::vector<std::string> messages = rules_.validateSetup(board_);
+    for (std::string message : messages)
+    {
+        view_->showError(message);
+    }
+    if (messages.empty())
+    {
+        state_ = GameState::Menu;
+        customStart_ = true;
+    }
+}
+
+void GameController::resign()
+{
+    Color winner = (turn_ == Color::White) ? Color::Black : Color::White;
+    scores_.addWin(winner);
+    state_ = GameState::Menu;
+}
+
+void GameController::printFinalScore()
+{
+    view_->showMessage("Final Score:");
+    view_->showMessage("White: " + std::to_string(scores_.whiteScore()));
+    view_->showMessage("Black: " + std::to_string(scores_.blackScore()));
 }
