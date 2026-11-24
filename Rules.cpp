@@ -92,7 +92,7 @@ GameStatus Rules::status(const Board &board, Color toMove, const std::vector<Mov
 bool Rules::givesCheck(Board &board, const Move &move, Color mover) const
 {
     board.applyTrial(move);
-    bool inCheck = isInCheck(board, mover == Color::White ? Color::Black : Color::White);
+    bool inCheck = isInCheck(board, mover == Color::White ? Color::White : Color::Black);
     board.undoTrial();
     return inCheck;
 }
