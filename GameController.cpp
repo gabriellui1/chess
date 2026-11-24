@@ -19,21 +19,20 @@ GameController::GameController(std::shared_ptr<TextView> view) : view_(std::move
     board_.attach(view);
 }
 
-std::unique_ptr<Player> makePlayer(const PlayerType &spec, const Rules &rules)
-{
-    switch (spec)
-    {
-    case PlayerType::Human:
-        return std::make_unique<Human>();
-    case PlayerType::Computer1:
-        return std::make_unique<Level1>(rules);
-    case PlayerType::Computer2:
-        return std::make_unique<Level2>(rules);
-    case PlayerType::Computer3:
-        return std::make_unique<Level3>(rules);
-    case PlayerType::Computer4:
-        return std::make_unique<Level4>(rules);
+std::unique_ptr<Player> makePlayer(const PlayerType& type, Color color, const Rules& rules) {
+    switch (type) {
+        case PlayerType::Human:
+            return std::make_unique<Human>(color);
+        case PlayerType::Computer1:
+            return std::make_unique<Level1>(color, rules);
+        case PlayerType::Computer2:
+            return std::make_unique<Level2>(color, rules);
+        case PlayerType::Computer3:
+            return std::make_unique<Level3>(color, rules);
+        case PlayerType::Computer4:
+            return std::make_unique<Level4>(color, rules);
     }
+    return nullptr;
 }
 
 void GameController::run()
@@ -156,8 +155,8 @@ void GameController::startGame(PlayerType whiteSpec, PlayerType blackSpec)
         return;
     }
     state_ = GameState::Game;
-    whitePlayer_ = makePlayer(whiteSpec, rules_);
-    blackPlayer_ = makePlayer(blackSpec, rules_);
+    whitePlayer_ = makePlayer(whiteSpec, Color::White, rules_);
+    blackPlayer_ = makePlayer(blackSpec, Color::Black, rules_);
     view_->onBoardChanged(board_);
 }
 
