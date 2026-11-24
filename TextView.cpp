@@ -30,7 +30,7 @@ void TextView::drawBetterBoard(const Board &board)
         for (int col = 0; col <= 7; col++)
         {
             Position pos{row, col};
-            out_ << ((board.at(pos) == nullptr) ? ((row + col) % 2 == 0 ? "■" : "□") : chessSymbolFor(*board.at(pos)));
+            out_ << ((board.at(pos) == nullptr) ? "□" : chessSymbolFor(*board.at(pos)));
         }
         out_ << std::endl;
     }

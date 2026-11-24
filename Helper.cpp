@@ -75,22 +75,22 @@ std::string chessSymbolFor(const Piece &piece)
     switch (piece.getType())
     {
     case PieceType::King:
-        return piece.getColor() == Color::White ? "♔" : "♚";
+        return piece.getColor() == Color::Black ? "♔" : "♚";
         break;
     case PieceType::Queen:
-        return piece.getColor() == Color::White ? "♕" : "♛";
+        return piece.getColor() == Color::Black ? "♕" : "♛";
         break;
     case PieceType::Rook:
-        return piece.getColor() == Color::White ? "♖" : "♜";
+        return piece.getColor() == Color::Black ? "♖" : "♜";
         break;
     case PieceType::Bishop:
-        return piece.getColor() == Color::White ? "♗" : "♝";
+        return piece.getColor() == Color::Black ? "♗" : "♝";
         break;
     case PieceType::Knight:
-        return piece.getColor() == Color::White ? "♘" : "♞";
+        return piece.getColor() == Color::Black ? "♘" : "♞";
         break;
     case PieceType::Pawn:
-        return piece.getColor() == Color::White ? "♙" : "♟";
+        return piece.getColor() == Color::Black ? "♙" : "♟";
         break;
     }
     return "?";
@@ -111,6 +111,15 @@ std::string colorToString(const Color color)
     return color == Color::White ? "White" : "Black";
 }
 
+std::string stateToString(const GameState state_)
+{
+    if (state_ == GameState::Menu)
+        return "Menu";
+    if (state_ == GameState::Game)
+        return "Game";
+    if (state_ == GameState::Setup)
+        return "Setup";
+}
 // assumes you have already validated
 PieceType charToPiece(const char c)
 {
