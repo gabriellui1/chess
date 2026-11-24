@@ -7,7 +7,6 @@ std::vector<Move> Level3::choose(const Command& cmd, const Board& board, const s
     (void)cmd;
     if (legal.empty()) return {};
 
-    Rules rules;
     Board& mutableBoard = const_cast<Board&>(board);
 
     int bestScore = -99999;
@@ -17,40 +16,28 @@ std::vector<Move> Level3::choose(const Command& cmd, const Board& board, const s
     for (const Move& m : legal) {
         int score = 0;
 
-        bool isCapture = false;
-        bool isCheck = false;
-
         // check if is capture
-        bool isCapture = isCapture(mutableBoard, m);
+        if (isCapture(mutableBoard, m)) {
+            score += 1;
+        }
 
         mutableBoard.apply(m);
 
         // check if is check
-        if (rules.inCheck(mutableBoard, !color)) {
-            score += 100;
+        if (rules_.isInCheck(mutableBoard, !color)) {
+            score += 1;
         }
 
         // check if opponent can capture any of our pieces on their next turn
-        std::vector<Move> opponentLegal = rules.legalMoves(mutableBoard, !color);
+        std::vector<Move> opponentLegal = rules_.legalMoves(mutableBoard, !color);
         for (const Move& oppMove : opponentLegal) {
-            bool capture = isCapture(mutableBoard, m);
-            if (capture) {
-                score -= 1;
+            if (isCapture(mutableBoard, oppMove)) {
+                score -= 2;
                 break;
             }
         }
 
         mutableBoard.undo();
-
-        if (!canBeCaptured) {
-            score += 1;
-        }
-        if (isCapture) {
-            score += 1;
-        }
-        if (isCheck) {
-            score += 1;
-        }
 
         if (score > bestScore) {
             bestScore = score;

@@ -6,8 +6,7 @@ std::vector<Move> Level2::choose(const Command& cmd, const Board& board, const s
     (void)cmd;
     if (legal.empty()) return {};
 
-    Color opponent = (getColor() == Color::White) ? Color::Black : Color::White;
-    Rules rules;
+    Color opponent = !getColor();
     Board& mutableBoard = const_cast<Board&>(board);
 
     int bestScore = -1;
@@ -15,13 +14,13 @@ std::vector<Move> Level2::choose(const Command& cmd, const Board& board, const s
 
     for (const Move& m : legal) {
         int score = 0;
-        bool isCapture = isCapture(mutableBoard, m);
+        bool capture = isCapture(board, m);
 
         mutableBoard.apply(m);
-        bool givesCheck = rules.inCheck(mutableBoard, opponent);
+        bool givesCheck = rules_.isInCheck(mutableBoard, opponent);
         mutableBoard.undo();
 
-        if (isCapture) {
+        if (capture) {
             score += 1;
         }
         if (givesCheck) {
