@@ -70,6 +70,32 @@ char symbolFor(const Piece &piece)
     return piece.getColor() == Color::White ? c : toLower(c);
 }
 
+std::string chessSymbolFor(const Piece &piece)
+{
+    switch (piece.getType())
+    {
+    case PieceType::King:
+        return piece.getColor() == Color::White ? "♔" : "♚";
+        break;
+    case PieceType::Queen:
+        return piece.getColor() == Color::White ? "♕" : "♛";
+        break;
+    case PieceType::Rook:
+        return piece.getColor() == Color::White ? "♖" : "♜";
+        break;
+    case PieceType::Bishop:
+        return piece.getColor() == Color::White ? "♗" : "♝";
+        break;
+    case PieceType::Knight:
+        return piece.getColor() == Color::White ? "♘" : "♞";
+        break;
+    case PieceType::Pawn:
+        return piece.getColor() == Color::White ? "♙" : "♟";
+        break;
+    }
+    return "?";
+}
+
 std::string pieceToString(const PieceType piece)
 {
     std::vector<std::string> pieceNames = {"Queen", "Rook", "Bishop", "Knight", "Pawn", "King"};

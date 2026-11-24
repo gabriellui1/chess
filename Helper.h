@@ -25,6 +25,7 @@ int findCharIndex(const std::string &str, char target);
 
 //
 char symbolFor(const Piece &piece);
+std::string chessSymbolFor(const Piece &piece);
 
 // finds index of element in vector, -1 if not found
 template <typename T>
