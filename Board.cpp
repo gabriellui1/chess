@@ -158,10 +158,10 @@ void Board::attach(const std::shared_ptr<BoardObserver> &observer)
 
 void Board::detach(const std::shared_ptr<BoardObserver> &observer)
 {
-    std::erase_if(observers_, [&observer](const auto &current)
-                  {
+    std::erase_if(observers_, [&observer](const auto &current) { // hello??????
         auto live = current.lock();
-        return !live || live == observer; });
+        return !live || live == observer;
+    });
 }
 
 void Board::applyMove(const Move &move)

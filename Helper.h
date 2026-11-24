@@ -15,6 +15,11 @@ std::string toLower(const std::string str);
 // turns every char in string to lowercase
 char toLower(const char c);
 
+// convert square to string
+std::string squareToString(const Position square);
+
+bool isSquareValid(const Position square);
+
 // finds first index of char in string, -1 if not found
 int findCharIndex(const std::string &str, char target);
 
@@ -36,6 +41,9 @@ int findIndex(const std::vector<T> &vec, const T &word)
 }
 // assumes you have already validated
 PieceType charToPiece(const char c);
+
+std::string pieceToString(const PieceType piece);
+std::string colorToString(const Color color);
 
 // assumes you have already validated
 PlayerType stringToPlayer(const std::string str);

@@ -2,9 +2,11 @@
 #include "Board.h"
 #include "Rules.h"
 
-std::vector<Move> Level2::choose(const Command& cmd, const Board& board, const std::vector<Move>& legal) {
+std::vector<Move> Level2::choose(const Command &cmd, const Board &board, const std::vector<Move> &legal)
+{
     (void)cmd;
-    if (legal.empty()) return {};
+    if (legal.empty())
+        return {};
 
     Color opponent = !getColor();
     Board& mutableBoard = const_cast<Board&>(board);

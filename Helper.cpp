@@ -1,6 +1,6 @@
 #include <sstream>
 #include <limits>
-#include "DataManipHelper.h"
+#include "Helper.h"
 #include "Piece.h"
 
 // turns every char in string to lowercase
@@ -15,6 +15,17 @@ std::string toLower(std::string str)
 char toLower(const char c)
 {
     return static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+}
+
+bool isSquareValid(const Position square)
+{
+    return square.col != -1 && square.row != -1;
+}
+// convert square to string
+std::string squareToString(const Position square)
+{
+    std::string files = "abcdefgh";
+    return {files[square.col], ('1' + square.row)};
 }
 
 // finds first index of char in string, -1 if not found
@@ -59,11 +70,26 @@ char symbolFor(const Piece &piece)
     return piece.getColor() == Color::White ? c : toLower(c);
 }
 
+std::string pieceToString(const PieceType piece)
+{
+    std::vector<std::string> pieceNames = {"Queen", "Rook", "Bishop", "Knight", "Pawn", "King"};
+    std::vector<PieceType> pieces({PieceType::Queen, PieceType::Rook, PieceType::Bishop, PieceType::Knight, PieceType::Pawn, PieceType::King});
+    int index = findIndex(pieces, piece);
+    if (index == -1)
+        return "";
+    return pieceNames[index];
+}
+
+std::string colorToString(const Color color)
+{
+    return color == Color::White ? "White" : "Black";
+}
+
 // assumes you have already validated
 PieceType charToPiece(const char c)
 {
     std::vector<PieceType> pieces({PieceType::Queen, PieceType::Rook, PieceType::Bishop, PieceType::Knight, PieceType::Pawn, PieceType::King});
-    int index = findCharIndex("qrbnpk", c);
+    int index = findCharIndex("qrbnpk", toLower(c));
     return pieces[index];
 }
 

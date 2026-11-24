@@ -53,6 +53,7 @@ enum class GameStatus
 };
 enum class CommandType
 {
+    Invalid,
     Game,
     Resign,
     Move,
@@ -60,8 +61,7 @@ enum class CommandType
     Place,
     Remove,
     SetTurn,
-    Done,
-    Invalid
+    Done
 };
 
 enum class PlayerType
@@ -75,35 +75,36 @@ enum class PlayerType
 
 struct Position
 {
-    int row;
-    int col;
+    int row = -1;
+    int col = -1;
     bool operator==(const Position &other) const = default;
 };
 
 struct Offset
 {
-    int drow;
-    int dcol;
+    int drow = 0;
+    int dcol = 0;
 };
 
 struct Move
 {
-    Position from;
-    Position to;
-    MoveKind kind;
-    std::vector<PieceType> promoteTo;
+    Position from = Position{-1, -1};
+    Position to = Position{-1, -1};
+    MoveKind kind = MoveKind::Normal;
+    std::vector<PieceType> promoteTo = {};
 };
 
 struct Command
 {
-    CommandType type;
-    Position from;
-    Position to;
-    PieceType piece;      // empty unless move promotes
-    PlayerType whiteSpec; // player type, uses player type enum class
-    PlayerType blackSpec;
-    Position square; // setup mode
-    Color color;     // setup mode
+    CommandType type = CommandType::Invalid;
+    std::vector<std::string> errMessages = {};
+    Position from = Position{-1, -1};
+    Position to = Position{-1, -1};
+    PieceType piece = PieceType::Pawn;        // empty unless move promotes
+    PlayerType whiteSpec = PlayerType::Human; // player type, uses player type enum class
+    PlayerType blackSpec = PlayerType::Human;
+    Position square = Position{-1, -1}; // setup mode
+    Color color = Color::White;         // setup mode
 };
 
 #endif
