@@ -5,12 +5,23 @@
 
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 enum class Color
 {
     White,
     Black
 };
+
+constexpr Color operator!(Color c)
+{
+    if (c == Color::White)
+    {
+        return Color::Black;
+    }
+    return Color::White;
+}
+
 enum class MoveKind
 {
     Normal,
@@ -28,6 +39,16 @@ enum class PieceType
     Knight,
     Pawn
 };
+
+const std::unordered_map<PieceType, int> PIECE_VALUES = {
+    { PieceType::Pawn,   1 },
+    { PieceType::Knight, 3 },
+    { PieceType::Bishop, 3 },
+    { PieceType::Rook,   5 },
+    { PieceType::Queen,  9 },
+    { PieceType::King,   -1 }
+};
+
 enum class GameState
 {
     Menu,

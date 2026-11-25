@@ -10,12 +10,14 @@ class Computer : public Player
 
 protected:
     const Rules &rules_;
+    bool isCapture(const Board &board, const Move &m) const;
 
 public:
-    explicit Computer(const Rules &rules);
+    Computer(Color color, const Rules &rules) : Player(color), rules_(rules) {}
+    virtual ~Computer() = default;
+
     bool isHuman() const;
     virtual std::vector<Move> choose(const Command &, const Board &, const std::vector<Move> &legal) = 0;
-    // more as needed
 };
 
 #endif

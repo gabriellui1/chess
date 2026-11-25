@@ -13,6 +13,7 @@ private:
     std::ostream &out_;
     std::vector<std::string> messages_;
     void drawBoard(const Board &board);
+    void drawBetterBoard(const Board &board);
 
 public:
     explicit TextView(std::ostream &out = std::cout);

@@ -21,9 +21,25 @@ void TextView::drawBoard(const Board &board)
          << "  abcdefgh" << std::endl;
 }
 
+void TextView::drawBetterBoard(const Board &board)
+{
+    out_ << std::endl;
+    for (int row = 7; row >= 0; row--)
+    {
+        out_ << row + 1;
+        for (int col = 0; col <= 7; col++)
+        {
+            Position pos{row, col};
+            out_ << ((board.at(pos) == nullptr) ? "□" : chessSymbolFor(*board.at(pos)));
+        }
+        out_ << std::endl;
+    }
+    out_ << " abcdefgh" << std::endl;
+}
+
 void TextView::onBoardChanged(const Board &board)
 {
-    drawBoard(board);
+    drawBetterBoard(board);
 }
 
 void TextView::show(const std::string &message)

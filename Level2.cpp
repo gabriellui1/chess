@@ -1,7 +1,6 @@
 #include "Level2.h"
 #include "Board.h"
 #include "Rules.h"
-#include <random>
 
 std::vector<Move> Level2::choose(const Command &cmd, const Board &board, const std::vector<Move> &legal)
 {
@@ -9,30 +8,32 @@ std::vector<Move> Level2::choose(const Command &cmd, const Board &board, const s
     if (legal.empty())
         return {};
 
-    Color opponent = (getColor() == Color::White) ? Color::Black : Color::White;
-    Rules rules;
-    Board &mutableBoard = const_cast<Board &>(board);
+    Color opponent = !getColor();
+    Board& mutableBoard = const_cast<Board&>(board);
 
-    std::vector<Move> preferred;
+    int bestScore = -1;
+    Move bestMove = legal[0];
 
-    for (const Move &m : legal)
-    {
-        bool isCapture = (board.at(m.to) != nullptr) || (m.kind == MoveKind::EnPassant);
+    for (const Move& m : legal) {
+        int score = 0;
+        bool capture = isCapture(board, m);
 
         mutableBoard.apply(m);
-        bool givesCheck = rules.isInCheck(mutableBoard, opponent);
+        bool givesCheck = rules_.isInCheck(mutableBoard, opponent);
         mutableBoard.undo();
 
-        if (isCapture || givesCheck)
-        {
-            preferred.push_back(m);
+        if (capture) {
+            score += 1;
+        }
+        if (givesCheck) {
+            score += 1;
+        }
+
+        if (score > bestScore) {
+            bestScore = score;
+            bestMove = m;
         }
     }
 
-    const std::vector<Move> &pool = preferred.empty() ? legal : preferred;
-
-    static std::mt19937 rng(std::random_device{}());
-    std::uniform_int_distribution<std::size_t> dist(0, pool.size() - 1);
-
-    return {pool[dist(rng)]};
+    return { bestMove };
 }
