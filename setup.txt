@@ -1,0 +1,44 @@
+List of commands while in setup mode:
+
++ <piece-type> <square>
+    places piece <piece-type> on square <square>. if there is already a piece on square <square>, replace it.
+
+    <piece-type>: Q | R | B | N | P | K | q | r | b | n | p | k 
+        the piece placed on the board, shortened to their starting letter. uppercase will produce white pieces, and lowercase will produce black pieces.
+
+    <square>: [a1-h8]
+        square on the 8x8 board. letter [a-h] specifies file and number [1-8] specifies rank
+    
+    ex. "+ K h1"
+
+- <square>
+    if there exists a piece on square <square>, remove it and leave it empty.
+
+    <square>: [a1-h8]
+        square on the 8x8 board. letter [a-h] specifies file and number [1-8] specifies rank
+    
+    ex. "- c7"
+
+= <color>
+    sets the starting turn of the board to color <color>
+
+    <color>: white | black
+        when a game is started with this board, <color> will be the color that moves first
+
+    ex. "= black"
+
+done
+    checks if the current board is ready for a game. if valid, saves the board for the start of the next game and exits setup mode. if invalid, displays an error message and does nothing. a valid board must have the following: exactly one white king and exactly one black king which are both not in check, and no pawns on the first or last row of the board.
+
+clear
+    removes every piece off the board
+
+reset
+    clears and resets the board to the standard position
+
+help
+    list of commands in your current state
+
+quit
+    exits chess
+

@@ -23,6 +23,8 @@ public:
     void showMessages();
     void pushMessages(const std::string message);
     void showStartMenu();
+    void showSetupHelp();
+    void showGameHelp();
     // void showLevelPrompt(Color side); this functionality is already implemented in commandParser.cpp
 };
 
