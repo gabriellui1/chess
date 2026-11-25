@@ -80,6 +80,20 @@ void GameController::execute(const Command &cmd)
     case CommandType::Done:
         finishSetup();
         break;
+    case CommandType::Help:
+        switch (state_)
+        {
+        case GameState::Menu:
+            view_->showStartMenu();
+            break;
+        case GameState::Game:
+            view_->showGameHelp();
+            break;
+        case GameState::Setup:
+            view_->showSetupHelp();
+            break;
+        }
+        break;
     default:
         break;
     }

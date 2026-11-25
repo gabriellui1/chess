@@ -217,7 +217,17 @@ Command CommandParser::parseSetup(const std::string &command) const
 Command CommandParser::parse(const std::string &line, GameState state) const
 {
 
-    Command cmd;
+    Command cmd{};
+
+    std::istringstream iss(line);
+    std::string word;
+    iss >> word;
+    if (word == "help")
+    {
+        cmd.type = CommandType::Help;
+        return cmd;
+    }
+
     Command menuCommand = parseMenu(line);
     Command gameCommand = parseGame(line);
     Command setupCommand = parseSetup(line);

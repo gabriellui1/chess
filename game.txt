@@ -1,4 +1,37 @@
+List of available commands while playing a game:
+
 move
+    on a computer player, calculates and performs the next move  
+
+move <source> <destination>
+    on a human player, performs a move on one of your pieces. moves your piece from the square <source> to the square <destination>
+
+    <source>: [a1-h8]
+        source square on the 8x8 board. letter [a-h] specifies file and number [1-8] specifies rank
+
+    <destination>: [a1-h8]
+        destination square on the 8x8 board. letter [a-h] specifies file and number [1-8] specifies rank
+
+    ex. "move e2 e4"
+
+move <source> <destination> <promoting-piece>
+    on a human player, performs a promoting pawn move on your pawn. moves your pawn from the square <source> to the square <destination> and promotes to the piece type <promoting-piece>
+
+    <promoting-piece>: Q | R | B | N
+        the piece that the pawn promotes to, shortened to their starting letter
+
+    ex. "move a7 b8 B"
+
+undo
+    reverts the last move, allowing a player to try a different line
+
 resign
+    forfeits the game as the current player and hands the win over to the opponent
+
 help
+    list of commands in your current state
+
 quit
+    exits chess
+
+
