@@ -3,6 +3,7 @@ remember to run git pull\
 also run ```make``` to compile\
 \
 TODO:\
+COMMANDS MISSING: help, quit, undo, clear, reset
 Add castling support (O-O and O-O-O) and special castling message\
 Add help command to more states (game and setup)\
 rename gamecontroller to controller\
