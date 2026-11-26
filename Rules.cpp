@@ -79,6 +79,9 @@ GameStatus Rules::status(const Board &board, Color toMove, const std::vector<Mov
     {
         return GameStatus::Stalemate;
     }
+    else if (isThreefoldRepetition(board))  {
+        return GameStatus::ThreeFoldRepetition;
+    }
     else if (inCheck && !legal.empty())
     {
         return GameStatus::Check;
@@ -154,6 +157,11 @@ bool Rules::castlinghelper(Position rook_square_king, const Board &board, Color 
             return false;
     }
     return true;
+}
+
+bool Rules::isThreefoldRepetition(const Board &board) const
+{
+    return board.repeatCount() >= 3;
 }
 
 std::vector<Move> Rules::castlingMoves(const Board &board, Color color) const

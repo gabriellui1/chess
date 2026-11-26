@@ -9,6 +9,7 @@ struct Board::UndoRecord
     Position capturedAt;
     std::unique_ptr<Piece> replacedPawn;
     bool previouslyMoved = false;
+    std::string previousFen;
 };
 
 Board::Board()
@@ -166,6 +167,7 @@ void Board::detach(const std::shared_ptr<BoardObserver> &observer)
 void Board::applyMove(const Move &move)
 {
     UndoRecord undo;
+    undo.previousFen = boardFEN();
     undo.move = move;
     undo.previouslyMoved = at(move.from)->hasMoved();
 
@@ -255,3 +257,53 @@ void Board::emptySquares()
 }
 
 bool Board::canUndo() const {return !history_.empty();}
+std::string Board::boardFEN() const {
+    std::string fen;
+    for (int i = 7; i >= 0; --i)
+    {
+        int empty = 0;
+        for (int j = 0; j < 8; j++) {
+            const auto &p = squares_[i][j];
+            if (p == nullptr) {
+                ++empty;
+            } else {
+                if (empty > 0) {
+                    fen += std::to_string(empty);
+                    empty = 0;
+                }
+                char c = PIECE_CHAR.at(p->getType());
+                if (p->getColor() == Color::Black) {
+                    fen += c - ('a' - 'A');
+                } else {
+                    fen += c;
+                }
+            }
+        }
+        if (empty > 0) {
+            fen += std::to_string(empty);
+            empty = 0;
+        }
+        if (i > 0)
+        {
+            fen += '/';
+        }
+    }
+    fen += (history_.size() % 2 == 0) ? " w " : " b ";
+
+    // TODO: impl for castle
+    // enpassant
+    return fen;
+}
+
+int Board::repeatCount() const {
+    int n = static_cast<int>(history_.size());
+    std::string current = boardFEN();
+    int count = 0;
+    for (int i = n - 2; i >= 0; i -= 2) {
+        if (history_[i].previousFen == current)
+        {
+            ++count;
+        }
+    }
+    return count;
+}

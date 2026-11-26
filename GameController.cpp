@@ -148,6 +148,11 @@ void GameController::playMove(const Command &cmd)
         scores_.addDraw();
         state_ = GameState::Menu;
         break;
+    case GameStatus::ThreeFoldRepetition:
+        view_->pushMessages("Threefold repetition.");
+        scores_.addDraw();
+        state_ = GameState::Menu;
+        break;
     }
 }
 

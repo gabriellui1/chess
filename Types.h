@@ -49,6 +49,15 @@ const std::unordered_map<PieceType, int> PIECE_VALUES = {
     { PieceType::King,   -1 }
 };
 
+const std::unordered_map<PieceType, char> PIECE_CHAR = {
+    { PieceType::Pawn,   'p' },
+    { PieceType::Knight, 'n' },
+    { PieceType::Bishop, 'b' },
+    { PieceType::Rook,   'r' },
+    { PieceType::Queen,  'q' },
+    { PieceType::King,   'k' }
+};
+
 enum class GameState
 {
     Menu,
@@ -60,7 +69,8 @@ enum class GameStatus
     Ongoing,
     Check,
     Checkmate,
-    Stalemate
+    Stalemate,
+    ThreeFoldRepetition,
 };
 enum class CommandType
 {
