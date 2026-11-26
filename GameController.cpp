@@ -14,23 +14,31 @@
 
 using namespace std;
 
-GameController::GameController(std::shared_ptr<TextView> view) : view_(std::move(view)), state_(GameState::Menu), rules_({})
+GameController::GameController(std::shared_ptr<TextView> view)
+    : view_(std::move(view)),
+      state_(GameState::Menu),
+      rules_({}),
+      turn_(Color::White),
+      customStart_(false),
+      undoEnabled_(false)
 {
     board_.attach(view_);
 }
 
-std::unique_ptr<Player> makePlayer(const PlayerType& type, Color color, const Rules& rules) {
-    switch (type) {
-        case PlayerType::Human:
-            return std::make_unique<Human>(color);
-        case PlayerType::Computer1:
-            return std::make_unique<Level1>(color, rules);
-        case PlayerType::Computer2:
-            return std::make_unique<Level2>(color, rules);
-        case PlayerType::Computer3:
-            return std::make_unique<Level3>(color, rules);
-        case PlayerType::Computer4:
-            return std::make_unique<Level4>(color, rules);
+std::unique_ptr<Player> makePlayer(const PlayerType &type, Color color, const Rules &rules)
+{
+    switch (type)
+    {
+    case PlayerType::Human:
+        return std::make_unique<Human>(color);
+    case PlayerType::Computer1:
+        return std::make_unique<Level1>(color, rules);
+    case PlayerType::Computer2:
+        return std::make_unique<Level2>(color, rules);
+    case PlayerType::Computer3:
+        return std::make_unique<Level3>(color, rules);
+    case PlayerType::Computer4:
+        return std::make_unique<Level4>(color, rules);
     }
     return nullptr;
 }
@@ -46,6 +54,7 @@ void GameController::run()
         execute(cmd);
     }
 
+    printFinalScore();
     view_->show("End program");
 }
 
@@ -139,8 +148,8 @@ void GameController::playMove(const Command &cmd)
         view_->pushMessages((turn_ == Color::White) ? "White is in check." : "Black is in check.");
         break;
     case GameStatus::Checkmate:
-        view_->pushMessages((turn_ == Color::White) ? "Checkmate! White wins!" : "Checkmate! Black wins!");
-        scores_.addWin((turn_ == Color::Black) ? Color::Black : Color::White);
+        view_->pushMessages((turn_ == Color::Black) ? "Checkmate! White wins!" : "Checkmate! Black wins!");
+        scores_.addWin((turn_ == Color::White) ? Color::Black : Color::White);
         state_ = GameState::Menu;
         break;
     case GameStatus::Stalemate:
@@ -166,8 +175,10 @@ void GameController::startGame(PlayerType whiteSpec, PlayerType blackSpec, bool 
         turn_ = Color::White;
     }
     else
+    {
+        view_->onBoardChanged(board_);
         customStart_ = false;
-
+    }
     legal_ = rules_.legalMoves(board_, turn_);
 
     if (rules_.status(board_, turn_, legal_) == GameStatus::Stalemate)
@@ -191,6 +202,11 @@ void GameController::setupPlace(const Command &cmd)
 
 void GameController::setupRemove(const Command &cmd)
 {
+    if (board_.at(cmd.square) == Board::outOfBoundsPtr_)
+    {
+        view_->pushMessages("No piece at " + squareToString(cmd.square) + ".");
+        return;
+    }
     // the code pieceToString(board_.at(chosen[0].to)->getType()) is scuffed, pls fix
     view_->pushMessages(std::format("Remove {} {} at square {}", colorToString(cmd.color), pieceToString(board_.at(cmd.square)->getType()), squareToString(cmd.square)));
     board_.remove(cmd.square);
@@ -234,11 +250,13 @@ void GameController::printFinalScore()
 
 void GameController::undoMove()
 {
-    if (!undoEnabled_){
+    if (!undoEnabled_)
+    {
         view_->pushMessages("Undo is not enabled for this game.");
         return;
     }
-    if (!board_.canUndo()){
+    if (!board_.canUndo())
+    {
         view_->pushMessages("There is no move to undo.");
         return;
     }
@@ -246,7 +264,8 @@ void GameController::undoMove()
     turn_ = !turn_;
     legal_ = rules_.legalMoves(board_, turn_);
     view_->pushMessages("Undid the last move.");
-    if (rules_.status(board_, turn_, legal_) == GameStatus::Check){
-        view_->pushMessages((turn_ == Color::White) ? "White is in check.":"Black is in check.");
+    if (rules_.status(board_, turn_, legal_) == GameStatus::Check)
+    {
+        view_->pushMessages((turn_ == Color::White) ? "White is in check." : "Black is in check.");
     }
 }
