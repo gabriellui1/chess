@@ -74,6 +74,13 @@ Command CommandParser::parseMenu(const std::string &command) const
             return cmd;
         }
         cmd.blackSpec = stringToPlayer(word);
+        if (iss >> word){
+            if (word != "undo"){
+                cmd.errMessages.push_back("Usage: game [white] [black] [undo]");
+                return cmd;
+            }
+            cmd.undoEnabled = true;
+        }
         cmd.type = CommandType::Game;
         return cmd;
     }
@@ -130,6 +137,10 @@ Command CommandParser::parseGame(const std::string &command) const
 
         cmd.piece = charToPiece(word[0]);
         cmd.type = CommandType::Move;
+        return cmd;
+    }
+    if (word == "undo"){
+        cmd.type = CommandType::Undo;
         return cmd;
     }
 
@@ -237,6 +248,11 @@ Command CommandParser::parse(const std::string &line, GameState state) const
     {
         cmd.type = CommandType::Invalid;
         cmd.errMessages.push_back("Game/setup mode is currently running. Please end it first.");
+        return cmd;
+    }
+    if (gameCommand.type == CommandType::Undo && state != GameState::Game){
+        cmd.type = CommandType::Invalid;
+        cmd.errMessages.push_back("Undo is only available during a game.");
         return cmd;
     }
     if (state != GameState::Game && gameCommand.type != CommandType::Invalid && menuCommand.type == CommandType::Invalid && setupCommand.type == CommandType::Invalid)

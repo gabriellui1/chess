@@ -56,7 +56,7 @@ void GameController::execute(const Command &cmd)
     switch (cmd.type)
     {
     case CommandType::Game:
-        startGame(cmd.whiteSpec, cmd.blackSpec);
+        startGame(cmd.whiteSpec, cmd.blackSpec, cmd.undoEnabled);
         break;
     case CommandType::Move:
         playMove(cmd);
@@ -93,6 +93,9 @@ void GameController::execute(const Command &cmd)
             view_->showSetupHelp();
             break;
         }
+        break;
+    case CommandType::Undo:
+        undoMove();
         break;
     default:
         break;
@@ -149,9 +152,10 @@ void GameController::playMove(const Command &cmd)
     view_->onBoardChanged(board_);
 }
 
-void GameController::startGame(PlayerType whiteSpec, PlayerType blackSpec)
+void GameController::startGame(PlayerType whiteSpec, PlayerType blackSpec, bool undoEnabled)
 {
     view_->pushMessages("New game");
+    undoEnabled_ = undoEnabled;
     if (!customStart_)
     {
         board_.loadStandardPosition();
@@ -226,4 +230,23 @@ void GameController::printFinalScore()
     view_->show("Final Score:");
     view_->show("White: " + std::to_string(scores_.whiteScore()));
     view_->show("Black: " + std::to_string(scores_.blackScore()));
+}
+
+void GameController::undoMove()
+{
+    if (!undoEnabled_){
+        view_->pushMessages("Undo is not enabled for this game.");
+        return;
+    }
+    if (!board_.canUndo()){
+        view_->pushMessages("There is no move to undo.");
+        return;
+    }
+    board_.undo();
+    turn_ = !turn_;
+    legal_ = rules_.legalMoves(board_, turn_);
+    view_->pushMessages("Undid the last move.");
+    if (rules_.status(board_, turn_, legal_) == GameStatus::Check){
+        view_->pushMessages((turn_ == Color::White) ? "White is in check.":"Black is in check.");
+    }
 }

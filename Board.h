@@ -39,6 +39,7 @@ public:
     void undoTrial();
     void attach(const std::shared_ptr<BoardObserver> &observer);
     void detach(const std::shared_ptr<BoardObserver> &observer);
+    bool canUndo() const;
 };
 
 #endif

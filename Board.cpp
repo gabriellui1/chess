@@ -254,3 +254,5 @@ void Board::emptySquares()
     }
     history_.clear();
 }
+
+bool Board::canUndo() const {return !history_.empty();}
