@@ -2,7 +2,6 @@
 
 #include "Board.h"
 #include "Types.h"
-#include <iostream>
 struct Board::UndoRecord
 {
     Move move;
@@ -105,8 +104,6 @@ void Board::undo()
 {
     undoMove();
     notifyObservers();
-    std::cout << "here" << std::endl;
-
 }
 
 void Board::applyTrial(const Move &move)
@@ -149,7 +146,6 @@ void Board::notifyObservers()
         return true; });
 
     for (const auto &observer : liveObservers){
-        std::cout << "observer called" << std::endl;
         observer->onBoardChanged(*this);
     }
 }
