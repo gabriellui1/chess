@@ -27,10 +27,11 @@ private:
     Color turn_;
     GameState state_;
     bool customStart_;
+    bool undoEnabled_;
 
     void execute(const Command &cmd);
     // bool runStartMenu(); menu and idle are same thing
-    void startGame(PlayerType whiteSpec, PlayerType blackSpec); // change from string to playerType
+    void startGame(PlayerType whiteSpec, PlayerType blackSpec, bool undoEnabled); // change from string to playerType
     void playMove(const Command &cmd);
     void resign();
     void setupPlace(const Command &cmd);
@@ -38,7 +39,7 @@ private:
     void enterSetup();
     void finishSetup();
     void printFinalScore();
-
+    void undoMove();
 public:
     GameController(std::shared_ptr<TextView> view);
     void run();

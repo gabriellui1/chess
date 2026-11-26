@@ -16,7 +16,7 @@ using namespace std;
 
 GameController::GameController(std::shared_ptr<TextView> view) : view_(std::move(view)), state_(GameState::Menu), rules_({})
 {
-    board_.attach(view);
+    board_.attach(view_);
 }
 
 std::unique_ptr<Player> makePlayer(const PlayerType& type, Color color, const Rules& rules) {
@@ -56,7 +56,7 @@ void GameController::execute(const Command &cmd)
     switch (cmd.type)
     {
     case CommandType::Game:
-        startGame(cmd.whiteSpec, cmd.blackSpec);
+        startGame(cmd.whiteSpec, cmd.blackSpec, cmd.undoEnabled);
         break;
     case CommandType::Move:
         playMove(cmd);
@@ -93,6 +93,9 @@ void GameController::execute(const Command &cmd)
             view_->showSetupHelp();
             break;
         }
+        break;
+    case CommandType::Undo:
+        undoMove();
         break;
     default:
         break;
@@ -151,12 +154,12 @@ void GameController::playMove(const Command &cmd)
         state_ = GameState::Menu;
         break;
     }
-    view_->onBoardChanged(board_);
 }
 
-void GameController::startGame(PlayerType whiteSpec, PlayerType blackSpec)
+void GameController::startGame(PlayerType whiteSpec, PlayerType blackSpec, bool undoEnabled)
 {
     view_->pushMessages("New game");
+    undoEnabled_ = undoEnabled;
     if (!customStart_)
     {
         board_.loadStandardPosition();
@@ -177,7 +180,6 @@ void GameController::startGame(PlayerType whiteSpec, PlayerType blackSpec)
     state_ = GameState::Game;
     whitePlayer_ = makePlayer(whiteSpec, Color::White, rules_);
     blackPlayer_ = makePlayer(blackSpec, Color::Black, rules_);
-    view_->onBoardChanged(board_);
 }
 
 void GameController::setupPlace(const Command &cmd)
@@ -185,7 +187,6 @@ void GameController::setupPlace(const Command &cmd)
     view_->pushMessages(std::format("Place {} {} at {}", colorToString(cmd.color), pieceToString(cmd.piece), squareToString(cmd.square)));
     std::unique_ptr<Piece> piece = PieceFactory::create(cmd.piece, cmd.color);
     board_.place(cmd.square, piece);
-    view_->onBoardChanged(board_);
 }
 
 void GameController::setupRemove(const Command &cmd)
@@ -193,7 +194,6 @@ void GameController::setupRemove(const Command &cmd)
     // the code pieceToString(board_.at(chosen[0].to)->getType()) is scuffed, pls fix
     view_->pushMessages(std::format("Remove {} {} at square {}", colorToString(cmd.color), pieceToString(board_.at(cmd.square)->getType()), squareToString(cmd.square)));
     board_.remove(cmd.square);
-    view_->onBoardChanged(board_);
 }
 
 void GameController::enterSetup()
@@ -203,7 +203,6 @@ void GameController::enterSetup()
     turn_ = Color::White;
     customStart_ = false;
     state_ = GameState::Setup;
-    view_->onBoardChanged(board_);
 }
 
 void GameController::finishSetup()
@@ -231,4 +230,23 @@ void GameController::printFinalScore()
     view_->show("Final Score:");
     view_->show("White: " + std::to_string(scores_.whiteScore()));
     view_->show("Black: " + std::to_string(scores_.blackScore()));
+}
+
+void GameController::undoMove()
+{
+    if (!undoEnabled_){
+        view_->pushMessages("Undo is not enabled for this game.");
+        return;
+    }
+    if (!board_.canUndo()){
+        view_->pushMessages("There is no move to undo.");
+        return;
+    }
+    board_.undo();
+    turn_ = !turn_;
+    legal_ = rules_.legalMoves(board_, turn_);
+    view_->pushMessages("Undid the last move.");
+    if (rules_.status(board_, turn_, legal_) == GameStatus::Check){
+        view_->pushMessages((turn_ == Color::White) ? "White is in check.":"Black is in check.");
+    }
 }

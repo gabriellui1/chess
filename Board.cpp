@@ -103,8 +103,6 @@ void Board::apply(const Move &move)
 
 void Board::undo()
 {
-    if (history_.empty())
-        return;
     undoMove();
     notifyObservers();
 }
@@ -148,8 +146,9 @@ void Board::notifyObservers()
         }
         return true; });
 
-    for (const auto &observer : liveObservers)
+    for (const auto &observer : liveObservers){
         observer->onBoardChanged(*this);
+    }
 }
 
 void Board::attach(const std::shared_ptr<BoardObserver> &observer)
@@ -257,6 +256,7 @@ void Board::emptySquares()
     history_.clear();
 }
 
+bool Board::canUndo() const {return !history_.empty();}
 std::string Board::boardFEN() const {
     std::string fen;
     for (int i = 7; i >= 0; --i)

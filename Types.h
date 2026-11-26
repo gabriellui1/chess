@@ -78,6 +78,7 @@ enum class CommandType
     Game,
     Resign,
     Move,
+    Undo,
     Setup,
     Place,
     Remove,
@@ -127,6 +128,7 @@ struct Command
     PlayerType blackSpec = PlayerType::Human;
     Position square = Position{-1, -1}; // setup mode
     Color color = Color::White;         // setup mode
+    bool undoEnabled = false; 
 };
 
 #endif
