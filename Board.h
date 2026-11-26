@@ -39,6 +39,8 @@ public:
     void undoTrial();
     void attach(const std::shared_ptr<BoardObserver> &observer);
     void detach(const std::shared_ptr<BoardObserver> &observer);
+    std::string boardFEN() const;
+    int repeatCount() const;
 };
 
 #endif

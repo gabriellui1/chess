@@ -15,6 +15,7 @@ public:
     bool givesCheck(Board &board, const Move &move, Color mover) const;
     std::vector<std::string> validateSetup(const Board &board) const;
     std::vector<Move> castlingMoves(const Board &board, Color color) const;
+    bool isThreefoldRepetition(const Board &board) const;
 };
 
 #endif

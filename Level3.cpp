@@ -21,7 +21,7 @@ std::vector<Move> Level3::choose(const Command& cmd, const Board& board, const s
             score += 1;
         }
 
-        mutableBoard.apply(m);
+        mutableBoard.applyTrial(m);
 
         // check if is check
         if (rules_.isInCheck(mutableBoard, !color)) {
@@ -37,7 +37,7 @@ std::vector<Move> Level3::choose(const Command& cmd, const Board& board, const s
             }
         }
 
-        mutableBoard.undo();
+        mutableBoard.undoTrial();
 
         if (score > bestScore) {
             bestScore = score;
