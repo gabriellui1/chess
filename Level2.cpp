@@ -18,9 +18,9 @@ std::vector<Move> Level2::choose(const Command &cmd, const Board &board, const s
         int score = 0;
         bool capture = isCapture(board, m);
 
-        mutableBoard.apply(m);
+        mutableBoard.applyTrial(m);
         bool givesCheck = rules_.isInCheck(mutableBoard, opponent);
-        mutableBoard.undo();
+        mutableBoard.undoTrial();
 
         if (capture) {
             score += 1;

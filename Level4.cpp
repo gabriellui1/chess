@@ -54,13 +54,16 @@ int Level4::alphaBeta(Board& board, int depth, int alpha, int beta, Color curren
         }
         return 0;
     }
+    if (rules_.isThreefoldRepetition(board)) {
+        return 0;
+    }
 
     if (currentColor == Color::White) {
         int bestScore = -99999;
         for (const Move& m : legals) {
-            board.apply(m);
+            board.applyTrial(m);
             int score = alphaBeta(board, depth - 1, alpha, beta, !currentColor);
-            board.undo();
+            board.undoTrial();
 
             bestScore = std::max(bestScore, score);
             alpha = std::max(alpha, bestScore);
@@ -72,9 +75,9 @@ int Level4::alphaBeta(Board& board, int depth, int alpha, int beta, Color curren
     } else {
         int bestScore = 99999;
         for (const Move& m : legals) {
-            board.apply(m);
+            board.applyTrial(m);
             int score = alphaBeta(board, depth - 1, alpha, beta, !currentColor);
-            board.undo();
+            board.undoTrial();
 
             bestScore = std::min(bestScore, score);
             beta = std::min(beta, bestScore);
@@ -101,9 +104,9 @@ std::vector<Move> Level4::choose(const Command& cmd, const Board& board, const s
     if (color == Color::White) {
         int bestScore = -99999;
         for (const Move& m : legal) {
-            mutableBoard.apply(m);
+            mutableBoard.applyTrial(m);
             int score = alphaBeta(mutableBoard, depth - 1, alpha, beta, !color);
-            mutableBoard.undo();
+            mutableBoard.undoTrial();
 
             if (score > bestScore) {
                 bestScore = score;
@@ -114,9 +117,9 @@ std::vector<Move> Level4::choose(const Command& cmd, const Board& board, const s
     } else {
         int bestScore = 99999;
         for (const Move& m : legal) {
-            mutableBoard.apply(m);
+            mutableBoard.applyTrial(m);
             int score = alphaBeta(mutableBoard, depth - 1, alpha, beta, !color);
-            mutableBoard.undo();
+            mutableBoard.undoTrial();
 
             if (score < bestScore) {
                 bestScore = score;
