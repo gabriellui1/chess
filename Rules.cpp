@@ -82,6 +82,9 @@ GameStatus Rules::status(const Board &board, Color toMove, const std::vector<Mov
     else if (isThreefoldRepetition(board))  {
         return GameStatus::ThreeFoldRepetition;
     }
+    else if (isFiftyMoves(board))  {
+        return GameStatus::FiftyMove;
+    }
     else if (inCheck && !legal.empty())
     {
         return GameStatus::Check;
@@ -95,7 +98,7 @@ GameStatus Rules::status(const Board &board, Color toMove, const std::vector<Mov
 bool Rules::givesCheck(Board &board, const Move &move, Color mover) const
 {
     board.applyTrial(move);
-    bool inCheck = isInCheck(board, mover == Color::White ? Color::White : Color::Black);
+    bool inCheck = isInCheck(board, !mover);
     board.undoTrial();
     return inCheck;
 }
@@ -162,6 +165,11 @@ bool Rules::castlinghelper(Position rook_square_king, const Board &board, Color 
 bool Rules::isThreefoldRepetition(const Board &board) const
 {
     return board.repeatCount() >= 3;
+}
+
+bool Rules::isFiftyMoves(const Board &board) const
+{
+    return board.fiftyMoveCount() >= 100;
 }
 
 std::vector<Move> Rules::castlingMoves(const Board &board, Color color) const

@@ -57,6 +57,9 @@ int Level4::alphaBeta(Board& board, int depth, int alpha, int beta, Color curren
     if (rules_.isThreefoldRepetition(board)) {
         return 0;
     }
+    if (rules_.isFiftyMoves(board)) {
+        return 0;
+    }
 
     if (currentColor == Color::White) {
         int bestScore = -99999;

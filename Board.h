@@ -40,8 +40,11 @@ public:
     void attach(const std::shared_ptr<BoardObserver> &observer);
     void detach(const std::shared_ptr<BoardObserver> &observer);
     bool canUndo() const;
+    bool castlingRights(Color color, bool kingside) const;
+    std::string getKey() const;
     std::string boardFEN() const;
     int repeatCount() const;
+    int fiftyMoveCount() const;
 };
 
 #endif

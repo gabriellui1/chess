@@ -16,6 +16,7 @@ public:
     std::vector<std::string> validateSetup(const Board &board) const;
     std::vector<Move> castlingMoves(const Board &board, Color color) const;
     bool isThreefoldRepetition(const Board &board) const;
+    bool isFiftyMoves(const Board &board) const;
 };
 
 #endif

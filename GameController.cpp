@@ -162,6 +162,11 @@ void GameController::playMove(const Command &cmd)
         scores_.addDraw();
         state_ = GameState::Menu;
         break;
+    case GameStatus::FiftyMove:
+        view_->pushMessages("Draw by fifty moves rule");
+        scores_.addDraw();
+        state_ = GameState::Menu;
+        break;
     }
 }
 
