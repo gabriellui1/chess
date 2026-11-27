@@ -85,7 +85,8 @@ enum class CommandType
     Remove,
     SetTurn,
     Done,
-    Help
+    Help,
+    PGN
 };
 
 enum class PlayerType

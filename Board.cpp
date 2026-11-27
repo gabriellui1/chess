@@ -6,11 +6,13 @@ struct Board::UndoRecord
 {
     Move move;
     PieceType movedPiece;
+    Color movedColor;
     std::unique_ptr<Piece> captured;
     Position capturedAt;
     std::unique_ptr<Piece> replacedPawn;
     bool previouslyMoved = false;
     std::string previousKey;
+    std::string san;
 };
 
 Board::Board()
@@ -96,9 +98,82 @@ std::vector<Move> Board::lastMove() const
     return v;
 }
 
+static std::string ambiguous(const Board &board, const Move &move, PieceType piece, Color color)
+{
+    bool a = false;
+    bool matchCol = false;
+    bool matchRow = false;
+    for (int r = 0; r < 8; ++r)
+    {
+        for (int c = 0; c < 8; ++c)
+        {
+            if (r == move.from.row && c == move.from.col) { continue; }
+            const auto &other = board.at(Position{r, c});
+            if (other != nullptr && other->getColor() == color && other->getType() == piece)
+            {
+                for (const Move &m : other->pseudoMoves(board, Position{r, c}))
+                {
+                    if (m.to.row == move.to.row && m.to.col == move.to.col)
+                    {
+                        a = true;
+                        if (c == move.from.col)
+                        {
+                            matchCol = true;
+                        }
+                        if (r == move.from.row)
+                        {
+                            matchRow = true;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    if (!a) { return ""; }
+    if (!matchCol) { return std::string(1, static_cast<char>('a' + move.from.col)); }
+    if (!matchRow) { return std::string(1, static_cast<char>('1' + move.from.row)); }
+    return squareToString(move.from);
+}
+
+std::string Board::generateMoveSan(const Move &move, PieceType piece, Color color, bool isCapture) const {
+    if (move.kind == MoveKind::Castle) {
+        return (move.to.col == 6) ? "O-O" : "O-O-O";
+    }
+    std::string san;
+    if (piece == PieceType::Pawn) {
+        if (isCapture) {
+            san += static_cast<char>('a' + move.from.col);
+            san += 'x';
+        }
+        san += squareToString(move.to);
+        if (move.kind == MoveKind::Promotion && !move.promoteTo.empty()) {
+            san += '=';
+            san += toUpper(PIECE_CHAR.at(move.promoteTo[0]));
+        }
+        return san;
+    }
+    else {
+        san += toUpper(PIECE_CHAR.at(piece));
+        san += ambiguous(*this, move, piece, color);
+        if (isCapture) {
+            san += 'x';
+        }
+        san += squareToString(move.to);
+        return san;
+    }
+}
+
 void Board::apply(const Move &move)
 {
+    PieceType piece = at(move.from)->getType();
+    Color color = at(move.from)->getColor();
+    bool isCapture = (move.kind == MoveKind::EnPassant) || (squares_[move.to.row][move.to.col] != nullptr);
+
+    std::string san = generateMoveSan(move, piece, color, isCapture);
     applyMove(move);
+    history_.back().san = std::move(san); // don't need san anymore
+
     notifyObservers();
 }
 
@@ -172,6 +247,7 @@ void Board::applyMove(const Move &move)
     undo.move = move;
     undo.previouslyMoved = at(move.from)->hasMoved();
     undo.movedPiece = at(move.from)->getType();
+    undo.movedColor = at(move.from)->getColor();
 
     if (move.kind == MoveKind::EnPassant)
     {
@@ -294,6 +370,27 @@ int Board::fiftyMoveCount() const
     return count;
 }
 
+std::string Board::getPGN() const
+{
+    std::string pgn;
+    int count = 1;
+    for (int i = 0; i < static_cast<int>(history_.size()); ++i) {
+        const UndoRecord &r = history_[i];
+        if (i > 0) {
+            pgn += ' ';
+        }
+        if (r.movedColor == Color::White) {
+            pgn += std::to_string(count) + ". ";
+        }
+        // assuming no custom positions
+        pgn += r.san;
+        if (r.movedColor == Color::Black) {
+            ++count;
+        }
+    }
+    return pgn;
+}
+
 std::string Board::getKey() const {
     std::string fen;
     for (int i = 7; i >= 0; --i)
@@ -378,4 +475,11 @@ int Board::repeatCount() const {
         }
     }
     return count;
+}
+
+void Board::appendSanSuffix(char suffix)
+{
+    if (!history_.empty()) {
+        history_.back().san += suffix;
+    }
 }

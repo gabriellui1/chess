@@ -41,10 +41,13 @@ public:
     void detach(const std::shared_ptr<BoardObserver> &observer);
     bool canUndo() const;
     bool castlingRights(Color color, bool kingside) const;
+    std::string generateMoveSan(const Move &move, PieceType piece, Color color, bool isCapture) const;
     std::string getKey() const;
+    std::string getPGN() const;
     std::string boardFEN() const;
     int repeatCount() const;
     int fiftyMoveCount() const;
+    void appendSanSuffix(char suffix);
 };
 
 #endif
