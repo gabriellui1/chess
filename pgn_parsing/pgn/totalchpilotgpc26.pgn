@@ -1,0 +1,1007 @@
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.11"]
+[Round "1.1"]
+[White "Giri, Anish"]
+[Black "Carlsen, Magnus"]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2747"]
+[BlackElo "2823"]
+[ECO "A80"]
+[Opening "Dutch"]
+[EventDate "2026.11.11"]
+[WhiteFideId "24116068"]
+[BlackFideId "1503014"]
+[WhiteCountry "NED"]
+[BlackCountry "NOR"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. d4 f5 2. Nf3 Nf6 3. c4 g6 4. Nc3 Bg7 5. b4 O-O 6. e3 d6 7. Bb2 c5 8.
+bxc5 dxc5 9. Be2 cxd4 10. exd4 Ne4 11. Qb3 Nc6 12. c5+ Kh8 13. Rd1 b6 14.
+O-O Rb8 15. Nb5 bxc5 16. d5 Nd4 17. Nfxd4 cxd4 18. Qa3 a6 19. Nxd4 Qd6 20.
+Nb3 Qxa3 21. Bxa3 Nc3 22. Rd2 Re8 23. Bc4 Bd7 24. Re1 Ne4 25. Rde2 Bb5 26.
+Bxb5 axb5 27. Bb4 Rbc8 28. a3 Bc3 29. Bxc3+ Rxc3 30. Nd4 Rxa3 31. Nxb5 Ra5
+32. f3 Rxb5 33. fxe4 fxe4 34. Rxe4 Rxd5 35. Rxe7 1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.11"]
+[Round "1.2"]
+[White "Martirosyan, Haik M."]
+[Black "Mamedyarov, Shakhriyar"]
+[Result "0-1"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2669"]
+[BlackElo "2709"]
+[ECO "C85"]
+[Opening "Ruy Lopez"]
+[Variation "Exchange variation doubly deferred (DERLD)"]
+[EventDate "2026.11.11"]
+[WhiteFideId "13306553"]
+[BlackFideId "13401319"]
+[WhiteCountry "ARM"]
+[BlackCountry "AZE"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Bxc6 dxc6 7. d3 Bd6
+8. Nbd2 Be6 9. d4 Nd7 10. dxe5 Nxe5 11. Nxe5 Bxe5 12. f4 Bd4+ 13. Kh1 f5
+14. Qh5+ g6 15. Qe2 Qf6 16. exf5 Qxf5 17. Re1 Kd7 18. c3 Bg7 19. Qf2 Rae8
+20. Nf1 Bd5 21. Ne3 Qe4 22. Bd2 Kc8 23. Nxd5 Qxd5 24. Red1 b6 25. Be3 Qc4
+26. a4 Re4 27. Qf3 Rhe8 28. Bg1 Rxf4 29. Qh3+ Kb7 30. a5 b5 31. Re1 Rfe4
+32. Rxe4 Qxe4 33. Qxh7 Rd8 34. Qh3 Rd2 35. Qg3 Re2 36. Rf1 Be5 37. Qg5 Rxb2
+38. h3 Bxc3 39. Rf3 Bxa5 40. Qd8 Bb4 0-1
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.11"]
+[Round "1.3"]
+[White "Nepomniachtchi, Ian"]
+[Black "Mishra, Abhimanyu"]
+[Result "1-0"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2719"]
+[BlackElo "2644"]
+[ECO "D12"]
+[Opening "QGD Slav"]
+[Variation "4.e3 Bf5"]
+[EventDate "2026.11.11"]
+[WhiteFideId "4168119"]
+[BlackFideId "30920019"]
+[WhiteCountry "RUS"]
+[BlackCountry "USA"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. c4 c6 2. d4 d5 3. Nf3 Nf6 4. e3 Bf5 5. Nc3 e6 6. Nh4 Bg6 7. Nxg6 hxg6 8.
+Bd2 Nbd7 9. cxd5 exd5 10. Bd3 Bd6 11. Qf3 Qe7 12. O-O-O O-O-O 13. h4 Rde8
+14. Qe2 Ne4 15. Nxe4 dxe4 16. Bc4 Nb6 17. Bb3 Nd5 18. g3 Kb8 19. Kb1 g5 20.
+hxg5 Qxg5 21. a3 a6 22. Rc1 g6 23. Bc4 Qe7 24. Ba5 Rxh1 25. Rxh1 Bc7 26.
+Be1 f5 27. Qc2 Rd8 28. Qb3 Ka7 29. Bd2 Rd7 30. Qc2 Qd8 31. Ka2 Qf6 32. Bb3
+Qd8 33. Rh6 Qg5 34. Rh2 Qe7 35. Qc1 Rd8 36. Rh6 Qg7 37. Qh1 Rd7 38. Kb1 Nf6
+39. Rh8 Rd8 40. Rh4 Rd7 41. Bb4 Nd5 42. Bc5+ b6 43. Bb4 Nxb4 44. axb4 Qe7
+45. Qc1 Kb7 46. Rh6 Qxb4 47. Be6 Rg7 48. d5 c5 49. d6 Bxd6 50. Qd1 c4 51.
+Rh8 b5 52. Qd5+ Kb6 53. Qd4+ Bc5 54. Rb8+ Ka5 55. Qxg7 Qe1+ 56. Ka2 Qd1 57.
+Qc3+ Bb4 58. Qd4 Qb3+ 59. Kb1 Qd3+ 60. Qxd3 exd3 61. Rg8 Be1 62. Rxg6 Bxf2
+63. Bc8 Bxe3 64. Rxa6+ Kb4 65. Bxf5 Kc5 66. Ra8 Bg5 67. Rg8 Bf6 68. g4 b4
+69. g5 d2 70. Bg4 Bxb2 71. Kxb2 c3+ 72. Kc2 1-0
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.11"]
+[Round "2.1"]
+[White "Carlsen, Magnus"]
+[Black "Giri, Anish"]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2823"]
+[BlackElo "2747"]
+[ECO "A16"]
+[Opening "English opening"]
+[EventDate "2026.11.11"]
+[WhiteFideId "1503014"]
+[BlackFideId "24116068"]
+[WhiteCountry "NOR"]
+[BlackCountry "NED"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. c4 Nf6 2. Nc3 c5 3. e3 g6 4. d4 cxd4 5. exd4 Bg7 6. Nf3 O-O 7. Be2 d5 8.
+O-O Nc6 9. h3 b6 10. Ne5 Bb7 11. Bf3 Na5 12. Re1 Rc8 13. cxd5 Nxd5 14. Bxd5
+Bxd5 15. Bf4 e6 16. Qe2 Nc6 17. Rad1 Ne7 18. Qa6 Ra8 19. Ng4 Nf5 20. Be5 f6
+21. Bf4 Qc8 22. Qe2 Bc4 23. Qe4 g5 24. Bh2 Nh4 25. Qc2 Bd5 26. Ne3 Bxg2 27.
+Nxg2 Nf3+ 28. Kh1 e5 29. Re3 Qxh3 30. Rxf3 Qxf3 31. dxe5 fxe5 32. Kg1 Rad8
+33. Rxd8 Rxd8 34. Ne3 Qc6 35. Bg3 e4 36. Qb3+ Kh8 37. Qf7 Qd7 38. Qh5 h6
+39. Qg6 Re8 40. Nf5 Re6 41. Qh5 Qe8 42. Qd1 Bxc3 43. bxc3 Kh7 44. Qd5 Qf7
+45. Nd6 Qe7 46. c4 h5 47. Nf5 Qf6 48. Nd4 Re8 49. Nc6 Kh6 50. Ne5 e3 51.
+fxe3 Rf8 52. Qd3 Qe6 53. e4 h4 54. Bh2 g4 55. Qd2+ Kh5 56. Bf4 Qf6 57. Nd3
+Qd4+ 58. Be3 Qxe4 59. Nf4+ Rxf4 60. Bxf4 Qxc4 61. Qe3 Qc5 62. Qxc5+ 1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.11"]
+[Round "2.2"]
+[White "Mamedyarov, Shakhriyar"]
+[Black "Martirosyan, Haik M."]
+[Result "0-1"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2709"]
+[BlackElo "2669"]
+[ECO "A20"]
+[Opening "English opening"]
+[EventDate "2026.11.11"]
+[WhiteFideId "13401319"]
+[BlackFideId "13306553"]
+[WhiteCountry "AZE"]
+[BlackCountry "ARM"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. c4 e5 2. g3 g6 3. Bg2 Bg7 4. Nc3 d6 5. e3 Nf6 6. Nge2 O-O 7. O-O c6 8.
+d4 Re8 9. Qc2 Qe7 10. b4 e4 11. b5 h5 12. a4 Bf5 13. Ba3 Nbd7 14. a5 c5 15.
+Rad1 Rac8 16. Nf4 h4 17. a6 hxg3 18. fxg3 bxa6 19. bxa6 cxd4 20. Ncd5 Nxd5
+21. Nxd5 Qe6 0-1
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.11"]
+[Round "2.3"]
+[White "Mishra, Abhimanyu"]
+[Black "Nepomniachtchi, Ian"]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2644"]
+[BlackElo "2719"]
+[ECO "B30"]
+[Opening "Sicilian"]
+[Variation "Nimzovich-Rossolimo attack (without ...d6)"]
+[EventDate "2026.11.11"]
+[WhiteFideId "30920019"]
+[BlackFideId "4168119"]
+[WhiteCountry "USA"]
+[BlackCountry "RUS"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. e4 c5 2. Nf3 Nc6 3. Bb5 e6 4. O-O Nge7 5. c3 a6 6. Ba4 b5 7. Bc2 Bb7 8.
+Re1 Rc8 9. a4 Ng6 10. Na3 b4 11. Nc4 Na5 12. Nxa5 Qxa5 13. cxb4 cxb4 14. d4
+Bd6 15. d5 O-O 16. Bb3 exd5 17. exd5 Rfe8 18. Rxe8+ Rxe8 19. Be3 Nf4 20.
+Ng5 Qd8 21. Qg4 Qe7 22. h4 Bxd5 23. Bxd5 Nxd5 24. Qf5 Nf6 25. Rd1 Qe5 26.
+Qxe5 Bxe5 27. b3 d5 28. Nf3 Bc3 29. Bg5 Rd8 30. Nd4 Bxd4 31. Rxd4 a5 32.
+Rd1 Kf8 33. Kf1 Ke7 34. Rc1 h6 35. Bxf6+ Kxf6 36. Ke2 Ke5 37. Rc7 Kd4 38.
+Kd2 Rf8 39. Ra7 Rc8 40. Rxf7 Rc3 41. Rxg7 Rxb3 42. Rg4+ Kc5 43. Rf4 Ra3 44.
+g4 Rxa4 45. g5 hxg5 46. hxg5 Ra2+ 47. Kd3 b3 48. g6 Ra1 49. Kc3 Rg1 50. Ra4
+Kb5 51. Kxb3 Rxg6 52. Rd4 Rg5 53. Kb2 Rf5 54. f3 Re5 55. f4 Rh5 56. Kb3
+Rh3+ 57. Kb2 Rh2+ 58. Kc3 Rh5 59. Kb3 a4+ 60. Ka3 Rh3+ 61. Ka2 Rh2+ 62. Kb1
+Rh1+ 63. Kb2 a3+ 64. Kxa3 Kc5 65. Rd2 Kc4 66. Kb2 d4 67. f5 Rf1 68. Kc2
+Rxf5 69. Rh2 Rf3 70. Kd2 Ra3 71. Rh8 Ra2+ 72. Kd1 Kc3 73. Rd8 Kd3 74. Kc1
+Rc2+ 75. Kd1 Rh2 76. Kc1 Rh1+ 77. Kb2 Rd1 78. Rh8 Re1 79. Rd8 Rf1 80. Rd7
+Rf8 81. Kc1 Rc8+ 82. Kd1 Kc3 83. Ke2 Re8+ 84. Kd1 Rh8 85. Ke2 Rh2+ 86. Kd1
+Kd3 87. Kc1 Rh1+ 88. Kb2 Rh4 89. Kc1 Rh8 90. Rd6 Rh1+ 91. Kb2 Rd1 92. Rh6
+Rd2+ 93. Kc1 Re2 94. Rd6 Re1+ 95. Kb2 Ke3 96. Kc2 Re2+ 97. Kd1 Rh2 98. Rd8
+d3 1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.12"]
+[Round "3.1"]
+[White "Carlsen, Magnus"]
+[Black "Mishra, Abhimanyu"]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2823"]
+[BlackElo "2644"]
+[ECO "C50"]
+[Opening "King's pawn game"]
+[EventDate "2026.11.11"]
+[WhiteFideId "1503014"]
+[BlackFideId "30920019"]
+[WhiteCountry "NOR"]
+[BlackCountry "USA"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 d6 4. a4 Be6 5. Bxe6 fxe6 6. c3 Nf6 7. Qe2 d5 8.
+d3 Bd6 9. b4 a6 10. O-O O-O 11. Nbd2 Nd7 12. Nb3 Qf6 13. Bd2 h6 14. h3 Kh8
+15. Rfc1 b6 16. a5 Rfc8 17. axb6 cxb6 18. Ra2 a5 19. Rca1 Qd8 20. bxa5 Nxa5
+21. Nxa5 Rxa5 22. Rxa5 bxa5 23. d4 Qc7 24. exd5 exd5 25. Qa6 e4 26. Nh4 Nb6
+27. Nf5 Ra8 28. Qb5 Nc4 29. Bxh6 gxh6 30. Qxd5 Rf8 31. Nxd6 Nxd6 32. Rxa5
+Ne8 33. Rc5 Qf4 34. Qe5+ Qxe5 35. dxe5 Ng7 36. Rc4 e3 37. fxe3 Re8 38. Rc5
+Ne6 39. Rc6 Kg7 40. Kf2 Ng5 41. Rc7+ Kg6 42. Rc6+ Kg7 43. h4 Nf7 44. e6 Ne5
+45. Ra6 Kf6 46. e4 Rc8 47. e7+ Kxe7 48. Ke3 Rxc3+ 49. Kd4 Rc6 50. Rxc6
+Nxc6+ 1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.12"]
+[Round "3.2"]
+[White "Mamedyarov, Shakhriyar"]
+[Black "Nepomniachtchi, Ian"]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2709"]
+[BlackElo "2719"]
+[ECO "D37"]
+[Opening "QGD"]
+[Variation "classical variation (5.Bf4)"]
+[EventDate "2026.11.11"]
+[WhiteFideId "13401319"]
+[BlackFideId "4168119"]
+[WhiteCountry "AZE"]
+[BlackCountry "RUS"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 d5 4. Nc3 Be7 5. Bf4 O-O 6. e3 b6 7. Be2 dxc4 8.
+Bxc4 Ba6 9. Qe2 Bxc4 10. Qxc4 c5 11. dxc5 Bxc5 12. O-O Nbd7 13. Rfd1 Qc8
+14. Qe2 Qb7 15. e4 Bb4 16. Nb5 Rfc8 17. Bd6 a6 18. Bxb4 axb5 19. e5 Nd5 20.
+Qxb5 Rc2 21. Bd2 Rac8 22. Qb3 Qb8 23. Bc3 Nxc3 24. Rxd7 Nd5 25. h3 h6 26.
+Rd1 R8c5 27. Ne1 Rc1 28. Qf3 Qe8 29. Rd6 Qc8 30. Nd3 Rxd1+ 31. Qxd1 Rc4 32.
+Qf3 Rd4 33. Kh2 Kh7 34. a3 Qc4 35. Nb4 Nxb4 36. axb4 1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.12"]
+[Round "3.3"]
+[White "Giri, Anish"]
+[Black "Martirosyan, Haik M."]
+[Result "1-0"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2747"]
+[BlackElo "2669"]
+[ECO "C53"]
+[Opening "Giuoco Piano"]
+[EventDate "2026.11.11"]
+[WhiteFideId "24116068"]
+[BlackFideId "13306553"]
+[WhiteCountry "NED"]
+[BlackCountry "ARM"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 O-O 6. a4 a6 7. O-O d6 8.
+Bg5 h6 9. Bh4 g5 10. Bg3 Ba7 11. Nbd2 Nh7 12. Kh1 Kg7 13. d4 exd4 14. Nxd4
+Nxd4 15. cxd4 Bxd4 16. f4 gxf4 17. Bxf4 Be5 18. Ra3 Bxf4 19. Rxf4 Be6 20.
+Rg3+ Kh8 21. Qh5 Rg8 22. Bxe6 fxe6 23. Nf3 Qd7 24. Rf7 Qe8 25. Ne5 Qxa4 26.
+Ng6+ 1-0
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.12"]
+[Round "4.1"]
+[White "Mishra, Abhimanyu"]
+[Black "Carlsen, Magnus"]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2644"]
+[BlackElo "2823"]
+[ECO "B01"]
+[Opening "Scandinavian defence"]
+[EventDate "2026.11.11"]
+[WhiteFideId "30920019"]
+[BlackFideId "1503014"]
+[WhiteCountry "USA"]
+[BlackCountry "NOR"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. e4 d5 2. exd5 Qxd5 3. Nc3 Qa5 4. d4 Nf6 5. Nf3 Bf5 6. Bc4 e6 7. Bd2 Bb4
+8. a3 Bxc3 9. Bxc3 Qb6 10. d5 Nbd7 11. O-O exd5 12. Re1+ Be6 13. Bxd5 Nxd5
+14. Qxd5 O-O-O 15. Qg5 Rhg8 16. Nd4 h6 17. Qg3 Nf8 18. Rad1 c5 19. Nf3 Rxd1
+20. Rxd1 Nd7 21. Ne5 Nf6 22. Re1 Qc7 23. Nd3 Qxg3 24. hxg3 Nd7 25. Nf4 Nf8
+26. f3 Kd7 27. Nh5 Bf5 28. Bxg7 Nh7 29. Re5 Bg6 30. Bxh6 Kc6 31. Be3 b6 32.
+c3 Rd8 33. Nf4 Bc2 34. Re7 Rd7 35. Rxd7 Kxd7 36. g4 Nf8 37. Kf2 Ng6 38. g5
+Nxf4 39. Bxf4 a5 40. g4 Bd1 41. Kg3 a4 42. Be3 Ke7 43. f4 Kf8 44. f5 Be2
+45. Kf4 Ke7 46. Ke5 Bxg4 47. g6 fxg6 48. fxg6 Be2 49. Bg5+ Kf8 50. Bh6+ Kg8
+51. Kd6 b5 52. Kxc5 Bf1 53. Kb4 Bd3 54. Ka5 Bc4 55. Kb6 Bf1 56. Kc6 Bc4 57.
+Kc5 Bf1 58. Kd4 Bc4 59. Ke5 Bd3 60. Kf6 Bc4 61. Be3 Bd3 62. Bd4 Bc4 63. Ke7
+Bd3 64. g7 Bc4 65. Kd6 Kf7 66. Kc5 Kg8 67. Kb4 Kf7 68. Be5 Kg8 69. Kc5 Kf7
+70. Kd4 Kg8 71. Ke4 Kf7 72. Kf5 Bd3+ 73. Kg5 Bc4 74. Kh6 Kg8 75. Bf4 Bb3
+76. Bc1 Bc4 77. Kg6 Bd3+ 78. Kf6 Bc4 79. b4 Bb3 80. Be3 Bc4 1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.12"]
+[Round "4.2"]
+[White "Nepomniachtchi, Ian"]
+[Black "Mamedyarov, Shakhriyar"]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2719"]
+[BlackElo "2709"]
+[ECO "C96"]
+[Opening "Ruy Lopez"]
+[Variation "closed (10...c5)"]
+[EventDate "2026.11.11"]
+[WhiteFideId "4168119"]
+[BlackFideId "13401319"]
+[WhiteCountry "RUS"]
+[BlackCountry "AZE"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 d6 8.
+c3 O-O 9. h3 Na5 10. Bc2 c5 11. d4 cxd4 12. cxd4 exd4 13. Nxd4 Bb7 14. Nf5
+Re8 15. Bg5 h6 16. Bh4 Bf8 17. Nc3 Rc8 18. Rc1 Nc4 19. Qd4 g5 20. Bg3 Nxb2
+21. Bb3 Nc4 22. a4 Na5 23. Nd5 Rxc1 24. Nxf6+ Qxf6 25. Qxf6 Rxe1+ 26. Kh2
+Nxb3 27. Bxd6 Re6 28. Qd8 Rxd6 29. Ne7+ Kg7 30. Nf5+ Kg8 31. Ne7+ Kg7 32.
+Nf5+ 1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.12"]
+[Round "4.3"]
+[White "Martirosyan, Haik M."]
+[Black "Giri, Anish"]
+[Result "1-0"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2669"]
+[BlackElo "2747"]
+[ECO "B51"]
+[Opening "Sicilian"]
+[Variation "Canal-Sokolsky (Nimzovich-Rossolimo, Moscow) attack"]
+[EventDate "2026.11.11"]
+[WhiteFideId "13306553"]
+[BlackFideId "24116068"]
+[WhiteCountry "ARM"]
+[BlackCountry "NED"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. e4 c5 2. Nf3 d6 3. Bb5+ Nd7 4. Ba4 Nf6 5. O-O e6 6. d3 Be7 7. c4 O-O 8.
+Nc3 Ne5 9. Ne1 Bd7 10. Bc2 Nc6 11. f4 Nd4 12. Nf3 Nxc2 13. Qxc2 Bc6 14. b3
+Nd7 15. Qe2 Bf6 16. Bd2 a6 17. Rae1 b5 18. Qf2 Rb8 19. Qg3 bxc4 20. dxc4
+Bd4+ 21. Kh1 f6 22. Qh3 Re8 23. Ne2 Bb2 24. Rb1 Ba3 25. Ng3 Nf8 26. Rbd1
+Rb7 27. Bc3 Rd7 28. Rde1 a5 29. Ba1 a4 30. Nh5 axb3 31. axb3 Bb4 32. Re3
+Rf7 33. Qg3 Ng6 34. Nh4 Nxh4 35. Bxf6 Nxg2 36. Bxd8 Nxe3 37. Qxe3 Rxd8 38.
+Kg1 Rdf8 39. Rd1 d5 40. cxd5 exd5 41. exd5 Bd7 42. Ng3 c4 43. bxc4 Rxf4 44.
+Rf1 Rxc4 45. Rxf8+ Bxf8 46. Qb3 Rb4 47. Qa2 Ra4 48. Qb2 Rb4 49. Qa1 Ra4 50.
+Qe5 Bc5+ 51. Kf1 Ra8 52. Qc7 Bh3+ 53. Ke2 Rc8 54. Qf4 Rd8 55. Ne4 Rxd5 56.
+Qg3 Be6 57. Nf6+ Kf7 58. Nxd5 Bxd5 59. Qe5 Bc4+ 60. Kf3 1-0
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.13"]
+[Round "5.1"]
+[White "Martirosyan, Haik M."]
+[Black "Carlsen, Magnus"]
+[Result "1-0"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2669"]
+[BlackElo "2823"]
+[ECO "B91"]
+[Opening "Sicilian"]
+[Variation "Najdorf, Zagreb (fianchetto) variation"]
+[EventDate "2026.11.11"]
+[WhiteFideId "13306553"]
+[BlackFideId "1503014"]
+[WhiteCountry "ARM"]
+[BlackCountry "NOR"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. g3 e6 7. Bg2 Be7 8.
+O-O O-O 9. Be3 Bd7 10. a4 Nc6 11. Nxc6 Bxc6 12. a5 Rc8 13. Re1 Nd7 14. Na4
+f5 15. Nb6 Nxb6 16. Bxb6 Qd7 17. c4 fxe4 18. Bxe4 Bf6 19. Qd2 Bxe4 20. Rxe4
+d5 21. cxd5 exd5 22. Rd1 d4 23. Qd3 Rfe8 24. Rde1 Rxe4 25. Qxe4 Rc6 26. b4
+Rc3 27. Bc5 d3 28. Rd1 h6 29. Be3 Kf7 30. h4 Qc6 31. Qf5 Qe6 32. Qf3 Qc6
+33. Qh5+ Kg8 34. Qf5 Qb5 35. Bc5 Qc4 36. Kh2 Qb3 37. Re1 Qf7 38. Qc8+ Kh7
+39. Re8 Qd5 40. Rh8+ Kg6 41. Qg4+ 1-0
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.13"]
+[Round "5.2"]
+[White "Nepomniachtchi, Ian"]
+[Black "Giri, Anish"]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2719"]
+[BlackElo "2747"]
+[ECO "E54"]
+[Opening "Nimzo-Indian"]
+[Variation "4.e3, Gligoric system with 7...dc"]
+[EventDate "2026.11.11"]
+[WhiteFideId "4168119"]
+[BlackFideId "24116068"]
+[WhiteCountry "RUS"]
+[BlackCountry "NED"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Bd3 d5 6. Nf3 dxc4 7. Bxc4 c5 8.
+O-O cxd4 9. exd4 b6 10. Bg5 Bb7 11. d5 Bxc3 12. dxe6 Bxb2 13. Rb1 Qxd1 14.
+Rfxd1 Bxf3 15. exf7+ Kh8 16. gxf3 Ba3 17. Bxf6 gxf6 18. Bd5 Na6 19. Bxa8
+Rxa8 20. Rd7 Bc5 21. a3 Rf8 22. Rxa7 Nb8 23. Rc7 Na6 24. Ra7 Nb8 25. Rc7
+Na6 26. Ra7 Nb8 1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.13"]
+[Round "5.3"]
+[White "Mishra, Abhimanyu"]
+[Black "Mamedyarov, Shakhriyar"]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2644"]
+[BlackElo "2709"]
+[ECO "B12"]
+[Opening "Caro-Kann"]
+[Variation "advance variation"]
+[EventDate "2026.11.11"]
+[WhiteFideId "30920019"]
+[BlackFideId "13401319"]
+[WhiteCountry "USA"]
+[BlackCountry "AZE"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. e4 c6 2. d4 d5 3. e5 Bf5 4. Nd2 e6 5. c3 c5 6. Bb5+ Nd7 7. Ne2 a6 8. Ba4
+Rc8 9. a3 b5 10. Bb3 a5 11. Nf1 h6 12. Ne3 Bh7 13. O-O Ne7 14. f4 Qb6 15.
+Kh1 a4 16. Ba2 c4 17. Bb1 Bxb1 18. Rxb1 f5 19. exf6 Nxf6 20. g4 h5 21. g5
+Ne4 22. Ng3 Nxg3+ 23. hxg3 g6 24. Kh2 Kd7 25. Ng2 Nf5 26. Nh4 Nxh4 27. gxh4
+Bd6 28. Be3 Rcf8 29. Qd2 Rf5 30. Rf2 Rhf8 31. Rbf1 1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.13"]
+[Round "6.1"]
+[White "Carlsen, Magnus"]
+[Black "Martirosyan, Haik M."]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2823"]
+[BlackElo "2669"]
+[ECO "E38"]
+[Opening "Nimzo-Indian"]
+[Variation "classical, 4...c5"]
+[EventDate "2026.11.11"]
+[WhiteFideId "1503014"]
+[BlackFideId "13306553"]
+[WhiteCountry "NOR"]
+[BlackCountry "ARM"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. Qc2 c5 5. a3 Bxc3+ 6. bxc3 Nc6 7. Nf3 d6
+8. g4 h6 9. h3 e5 10. dxc5 dxc5 11. Be3 Qe7 12. Bg2 Bd7 13. Nd2 Na5 14. Rb1
+Bc6 15. Bxc6+ Nxc6 16. Qa4 Rc8 17. g5 hxg5 18. Bxg5 b6 19. Ne4 Qe6 20. Bxf6
+gxf6 21. Rd1 Rd8 22. Rd5 Ke7 23. Ng3 Rxd5 24. cxd5 Qxd5 25. e4 Qe6 26. h4
+Kd7 27. h5 Kc7 28. Kf1 Qg4 29. Qc4 Nd8 30. Qe2 Qg5 31. Qe3 Qg4 32. Qe2 Qg5
+33. Qe3 Qg4 1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.13"]
+[Round "6.2"]
+[White "Giri, Anish"]
+[Black "Nepomniachtchi, Ian"]
+[Result "1-0"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2747"]
+[BlackElo "2719"]
+[ECO "D37"]
+[Opening "QGD"]
+[Variation "classical variation (5.Bf4)"]
+[EventDate "2026.11.11"]
+[WhiteFideId "24116068"]
+[BlackFideId "4168119"]
+[WhiteCountry "NED"]
+[BlackCountry "RUS"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 d5 4. Nc3 Be7 5. Bf4 O-O 6. e3 b6 7. Bd3 dxc4 8.
+Bxc4 Ba6 9. Qe2 Bxc4 10. Qxc4 c5 11. dxc5 Bxc5 12. O-O Qc8 13. Rac1 Nbd7
+14. Nb5 Qa6 15. Rfd1 Rac8 16. Nd6 Qxc4 17. Nxc4 Nd5 18. Kf1 Rfd8 19. Nd6
+Bxd6 20. Bxd6 N7f6 21. Ba3 Ne4 22. Nd4 Nd2+ 23. Ke2 Nc4 24. Nb5 Nxa3 25.
+Nxa3 Kf8 26. Nb5 a6 27. Nc7 a5 28. Nb5 g5 29. a3 Ke7 30. Na7 Rxc1 31. Rxc1
+Ra8 32. Nb5 a4 33. g3 Ra5 34. Nd4 Kd7 35. Rc4 g4 36. Nc6 Rb5 37. Ne5+ Ke7
+38. Nd3 Nf6 39. Rxa4 Rh5 40. Rf4 Rxh2 41. Ne5 h5 42. Nc6+ Kd6 43. Rxf6 Kxc6
+44. Rxf7 h4 45. gxh4 g3 46. b3 Kd5 47. Rf3 gxf2 48. Rf4 b5 49. a4 e5 50.
+Rg4 bxa4 51. bxa4 Kc5 52. Re4 Kd5 53. Rg4 Kc5 54. Kf1 Kb6 55. Re4 Ka6 56.
+Ke2 Kb6 57. Rxe5 Rxh4 58. a5+ Kc6 59. Kxf2 Ra4 60. Kf3 Kd6 61. Rh5 Ke6 62.
+a6 Kf6 63. Rh8 1-0
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.13"]
+[Round "6.3"]
+[White "Mamedyarov, Shakhriyar"]
+[Black "Mishra, Abhimanyu"]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2709"]
+[BlackElo "2644"]
+[ECO "A48"]
+[Opening "King's Indian"]
+[Variation "East Indian defence"]
+[EventDate "2026.11.11"]
+[WhiteFideId "13401319"]
+[BlackFideId "30920019"]
+[WhiteCountry "AZE"]
+[BlackCountry "USA"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. d4 Nf6 2. Nf3 g6 3. Nbd2 c5 4. dxc5 Qa5 5. a3 Qxc5 6. b4 Qc7 7. Bb2 Bg7
+8. c4 O-O 9. e3 d6 10. Be2 a5 11. O-O Nc6 12. Qb3 b6 13. Nd4 Nxd4 14. exd4
+e6 15. Rac1 axb4 16. axb4 Bb7 17. Rfd1 Rfc8 18. h3 Bc6 19. b5 Bb7 20. Bf3
+Bxf3 21. Qxf3 Qd7 22. Qb3 Rab8 23. Nf3 Qb7 24. d5 exd5 25. Bxf6 Bxf6 26.
+cxd5 Rc5 27. Rxc5 dxc5 28. d6 Rd8 29. Qa4 Qd7 30. Qa6 Rb8 31. Qa4 1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.14"]
+[Round "7.1"]
+[White "Carlsen, Magnus"]
+[Black "Mamedyarov, Shakhriyar"]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2823"]
+[BlackElo "2709"]
+[ECO "B13"]
+[Opening "Caro-Kann"]
+[Variation "Panov-Botvinnik attack"]
+[EventDate "2026.11.11"]
+[WhiteFideId "1503014"]
+[BlackFideId "13401319"]
+[WhiteCountry "NOR"]
+[BlackCountry "AZE"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. e4 c6 2. d4 d5 3. exd5 cxd5 4. c4 Nf6 5. Nc3 Nc6 6. Nf3 a6 7. c5 Bg4 8.
+Be2 g6 9. O-O Bg7 10. Be3 O-O 11. h3 Bxf3 12. Bxf3 e6 13. Rb1 Ne4 14. Nxe4
+dxe4 15. Bxe4 f5 16. Bf3 f4 17. Bc1 Nxd4 18. Bxb7 Rb8 19. Bf3 Qa5 20. a3
+Rb3 21. Bd2 Qb5 22. Re1 Rd8 23. Be2 Qxc5 24. Bxf4 Qf5 25. Be3 Nf3+ 26. Bxf3
+Rxd1 27. Rbxd1 Rd3 28. Rc1 h5 29. Rc8+ Kh7 30. Rc7 Qa5 31. Rec1 Rxe3 32.
+fxe3 Qd2 33. Kh1 Kh6 34. b4 Qxe3 35. Rd1 Qf4 36. Rc6 Be5 37. Kg1 Bd4+ 38.
+Kh1 Be5 39. Kg1 Qe3+ 40. Kh1 Bb8 41. Rxa6 Qe5 42. Kg1 Qe3+ 43. Kh1 Qf4 44.
+Kg1 Qe3+ 1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.14"]
+[Round "7.2"]
+[White "Giri, Anish"]
+[Black "Mishra, Abhimanyu"]
+[Result "1-0"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2747"]
+[BlackElo "2644"]
+[ECO "A15"]
+[Opening "English opening"]
+[EventDate "2026.11.11"]
+[WhiteFideId "24116068"]
+[BlackFideId "30920019"]
+[WhiteCountry "NED"]
+[BlackCountry "USA"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. Nf3 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. e4 Nxc3 6. bxc3 Bg7 7. h4 c5
+8. h5 Nc6 9. Qe2 Qa5 10. Qe3 Bg4 11. h6 Bf6 12. e5 Bxf3 13. exf6 Bd5 14.
+fxe7 Nxe7 15. c4 Be6 16. Bb2 Nf5 17. Qg5 Rf8 18. Bf6 Kd7 19. Be2 Nd6 20.
+Rb1 Bf5 21. O-O Rae8 22. Bg4 Kc8 23. d4 Qc7 24. dxc5 Qxc5 25. Be7 Rg8 26.
+Rb5 Qc7 27. Bxd6 Qxd6 28. Rd5 Qe7 29. Bxf5+ gxf5 30. Qxf5+ Qe6 31. Qf4 b6
+32. Rfd1 Rg4 33. Qf3 Re4 34. c5 Qxh6 35. Rh5 Qf4 36. Qxf4 Rxf4 37. cxb6
+axb6 38. Rd2 Rd8 39. Rc2+ Kb7 40. Rxh7 Rd7 41. g3 Rf5 42. Kg2 b5 43. Rh4
+Rfd5 44. a4 Kb6 45. Rb4 Ka5 46. Rxb5+ Rxb5 47. axb5 Kxb5 48. g4 Rd4 49. Kg3
+Kb6 50. g5 Rd1 51. f4 Kb7 52. Kg4 Rd5 53. Rc4 Kb6 54. Rc8 Kb7 55. Rf8 Rd7
+56. Kf5 Kc6 57. Kf6 Kd5 58. Rxf7 1-0
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.14"]
+[Round "7.3"]
+[White "Martirosyan, Haik M."]
+[Black "Nepomniachtchi, Ian"]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2669"]
+[BlackElo "2719"]
+[ECO "D37"]
+[Opening "QGD"]
+[Variation "classical variation (5.Bf4)"]
+[EventDate "2026.11.11"]
+[WhiteFideId "13306553"]
+[BlackFideId "4168119"]
+[WhiteCountry "ARM"]
+[BlackCountry "RUS"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 d5 4. Nc3 Be7 5. Bf4 O-O 6. e3 c5 7. dxc5 Bxc5 8.
+a3 Nc6 9. Be2 dxc4 10. Bxc4 Be7 11. Qe2 Nh5 12. O-O Nxf4 13. exf4 Qc7 14.
+g3 a6 15. Rac1 Bd7 16. Rfd1 g6 17. Ne4 Rad8 18. b4 Bc8 19. Rxd8 Qxd8 20.
+Qb2 b5 21. Be2 Bb7 22. Rd1 Qc7 23. Nf6+ Bxf6 24. Qxf6 Rd8 25. Rxd8+ Qxd8
+26. Qxd8+ Nxd8 27. Ne5 Nc6 28. Nxc6 Bxc6 29. Kf1 Kf8 30. Ke1 Ke7 31. Kd2
+Kd6 1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.14"]
+[Round "8.1"]
+[White "Mamedyarov, Shakhriyar"]
+[Black "Carlsen, Magnus"]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2709"]
+[BlackElo "2823"]
+[ECO "D37"]
+[Opening "QGD"]
+[Variation "4.Nf3"]
+[EventDate "2026.11.11"]
+[WhiteFideId "13401319"]
+[BlackFideId "1503014"]
+[WhiteCountry "AZE"]
+[BlackCountry "NOR"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. d4 d5 2. c4 e6 3. Nf3 Nf6 4. Nc3 Nc6 5. a3 a6 6. e3 g6 7. b4 Bg7 8. Bb2
+O-O 9. Rc1 b6 10. Bd3 dxc4 11. Bxc4 Bb7 12. O-O Ne7 13. Qe2 Ned5 14. Ne5
+Nxc3 15. Rxc3 Nd7 16. Nxd7 Qxd7 17. Rd1 Rfc8 18. Rcc1 a5 19. b5 Rd8 20. e4
+Qe7 21. Qe3 Rac8 22. Be2 c5 23. bxc6 Rxc6 24. Bb5 Rcc8 25. f3 Qd6 26. a4
+Rxc1 27. Qxc1 Rc8 28. Qd2 Bc6 29. Rc1 Bd7 30. Rxc8+ Bxc8 31. Qc3 Bd7 32.
+Bxd7 Qxd7 33. Qc4 h5 34. g3 g5 35. Kf2 g4 36. f4 Kh7 37. Ke3 f5 38. exf5
+exf5 39. Kd3 Qb7 40. Qe6 Qf3+ 41. Kc2 Qf2+ 42. Kb3 Qxh2 43. Qxf5+ Kh8 44.
+Qc8+ Kh7 45. Qf5+ Kh8 46. Bc3 Qxg3 47. Qxh5+ Kg8 48. Qe8+ Kh7 49. Qh5+ Kg8
+50. Qe8+ Kh7 51. f5 Qf3 52. Qg6+ Kh8 1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.14"]
+[Round "8.2"]
+[White "Mishra, Abhimanyu"]
+[Black "Giri, Anish"]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2644"]
+[BlackElo "2747"]
+[ECO "E20"]
+[Opening "Nimzo-Indian"]
+[Variation "Kmoch variation"]
+[EventDate "2026.11.11"]
+[WhiteFideId "30920019"]
+[BlackFideId "24116068"]
+[WhiteCountry "USA"]
+[BlackCountry "NED"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. f3 c5 5. d5 d6 6. e4 exd5 7. cxd5 Nbd7 8.
+Nh3 O-O 9. Nf2 a6 10. Be2 b5 11. O-O c4 12. Be3 Bc5 13. Bxc5 Nxc5 14. Qd4
+Re8 15. Rfb1 Qb6 16. b4 cxb3 17. axb3 b4 18. Ncd1 a5 19. Ne3 Bd7 20. Nc4
+Qc7 21. Nd3 Nfxe4 22. fxe4 Rxe4 23. Qf2 Nxb3 24. Rxb3 Rxc4 25. Rxb4 Rxb4
+26. Nxb4 Qc3 27. Rf1 Rf8 28. Na2 Qb3 29. Bf3 a4 30. Nc1 Qb4 31. Ne2 Bb5 32.
+Rc1 1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.14"]
+[Round "8.3"]
+[White "Nepomniachtchi, Ian"]
+[Black "Martirosyan, Haik M."]
+[Result "1-0"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2719"]
+[BlackElo "2669"]
+[ECO "E21"]
+[Opening "Nimzo-Indian"]
+[Variation "three knights variation"]
+[EventDate "2026.11.11"]
+[WhiteFideId "4168119"]
+[BlackFideId "13306553"]
+[WhiteCountry "RUS"]
+[BlackCountry "ARM"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. Nf3 O-O 5. Bg5 c5 6. a3 Bxc3+ 7. bxc3 d6
+8. e3 h6 9. Bh4 Nbd7 10. Bd3 e5 11. O-O e4 12. Bxe4 g5 13. Nxg5 Nxe4 14.
+Nxe4 Qxh4 15. Nxd6 Nf6 16. Qf3 Qg5 17. h3 Rb8 18. Rab1 Be6 19. d5 Bd7 20.
+Rxb7 Rxb7 21. Nxb7 Rc8 22. e4 Qe5 23. Qe3 Qc7 24. e5 Ne8 25. Qg3+ Kf8 26.
+Nd6 Nxd6 27. exd6 Qd8 28. Qe5 Kg8 29. Rb1 Qg5 30. Qxg5+ hxg5 31. Rb7 Rd8
+32. Rxa7 g4 33. Rc7 gxh3 34. Rxc5 hxg2 35. Kxg2 Be8 36. Kf3 Rxd6 37. Ra5
+Rh6 38. Ke4 Kf8 39. c5 Rh3 40. c4 Ke7 41. Ra7+ Kd8 42. c6 1-0
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.15"]
+[Round "9.1"]
+[White "Nepomniachtchi, Ian"]
+[Black "Carlsen, Magnus"]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2719"]
+[BlackElo "2823"]
+[ECO "B12"]
+[Opening "Caro-Kann"]
+[Variation "advance variation"]
+[EventDate "2026.11.11"]
+[WhiteFideId "4168119"]
+[BlackFideId "1503014"]
+[WhiteCountry "RUS"]
+[BlackCountry "NOR"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. e4 c6 2. d4 d5 3. e5 Bf5 4. h4 h6 5. g4 Be4 6. f3 Bh7 7. e6 fxe6 8. Bd3
+c5 9. Bxh7 Rxh7 10. Qd3 Nf6 11. Nh3 c4 12. Qe2 Nc6 13. c3 g5 14. Qxe6 gxh4
+15. Bf4 Qd7 16. Qe2 O-O-O 17. Nd2 e6 18. O-O-O b5 19. Rde1 Re8 20. a3 a5
+21. Qf2 b4 22. axb4 axb4 23. Kd1 Qa7 24. Qxh4 Be7 25. Ke2 Qa2 26. Kf1 Bd8
+27. Rh2 Kd7 28. Rhe2 Qxb2 29. cxb4 Qc3 30. Kg2 Nxd4 31. Qf2 Bb6 32. Re3
+Qxb4 33. Rb1 Nb3 34. Rexb3 cxb3 35. Qe2 b2 36. Qe5 Ke7 37. Rxb2 Qc5 38. Bg3
+Nd7 39. Qe2 Kf8 40. Qd3 Rg7 41. Bf2 Qc7 42. Bxb6 Nxb6 43. Qe3 Nc4 44. Nxc4
+dxc4 45. Qxh6 Kg8 46. Nf4 Qe5 47. Rc2 c3 48. Nh5 Rb7 49. Qg6+ Kf8 50. Qh6+
+Kg8 51. Qg6+ Kf8 52. Qh6+ 1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.15"]
+[Round "9.2"]
+[White "Mishra, Abhimanyu"]
+[Black "Martirosyan, Haik M."]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2644"]
+[BlackElo "2669"]
+[ECO "C55"]
+[Opening "Two knights defence (Modern bishop's opening)"]
+[EventDate "2026.11.11"]
+[WhiteFideId "30920019"]
+[BlackFideId "13306553"]
+[WhiteCountry "USA"]
+[BlackCountry "ARM"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 Be7 5. O-O O-O 6. Nc3 d6 7. a4 Na5 8.
+Ba2 c5 9. Bg5 Nc6 10. Bxf6 Bxf6 11. Nd5 Be6 12. c3 Rc8 13. h3 Bg5 14. Nxg5
+Qxg5 15. f4 exf4 16. Nxf4 Bxa2 17. Rxa2 Ne7 18. Qf3 Rcd8 19. Raa1 d5 20.
+Rae1 dxe4 21. Rxe4 Ng6 22. Qe3 Nxf4 23. Rfxf4 Rd7 24. Re5 Rxd3 25. Rxg5
+Rxe3 26. Rxc5 Re7 27. a5 g6 28. Rfc4 Rd8 29. Rc8 Rxc8 30. Rxc8+ Kg7 31. Kf2
+Kf6 32. b4 a6 33. c4 h5 34. b5 axb5 35. cxb5 1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.15"]
+[Round "9.3"]
+[White "Mamedyarov, Shakhriyar"]
+[Black "Giri, Anish"]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2709"]
+[BlackElo "2747"]
+[ECO "D38"]
+[Opening "QGD"]
+[Variation "Ragozin variation"]
+[EventDate "2026.11.11"]
+[WhiteFideId "13401319"]
+[BlackFideId "24116068"]
+[WhiteCountry "AZE"]
+[BlackCountry "NED"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 d5 4. Nc3 Bb4 5. cxd5 exd5 6. Bf4 Ne4 7. Rc1 Nc6
+8. Nd2 g5 9. Be3 Nxc3 10. bxc3 Ba3 11. Rb1 f5 12. g3 Bd6 13. Nf3 f4 14. Bd2
+O-O 15. gxf4 gxf4 16. c4 Kh8 17. Rg1 Qf6 18. Rb5 Bf5 19. c5 Be7 20. Bxf4
+Bc2 21. Bg5 Qxf3 22. exf3 Bxd1 23. Bxe7 Nxe7 24. Kxd1 b6 25. Rb3 Rf4 26.
+Rg4 Raf8 27. cxb6 axb6 28. Rc3 Rxg4 29. fxg4 Rxf2 30. Bb5 c6 31. Bxc6
+1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.15"]
+[Round "10.1"]
+[White "Carlsen, Magnus"]
+[Black "Nepomniachtchi, Ian"]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2823"]
+[BlackElo "2719"]
+[ECO "D37"]
+[Opening "QGD"]
+[Variation "classical variation (5.Bf4)"]
+[EventDate "2026.11.11"]
+[WhiteFideId "1503014"]
+[BlackFideId "4168119"]
+[WhiteCountry "NOR"]
+[BlackCountry "RUS"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. Nf3 d5 2. d4 Nf6 3. c4 e6 4. Nc3 Be7 5. Bf4 O-O 6. e3 b6 7. Bd3 dxc4 8.
+Bxc4 Ba6 9. Be2 c5 10. O-O Nd5 11. Nxd5 Qxd5 12. Bxb8 Bxe2 13. Qxe2 Raxb8
+14. dxc5 Bxc5 15. Rfd1 Qe4 16. Rd7 Rb7 17. Ng5 Qc6 18. Qc2 g6 19. Rxf7
+Rfxf7 20. Nxf7 Kxf7 21. b4 Rc7 22. bxc5 Qxc5 23. Qd1 b5 24. h3 Kg7 25. Rb1
+a6 26. Qd2 Qf5 27. Rf1 Qd5 28. Qb2+ Kg8 29. Qa3 Rc6 30. Qb2 Qd3 31. Qb4 Qd6
+32. Qb1 Rc5 33. Qb4 Rc6 34. Qb3 Qd5 35. Qb1 Qd7 36. h4 Qc7 37. Qd1 h5 38.
+g3 Kh7 39. Qb1 Rc2 40. a3 Qc3 41. Qd1 Qc7 42. Kh2 a5 43. Qd4 Qb7 44. Qf6
+Qd7 45. Rb1 Qg7 46. Qf3 Qd7 47. Kg2 Kg7 48. Qf4 Rc5 49. e4 Qd4 50. Rb3 Qe5
+51. Qe3 Rc4 52. Qa7+ Rc7 53. Qe3 Rc4 54. Qa7+ Rc7 55. Qe3 Rc4 1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.15"]
+[Round "10.2"]
+[White "Martirosyan, Haik M."]
+[Black "Mishra, Abhimanyu"]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2669"]
+[BlackElo "2644"]
+[ECO "B52"]
+[Opening "Sicilian"]
+[Variation "Canal-Sokolsky attack, Sokolsky variation"]
+[EventDate "2026.11.11"]
+[WhiteFideId "13306553"]
+[BlackFideId "30920019"]
+[WhiteCountry "ARM"]
+[BlackCountry "USA"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. e4 c5 2. Nf3 d6 3. Bb5+ Bd7 4. Bxd7+ Qxd7 5. c4 Nf6 6. Nc3 g6 7. d4 cxd4
+8. Nxd4 Bg7 9. f3 O-O 10. Be3 Nc6 11. O-O a6 12. Qd3 Ne5 13. Qe2 Rfc8 14.
+b3 b5 15. Nd5 Rcb8 16. Rac1 bxc4 17. bxc4 e6 18. Nxf6+ Bxf6 19. Rfd1 Qa4
+20. Nb3 Rb4 21. c5 dxc5 22. Rxc5 Rc4 23. f4 Rxc5 24. Nxc5 Qc4 25. Kf2 Qxe2+
+26. Kxe2 Nc4 27. Bd4 Be7 28. Nd7 Nd6 29. Bc5 Nxe4 30. Bxe7 Nc3+ 31. Ke1
+Nxd1 32. Kxd1 Rc8 33. Ne5 Kg7 34. Kd2 f6 35. Nd3 Rc4 36. g3 Kf7 37. Bb4 h6
+38. h4 Rd4 39. Kc3 Re4 40. Kd2 e5 41. fxe5 fxe5 42. a3 Kf6 43. Bf8 h5 44.
+Bb4 g5 45. hxg5+ Kxg5 46. Bc3 Kf5 47. Bb2 h4 48. gxh4 Rxh4 49. Bxe5 Rh3 50.
+Bc3 Rxd3+ 51. Kxd3 Ke6 52. Kc4 Kd6 53. Kb4 Kc6 54. Ka5 Kb7 55. Bd4 Ka8 56.
+Kb6 a5 57. a4 Kb8 58. Ka6 Ka8 59. Ba7 1/2-1/2
+
+[Event "Total Chess Pilot GpC"]
+[Site "Budapest HUN"]
+[Date "2026.11.15"]
+[Round "10.3"]
+[White "Giri, Anish"]
+[Black "Mamedyarov, Shakhriyar"]
+[Result "1/2-1/2"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2747"]
+[BlackElo "2709"]
+[ECO "E04"]
+[Opening "Catalan"]
+[Variation "open, 5.Nf3"]
+[EventDate "2026.11.11"]
+[WhiteFideId "24116068"]
+[BlackFideId "13401319"]
+[WhiteCountry "NED"]
+[BlackCountry "AZE"]
+[EventType "drr"]
+[TimeControl "2700+30"]
+[EventRounds "10"]
+[EventCountry "HUN"]
+[Source "Mark Crowther"]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 d5 4. g3 dxc4 5. Bg2 Nc6 6. Qa4 Bb4+ 7. Bd2 Nd5
+8. Bxb4 Nxb4 9. O-O Rb8 10. Nc3 a6 11. Ne5 O-O 12. Nxc6 Nxc6 13. Bxc6 bxc6
+14. Qxc4 Rxb2 15. Rab1 Rb6 16. Qc5 Re8 17. f3 f6 18. Rfd1 Rxb1 19. Rxb1 e5
+20. Rd1 Qd6 21. Qxd6 cxd6 22. dxe5 dxe5 23. Rd6 Kf8 24. Rxc6 Bb7 25. Rb6
+Rc8 26. Rb3 Bc6 27. Kf2 Ke7 28. Ke3 Kd6 29. Rb6 a5 30. Ne4+ Kc7 1/2-1/2
+
