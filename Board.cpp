@@ -1,15 +1,16 @@
-// Status: Finished?? but not tested
-
 #include "Board.h"
 #include "Types.h"
+#include "Helper.h"
+
 struct Board::UndoRecord
 {
     Move move;
+    PieceType movedPiece;
     std::unique_ptr<Piece> captured;
     Position capturedAt;
     std::unique_ptr<Piece> replacedPawn;
     bool previouslyMoved = false;
-    std::string previousFen;
+    std::string previousKey;
 };
 
 Board::Board()
@@ -167,9 +168,10 @@ void Board::detach(const std::shared_ptr<BoardObserver> &observer)
 void Board::applyMove(const Move &move)
 {
     UndoRecord undo;
-    undo.previousFen = boardFEN();
+    undo.previousKey = getKey();
     undo.move = move;
     undo.previouslyMoved = at(move.from)->hasMoved();
+    undo.movedPiece = at(move.from)->getType();
 
     if (move.kind == MoveKind::EnPassant)
     {
@@ -257,7 +259,42 @@ void Board::emptySquares()
 }
 
 bool Board::canUndo() const {return !history_.empty();}
-std::string Board::boardFEN() const {
+
+bool Board::castlingRights(Color color, bool kingside) const
+{
+    int x = (color == Color::White) ? 0 : 7;
+    int rookPos = kingside ? 7 : 0;
+    const auto & king = squares_[x][4];
+    const auto & rook = squares_[x][rookPos];
+    bool kingGood = false;
+    if (king != nullptr && king->getType() == PieceType::King
+        && king->getColor() == color && !king->hasMoved()) {
+        kingGood = true;
+    }
+    bool rookGood = false;
+    if (rook != nullptr && rook->getType() == PieceType::Rook &&
+           rook->getColor() == color && !rook->hasMoved()) {
+        rookGood = true;
+    }
+    return kingGood && rookGood;
+}
+
+int Board::fiftyMoveCount() const
+{
+    int count = 0;
+    for (int i = static_cast<int>(history_.size()) - 1; i >= 0; --i)
+    {
+        const UndoRecord &rec = history_[i];
+        if (rec.captured != nullptr || rec.movedPiece == PieceType::Pawn)
+        {
+            break;
+        }
+        ++count;
+    }
+    return count;
+}
+
+std::string Board::getKey() const {
     std::string fen;
     for (int i = 7; i >= 0; --i)
     {
@@ -273,10 +310,11 @@ std::string Board::boardFEN() const {
                 }
                 char c = PIECE_CHAR.at(p->getType());
                 if (p->getColor() == Color::Black) {
-                    fen += c - ('a' - 'A');
+                    if (c >= 'A' && c <= 'Z') c += ('a' - 'A');
                 } else {
-                    fen += c;
+                    if (c >= 'a' && c <= 'z') c -= ('a' - 'A');
                 }
+                fen += c;
             }
         }
         if (empty > 0) {
@@ -290,17 +328,51 @@ std::string Board::boardFEN() const {
     }
     fen += (history_.size() % 2 == 0) ? " w " : " b ";
 
-    // TODO: impl for castle
+    bool rights = false;
+    if (castlingRights(Color::White, true)) { fen += 'K'; rights = true; }
+    if (castlingRights(Color::White, false)) { fen += 'Q'; rights = true; }
+    if (castlingRights(Color::Black, true)) { fen += 'k'; rights = true; }
+    if (castlingRights(Color::Black, false)) { fen += 'q'; rights = true; }
+    if (!rights) { fen += '-'; }
+
     // enpassant
+    fen += ' ';
+    if (history_.empty()) {
+        fen += "-";
+    } else {
+        const Move &last = history_.back().move;
+        const auto &piece = squares_[last.to.row][last.to.col];
+        if (piece != nullptr && piece->getType() == PieceType::Pawn) {
+            int diff = last.to.row - last.from.row;
+            if (diff == 2 || diff == -2) {
+                int x = last.to.col;
+                int y = (last.from.row + last.to.row) / 2;
+                Position square{ y, x };
+                std::string s = squareToString(square);
+                fen += s;
+            } else {
+                fen += "-";
+            }
+        } else {
+            fen += "-";
+        }
+    }
+    return fen;
+}
+
+std::string Board::boardFEN() const {
+    std::string fen = getKey();
+    fen += ' ' + std::to_string(fiftyMoveCount());
+    fen += ' ' + std::to_string(1 + history_.size() / 2);
     return fen;
 }
 
 int Board::repeatCount() const {
     int n = static_cast<int>(history_.size());
-    std::string current = boardFEN();
-    int count = 0;
+    std::string current = getKey();
+    int count = 1;
     for (int i = n - 2; i >= 0; i -= 2) {
-        if (history_[i].previousFen == current)
+        if (history_[i].previousKey == current)
         {
             ++count;
         }

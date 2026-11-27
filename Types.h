@@ -71,6 +71,7 @@ enum class GameStatus
     Checkmate,
     Stalemate,
     ThreeFoldRepetition,
+    FiftyMove,
 };
 enum class CommandType
 {
@@ -128,7 +129,7 @@ struct Command
     PlayerType blackSpec = PlayerType::Human;
     Position square = Position{-1, -1}; // setup mode
     Color color = Color::White;         // setup mode
-    bool undoEnabled = false; 
+    bool undoEnabled = false;
 };
 
 #endif
