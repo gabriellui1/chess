@@ -239,6 +239,12 @@ Command CommandParser::parse(const std::string &line, GameState state) const
         return cmd;
     }
 
+    if (word == "pgn")
+    {
+        cmd.type = CommandType::PGN;
+        return cmd;
+    }
+
     Command menuCommand = parseMenu(line);
     Command gameCommand = parseGame(line);
     Command setupCommand = parseSetup(line);

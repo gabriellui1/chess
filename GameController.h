@@ -40,6 +40,7 @@ private:
     void finishSetup();
     void printFinalScore();
     void undoMove();
+    void showPGN();
 public:
     GameController(std::shared_ptr<TextView> view);
     void run();

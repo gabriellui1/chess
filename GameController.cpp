@@ -106,6 +106,9 @@ void GameController::execute(const Command &cmd)
     case CommandType::Undo:
         undoMove();
         break;
+    case CommandType::PGN:
+        showPGN();
+        break;
     default:
         break;
     }
@@ -113,9 +116,22 @@ void GameController::execute(const Command &cmd)
     view_->showMessages();
 }
 
+void GameController::showPGN()
+{
+    view_->clearMessages();
+    std::string pgn = board_.getPGN();
+    if (pgn.empty())
+    {
+        view_->pushMessages("No moves played yet.");
+    }
+    else
+    {
+        view_->pushMessages(pgn);
+    }
+}
+
 void GameController::playMove(const Command &cmd)
 {
-
     std::unique_ptr<Player> &currentPlayer = (turn_ == Color::White) ? whitePlayer_ : blackPlayer_;
     if (currentPlayer->isHuman() && (!isSquareValid(cmd.from) || !isSquareValid(cmd.to)))
     {
@@ -146,11 +162,13 @@ void GameController::playMove(const Command &cmd)
     {
     case GameStatus::Check:
         view_->pushMessages((turn_ == Color::White) ? "White is in check." : "Black is in check.");
+        board_.appendSanSuffix('+');
         break;
     case GameStatus::Checkmate:
         view_->pushMessages((turn_ == Color::Black) ? "Checkmate! White wins!" : "Checkmate! Black wins!");
         scores_.addWin((turn_ == Color::White) ? Color::Black : Color::White);
         state_ = GameState::Menu;
+        board_.appendSanSuffix('#');
         break;
     case GameStatus::Stalemate:
         view_->pushMessages("Stalemate!");

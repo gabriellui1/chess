@@ -17,6 +17,15 @@ char toLower(const char c)
     return static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
 }
 
+char toUpper(const char c)
+{
+    if (c >= 'a' && c <= 'z')
+    {
+        return static_cast<char>(c - ('a' - 'A'));
+    }
+    return c;
+}
+
 bool isSquareValid(const Position square)
 {
     return square.col != -1 && square.row != -1;
@@ -136,3 +145,4 @@ PlayerType stringToPlayer(const std::string str)
     int index = findIndex(playerStrings, toLower(str));
     return players[index];
 }
+

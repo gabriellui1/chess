@@ -14,6 +14,7 @@ std::string toLower(const std::string str);
 
 // turns every char in string to lowercase
 char toLower(const char c);
+char toUpper(const char c);
 
 // convert square to string
 std::string squareToString(const Position square);
@@ -49,5 +50,4 @@ std::string colorToString(const Color color);
 
 // assumes you have already validated
 PlayerType stringToPlayer(const std::string str);
-
 #endif
