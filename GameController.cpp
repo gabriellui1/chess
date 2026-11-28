@@ -208,6 +208,7 @@ void GameController::startGame(PlayerType whiteSpec, PlayerType blackSpec, bool 
     {
         view_->clearMessages();
         view_->pushMessages("Stalemate!");
+        scores_.addDraw();
         state_ = GameState::Menu;
         return;
     }
@@ -267,8 +268,8 @@ void GameController::resign()
 void GameController::printFinalScore()
 {
     view_->show("Final Score:");
-    view_->show("White: " + std::to_string(scores_.whiteScore()));
-    view_->show("Black: " + std::to_string(scores_.blackScore()));
+    view_->show("White: " + std::format("{:.1f}", scores_.whiteScore()));
+    view_->show("Black: " + std::format("{:.1f}", scores_.blackScore()));
 }
 
 void GameController::undoMove()
