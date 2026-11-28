@@ -6,8 +6,8 @@
 class ScoreBoard
 {
 private:
-    double white_; // draw gives half points
-    double black_;
+    double white_ = 0.0; // draw gives half points
+    double black_ = 0.0;
 
 public:
     void addWin(Color color);
